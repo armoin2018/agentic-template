@@ -1,38 +1,53 @@
 ---
-name: Bug report
+name: Bug Report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: '🐛 [BUG] '
+labels: 'bug, needs-triage'
 assignees: ''
-
 ---
 
-**Describe the bug**
+## Bug Description
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+## Steps to Reproduce
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+## Expected Behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
+## Actual Behavior
+A clear and concise description of what actually happened.
+
+## Screenshots
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment
+- **OS**: [e.g. macOS, Windows, Linux]
+- **Node.js Version**: [e.g. 20.11.0]
+- **Package Version**: [e.g. 0.9.0]
+- **Container**: [e.g. Docker, Podman, or N/A]
+- **IDE**: [e.g. VS Code, Cursor, Claude Code]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Configuration
+```yaml
+# Paste relevant configuration (remove sensitive data)
+```
 
-**Additional context**
+## Logs
+```
+# Paste relevant logs here
+```
+
+## Additional Context
 Add any other context about the problem here.
+
+## Checklist
+- [ ] I have searched existing issues for duplicates
+- [ ] I have included all relevant environment information
+- [ ] I have provided steps to reproduce the issue
+- [ ] I have included relevant logs or error messages
+- [ ] I have removed any sensitive information from the report

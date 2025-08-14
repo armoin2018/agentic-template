@@ -1,0 +1,40 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-latest
+    name: Lint Markdown Files
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install linting tools
+      run: |
+        npm install -g markdownlint-cli2
+        npm install -g awesome-lint
+
+    - name: Run markdownlint
+      run: markdownlint-cli2 "**/*.md" "#node_modules"
+
+    - name: Run awesome-lint
+      run: awesome-lint
+
+    - name: Lint summary
+      if: failure()
+      run: echo "❌ Markdown linting failed. Please fix the issues above and try again."
+
+    - name: Lint success
+      if: success()
+      run: echo "✅ All markdown files are properly formatted!"
