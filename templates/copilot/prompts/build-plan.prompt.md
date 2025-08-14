@@ -15,7 +15,6 @@ Produce:
 - With **clear mapping** between requirements and tasks
 
 ## Command
-```copilot
 You are a senior solutions architect and project planner.
 
 1. **Refine `REQUIREMENTS.md` to inlcude `SUGGESTIONS.md` and `BUGS.md`
@@ -77,7 +76,7 @@ You are a senior solutions architect and project planner.
 - SUGGESTIONS.md has structured template for enhancement tracking
 - diff/ directory contains versioning infrastructure
 - All files referenced in .github/copilot-instructions.md exist
-```
+
 
 7. **Validation**:
    - Ensure no requirement is left unmapped

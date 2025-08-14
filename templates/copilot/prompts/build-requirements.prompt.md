@@ -7,7 +7,6 @@ If `project/REQUIREMENTS.md` already exists, merge and refine both sources to pr
 
 ## Command
 
-```copilot
 You are an expert business analyst and technical architect.
 
 1. **Load core source**:
@@ -37,4 +36,4 @@ You are an expert business analyst and technical architect.
 6. **Deliver**:
    - Output the updated `project/REQUIREMENTS.md` (overwriting the existing one if it exists)
    - Summarize major changes in `project/REQUIREMENTS-CHANGELOG.md`
-```
+
