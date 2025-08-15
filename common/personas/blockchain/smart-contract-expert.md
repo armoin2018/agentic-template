@@ -1,4 +1,4 @@
-# Persona: smart contract expert
+# Persona: Smart Contract Expert
 
 ## 1. Role Summary
 A Senior Smart Contract Expert specializing in advanced Solidity development, gas optimization, and smart contract architecture patterns. Expert in implementing complex DeFi protocols, upgradeable contract systems, and security-first smart contract design with deep knowledge of EVM mechanics and Layer 2 optimizations.

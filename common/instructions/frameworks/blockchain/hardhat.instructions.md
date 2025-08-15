@@ -1,11 +1,69 @@
-# Framework Instructions Template
+---
+title: "Hardhat Ethereum Development Framework Instructions"
+description: "Comprehensive guide for Hardhat development environment for Ethereum smart contracts, testing, and deployment"
+category: "Blockchain Frameworks"
+author: "AI Assistant"
+tags: ["hardhat", "ethereum", "solidity", "smart-contracts", "testing", "deployment", "defi", "web3"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/hardhat.config.*"
+  - "**/contracts/**"
+  - "**/test/**"
+  - "**/scripts/**"
+  - "**/tasks/**"
+  - "**/typechain-types/**"
+---
+
+# Hardhat Ethereum Development Framework Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Hardhat
+- **Version**: 2.19+ (Latest stable with improved TypeScript support and performance)
+- **Type**: Ethereum Development Environment and Testing Framework
+- **Language**: Solidity, JavaScript, TypeScript
+- **Use Cases**: Smart contract development, automated testing, local blockchain simulation, DeFi protocol development
+
+## When to Use Hardhat
+
+### ✅ **Use Hardhat When**
+- Developing Ethereum smart contracts requiring comprehensive testing frameworks
+- Building DeFi protocols that need complex testing scenarios and forking
+- Need advanced debugging capabilities with console.log in Solidity
+- Working on projects requiring TypeScript integration and type safety
+- Building applications that need local blockchain networks for development
+- Need flexible deployment scripts and task automation
+- Working with teams requiring consistent development environments
+- Developing contracts that interact with existing protocols (need mainnet forking)
+- Building projects requiring gas optimization and detailed transaction analysis
+
+### ❌ **Avoid Hardhat When**
+- Building simple smart contracts that don't require extensive testing
+- Working on non-Ethereum blockchains (Solana, Cardano, etc.)
+- Need extremely fast compilation times (consider Foundry for pure Solidity)
+- Building projects that don't require local development networks
+- Working with teams that prefer Rust-based tooling
+- Developing contracts for blockchains without EVM compatibility
+
+## AI Agent Decision Matrix
+
+### Project Complexity Assessment
+| Project Type | Hardhat Recommendation | Key Benefits |
+|--------------|----------------------|--------------|
+| DeFi Protocol | ✅ **Essential** - Complex testing needs | Mainnet forking, advanced testing |
+| NFT Collection | ✅ **Recommended** - Good tooling | TypeScript, deployment scripts |
+| Simple Token | 🔄 **Consider** - May be overkill | Remix might be sufficient |
+| DAO Governance | ✅ **Excellent** - Complex interactions | Multi-sig testing, governance |
+| Cross-chain Bridge | ✅ **Ideal** - Multi-network deployment | Network switching, complex tests |
+| Enterprise Smart Contracts | ✅ **Perfect** - Professional development | CI/CD integration, type safety |
+
+### Development Team Assessment
+| Team Characteristics | Hardhat Suitability | Alternative Consideration |
+|---------------------|-------------------|--------------------------|
+| **JavaScript/TypeScript Team** | ✅ **Perfect Match** | Familiar tooling and syntax |
+| **Solidity-focused Team** | 🔄 **Good** | Consider Foundry for pure Solidity |
+| **Beginner Blockchain** | ✅ **Recommended** | Excellent documentation |
+| **Enterprise Development** | ✅ **Ideal** | Professional tooling |
 
 ## Installation & Setup
 ```bash

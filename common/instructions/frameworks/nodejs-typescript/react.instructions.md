@@ -1,9 +1,8 @@
-````instructions
 # React Framework Instructions
 
 ## Framework Overview
 - **Framework Name**: React
-- **Version**: 18.0+
+- **Version**: 19.x (Current), 18.x LTS
 - **Type**: JavaScript UI Library/Framework
 - **Language**: JavaScript/TypeScript
 - **Use Cases**: Single-page applications, component-based UIs, mobile apps with React Native
@@ -452,4 +451,122 @@ npm run build && npx webpack-bundle-analyzer build/static/js/*.js
 - **Error**: `Maximum update depth exceeded`
   **Cause**: Infinite re-render loops
   **Solution**: Check useEffect dependencies and state updates
-````
+
+## React 19 Modern Features
+### React Compiler (Experimental)
+```tsx
+// Automatic optimization of components and hooks
+// No need for manual useMemo/useCallback in many cases
+const OptimizedComponent = ({ items, onSelect }) => {
+  // React Compiler automatically optimizes this
+  const expensiveValue = items.filter(item => item.isActive)
+    .map(item => ({ ...item, processed: true }));
+  
+  return (
+    <ul>
+      {expensiveValue.map(item => (
+        <li key={item.id} onClick={() => onSelect(item)}>
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+```
+
+### Server Components Integration
+```tsx
+// Server Component (runs on server)
+async function ServerUserProfile({ userId }: { userId: string }) {
+  // This runs on the server, can access databases directly
+  const user = await getUserFromDatabase(userId);
+  
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <ClientInteractiveButton userId={userId} />
+    </div>
+  );
+}
+
+// Client Component (runs in browser)
+'use client';
+function ClientInteractiveButton({ userId }: { userId: string }) {
+  const [liked, setLiked] = useState(false);
+  
+  return (
+    <button onClick={() => setLiked(!liked)}>
+      {liked ? 'Unlike' : 'Like'}
+    </button>
+  );
+}
+```
+
+### Actions and Form Handling
+```tsx
+// React 19 form actions
+function ContactForm() {
+  const [pending, setPending] = useState(false);
+  const [message, setMessage] = useState('');
+  
+  async function submitForm(formData: FormData) {
+    setPending(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        setMessage('Message sent successfully!');
+      } else {
+        setMessage('Failed to send message.');
+      }
+    } finally {
+      setPending(false);
+    }
+  }
+  
+  return (
+    <form action={submitForm}>
+      <input 
+        name="email" 
+        type="email" 
+        placeholder="Your email" 
+        required 
+      />
+      <textarea 
+        name="message" 
+        placeholder="Your message" 
+        required 
+      />
+      <button type="submit" disabled={pending}>
+        {pending ? 'Sending...' : 'Send Message'}
+      </button>
+      {message && <p>{message}</p>}
+    </form>
+  );
+}
+```
+
+## AI Assistant Guidelines
+When helping with React:
+
+1. **Always use functional components with hooks over class components**
+2. **Prioritize TypeScript for type safety and better developer experience**
+3. **Implement proper error boundaries for production applications**
+4. **Suggest modern patterns: hooks, context, and composition over inheritance**
+5. **Include accessibility considerations in component design**
+6. **Recommend React 19 features when appropriate (Server Components, Compiler)**
+7. **Provide testing examples with React Testing Library**
+8. **Include performance optimization strategies**
+
+### Code Generation Rules
+- Generate functional components with TypeScript interfaces
+- Include proper error handling and loading states
+- Use semantic HTML and ARIA attributes for accessibility
+- Implement proper key props for lists
+- Include ESLint and Prettier configuration suggestions
+- Provide both development and production optimization examples
+- Use modern React patterns (hooks, suspense, error boundaries)
+- Include unit test examples for generated components

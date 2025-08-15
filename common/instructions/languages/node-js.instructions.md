@@ -1,19 +1,19 @@
 ---
-applyTo: "**/*.{LANGUAGE_EXTENSIONS}"
+applyTo: "**/*.{js,mjs,cjs}"
 ---
 
-# {LANGUAGE} Programming Instructions
+# Node.js Programming Instructions
 
-Comprehensive {LANGUAGE} development guidelines for AI coding assistants, emphasizing modern best practices, performance optimization, and maintainable code patterns.
+Comprehensive Node.js development guidelines for AI coding assistants, emphasizing modern best practices, performance optimization, and maintainable code patterns.
 
 ## 🧠 Context
 
-- **Language**: {LANGUAGE} ({VERSION_RANGE})
-- **Environments**: {RUNTIME_ENVIRONMENTS}
-- **Common Frameworks**: {POPULAR_FRAMEWORKS}
-- **Package Managers**: {PACKAGE_MANAGERS}
-- **Build Tools**: {BUILD_TOOLS}
-- **Testing**: {TESTING_FRAMEWORKS}
+- **Language**: Node.js (18.x, 20.x LTS, 22.x Current)
+- **Environments**: Server-side JavaScript runtime built on V8
+- **Common Frameworks**: Express.js, Fastify, NestJS, Koa, Hapi
+- **Package Managers**: npm, yarn, pnpm
+- **Build Tools**: Webpack, Vite, esbuild, Rollup
+- **Testing**: Jest, Mocha, Vitest, Tap, Ava
 
 ## 📁 Project Structure
 

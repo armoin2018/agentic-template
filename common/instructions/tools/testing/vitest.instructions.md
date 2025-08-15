@@ -1,4 +1,3 @@
-````instructions
 # Vitest Testing Framework Instructions
 
 ## Tool Overview

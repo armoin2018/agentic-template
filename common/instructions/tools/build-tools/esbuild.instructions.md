@@ -1,4 +1,3 @@
-````instructions
 # esbuild JavaScript Bundler Instructions
 
 ## Tool Overview

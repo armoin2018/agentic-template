@@ -1,4 +1,3 @@
-````instructions
 # Playwright End-to-End Testing Framework Instructions
 
 ## Tool Overview

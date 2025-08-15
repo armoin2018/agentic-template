@@ -1109,52 +1109,94 @@ export class ErrorHandlerService {
 
 ### Code Style
 
-- [Coding conventions specific to this framework]
-- [Naming conventions]
-- [File organization patterns]
+- Use TypeScript for type safety and better developer experience
+- Follow Angular/React/Vue style guides for your chosen framework
+- Use kebab-case for custom component selectors (`<my-component>`)
+- Prefix Ionic pages with 'Page' suffix (`HomePage`, `ProfilePage`)
+- Use PascalCase for component names and interfaces
+- Use camelCase for methods, properties, and variables
 
 ### Architecture Patterns
 
-- [Recommended architectural patterns]
-- [State management approaches]
-- [Component/module organization]
+- **MVVM Pattern**: Use with Angular's two-way data binding
+- **Component-Based Architecture**: Modular, reusable UI components
+- **State Management**: NgRx (Angular), Redux (React), Vuex/Pinia (Vue)
+- **Service Layer**: Centralized business logic and API calls
+- **Guard Pattern**: Route protection with authentication/authorization guards
+- **Provider Pattern**: Dependency injection for services and utilities
 
 ## Integration Points
 
-### [External Service/Tool 1]
+### Firebase Integration
 
-- **Purpose**: [What it integrates with]
-- **Setup**: [How to configure]
-- **Usage**: [Implementation examples]
+- **Purpose**: Authentication, real-time database, cloud functions, analytics
+- **Setup**: `npm install firebase @angular/fire` (for Angular)
+- **Usage**: 
+  ```typescript
+  import { AngularFireAuth } from '@angular/fire/compat/auth';
+  import { AngularFirestore } from '@angular/fire/compat/firestore';
+  ```
 
-### [External Service/Tool 2]
+### Native Plugin Integration
 
-- **Purpose**: [What it integrates with]
-- **Setup**: [How to configure]
-- **Usage**: [Implementation examples]
+- **Purpose**: Access device features through Capacitor plugins
+- **Setup**: `npm install @capacitor/[plugin-name]`
+- **Usage**: Import and configure in platform-specific code
+  ```typescript
+  import { Camera } from '@capacitor/camera';
+  import { Geolocation } from '@capacitor/geolocation';
+  ```
 
 ## Version Compatibility
 
-- **Node.js**: [Supported versions]
-- **Dependencies**: [Key dependency versions]
-- **Browser Support**: [If applicable]
-- **OS Support**: [If applicable]
+- **Node.js**: 16.x or later (18.x recommended)
+- **Angular**: 16+ (for Ionic 7)
+- **React**: 18+ (for Ionic React)
+- **Vue**: 3+ (for Ionic Vue)
+- **Capacitor**: 5.x
+- **TypeScript**: 4.7+
+- **Browser Support**: Modern browsers (Chrome 70+, Safari 13+, Firefox 63+)
+- **iOS**: 13.0+ (via Capacitor)
+- **Android**: API level 22+ (Android 5.1+)
 
 ## Troubleshooting
 
 ### Debug Mode
 
 ```bash
-[debug commands]
+# Enable debug logging
+ionic capacitor run ios --livereload --external
+ionic capacitor run android --livereload --external
+
+# Chrome DevTools for web debugging
+ionic serve --lab
+
+# Native debugging
+ionic capacitor open ios  # Opens Xcode
+ionic capacitor open android  # Opens Android Studio
 ```
 
 ### Log Analysis
 
-- [Where to find logs]
-- [How to interpret common error messages]
+- **Web**: Browser DevTools Console tab
+- **iOS**: Xcode Console when running on device/simulator
+- **Android**: Android Studio Logcat when running on device/emulator
+- **Capacitor**: Check native logs for plugin-related issues
 
 ### Common Error Messages
 
-- **Error**: `[error message]`
-  **Cause**: [Why this happens]
-  **Solution**: [How to fix]
+- **Error**: `Cannot resolve dependency 'cordova-plugin-*'`
+  **Cause**: Trying to use Cordova plugins instead of Capacitor
+  **Solution**: Use equivalent Capacitor plugins or community plugins
+
+- **Error**: `Module not found: Error: Can't resolve '@ionic/angular'`
+  **Cause**: Ionic packages not installed or incorrect import path
+  **Solution**: `npm install @ionic/angular` and verify import statements
+
+- **Error**: `Platform 'ios' is not installed`
+  **Cause**: iOS platform not added to Capacitor project
+  **Solution**: `ionic capacitor add ios` then `ionic capacitor sync`
+
+- **Error**: `Could not find valid entry point 'main'`
+  **Cause**: Build output directory mismatch between framework and Capacitor
+  **Solution**: Update `capacitor.config.ts` with correct `webDir` path

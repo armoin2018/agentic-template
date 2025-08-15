@@ -1,4 +1,3 @@
-````instructions
 # Tool Instructions Template
 
 ## Tool Overview

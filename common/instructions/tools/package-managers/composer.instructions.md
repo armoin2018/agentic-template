@@ -1,4 +1,4 @@
-````instructions
+
 # Composer PHP Package Manager Instructions
 
 ## Tool Overview

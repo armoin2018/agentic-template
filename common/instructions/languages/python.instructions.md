@@ -1172,3 +1172,43 @@ import pre_commit                   # Git hooks
 - [Python Patterns](https://python-patterns.guide/)
 - [Effective Python by Brett Slatkin](https://effectivepython.com/)
 - [Architecture Patterns with Python](https://www.cosmicpython.com/)
+
+## AI Assistant Guidelines
+When helping with Python:
+
+1. **Always use modern Python features and type hints (3.9+)**
+2. **Prioritize code readability and maintainability over performance optimizations**
+3. **Include proper error handling with specific exception types**
+4. **Suggest appropriate design patterns for the problem domain**
+5. **Include comprehensive testing examples with pytest**
+6. **Recommend async/await for I/O-bound operations**
+7. **Provide configuration and environment management guidance**
+8. **Include logging and monitoring best practices**
+
+### Code Generation Rules
+- Generate code with comprehensive type hints using modern syntax
+- Include proper error handling with logging and structured exceptions
+- Use dataclasses or Pydantic models for data structures
+- Implement proper resource management with context managers
+- Include docstrings for all public functions and classes
+- Follow PEP 8 and use Black formatting standards
+- Provide both synchronous and asynchronous examples where applicable
+- Include unit test examples for generated functions and classes
+- Use modern Python idioms (f-strings, pathlib, dataclasses, etc.)
+- Consider security implications (input validation, SQL injection prevention)
+
+### Performance Enforcement
+- ✅ Promote list comprehensions over for loops for simple operations
+- ✅ Suggest generators for memory-efficient iteration
+- ✅ Recommend `@lru_cache` for expensive computations
+- 🚫 Block string concatenation in loops without suggesting `join()`
+- 🚫 Block bare `except:` clauses without specific exception handling
+- ✅ Promote async/await for I/O operations
+- ✅ Suggest connection pooling for database and HTTP operations
+
+### Security Enforcement
+- 🔒 Enforce parameterized queries for database operations
+- 🔒 Block direct string formatting in SQL queries
+- 🔒 Require input validation for user data
+- 🔒 Promote secure random generation with `secrets` module
+- 🔒 Suggest environment variables for sensitive configuration

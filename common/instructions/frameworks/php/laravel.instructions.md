@@ -1,11 +1,71 @@
-# Framework Instructions Template
+---
+title: "Laravel PHP Web Framework Instructions"
+description: "Comprehensive guide for Laravel framework with Eloquent ORM, Artisan CLI, and modern PHP development patterns"
+category: "PHP Frameworks"
+author: "AI Assistant"
+tags: ["laravel", "php", "eloquent", "artisan", "mvc", "web-framework", "api", "full-stack"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/artisan"
+  - "**/composer.json"
+  - "**/config/**"
+  - "**/app/**"
+  - "**/routes/**"
+  - "**/database/**"
+  - "**/resources/views/**"
+---
+
+# Laravel PHP Web Framework Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Laravel
+- **Version**: 10.x+ (Latest stable with PHP 8.1+ support and improved performance)
+- **Type**: Full-Stack PHP Web Framework
+- **Language**: PHP, Blade templating, JavaScript, CSS
+- **Use Cases**: Web applications, APIs, e-commerce platforms, content management systems, enterprise applications
+
+## When to Use Laravel
+
+### ✅ **Use Laravel When**
+- Building full-featured web applications with complex business logic
+- Need rapid development with built-in authentication, routing, and ORM
+- Team has PHP expertise and prefers mature, well-documented frameworks
+- Building APIs that require robust features like rate limiting and API resources
+- Need comprehensive testing tools and development environment (Sail, Valet)
+- Developing applications requiring real-time features (broadcasting, queues)
+- Building e-commerce platforms or content management systems
+- Need excellent package ecosystem and community support
+- Working on projects requiring strong security features and CSRF protection
+
+### ❌ **Avoid Laravel When**
+- Building simple static websites that don't need dynamic functionality
+- Performance is absolutely critical and framework overhead is unacceptable
+- Team lacks PHP experience or strongly prefers other languages
+- Building microservices where lighter frameworks might be more appropriate
+- Working with legacy PHP codebases that can't be modernized
+- Need extremely fine-grained control over every aspect of the application
+- Building real-time applications where Node.js might be more suitable
+
+## AI Agent Decision Matrix
+
+### Project Type Assessment
+| Project Type | Laravel Recommendation | Key Strengths |
+|--------------|----------------------|---------------|
+| E-commerce Platform | ✅ **Excellent** - Complete feature set | Payment integration, user management |
+| Content Management | ✅ **Perfect** - Admin panels, CRUD | Eloquent ORM, file management |
+| Business Application | ✅ **Ideal** - Complex business logic | Form validation, authorization |
+| API Backend | ✅ **Recommended** - API resources, auth | Rate limiting, JSON responses |
+| Simple Blog | 🔄 **Overkill** - Too much for basic needs | WordPress might be better |
+| Real-time App | 🔄 **Consider** - Broadcasting available | Node.js might be more suitable |
+
+### Team Expertise Assessment
+| Team Background | Laravel Suitability | Learning Curve |
+|-----------------|-------------------|----------------|
+| **PHP Experience** | ✅ **Perfect** - Natural progression | 1-2 weeks to productivity |
+| **MVC Frameworks** | ✅ **Excellent** - Familiar patterns | 1 week to understand Laravel way |
+| **JavaScript Background** | 🔄 **Moderate** - Different paradigms | 2-4 weeks PHP learning |
+| **Complete Beginners** | ✅ **Good** - Excellent documentation | 4-8 weeks comprehensive learning |
 
 ## Installation & Setup
 ```bash

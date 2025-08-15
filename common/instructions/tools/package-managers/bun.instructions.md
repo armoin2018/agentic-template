@@ -1,4 +1,4 @@
-````instructions
+
 # Bun JavaScript Runtime & Package Manager Instructions
 
 ## Tool Overview

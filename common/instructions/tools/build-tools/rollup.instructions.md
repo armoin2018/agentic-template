@@ -1,4 +1,3 @@
-````instructions
 # Rollup JavaScript Bundler Instructions
 
 ## Tool Overview

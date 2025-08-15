@@ -1,11 +1,69 @@
-# Framework Instructions Template
+---
+title: "Material Design System Framework Instructions"
+description: "Comprehensive guide for implementing Google's Material Design system across web, mobile, and desktop applications"
+category: "UI/UX Frameworks"
+author: "AI Assistant"
+tags: ["material-design", "mui", "material-ui", "mdc-web", "design-system", "components", "theming"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/material/**"
+  - "**/mui/**"
+  - "**/@mui/**"
+  - "**/mdc-web/**"
+  - "**/material-components-web/**"
+  - "**/theme.*"
+---
+
+# Material Design System Framework Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Material Design
+- **Version**: Material 3 (Latest design system with dynamic color and improved accessibility)
+- **Type**: Design System and Component Framework
+- **Language**: CSS, JavaScript, TypeScript (implementation-dependent)
+- **Use Cases**: Cross-platform design consistency, component libraries, design systems, web/mobile applications
+
+## When to Use Material Design
+
+### ✅ **Use Material Design When**
+- Building applications that need Google ecosystem integration and familiarity
+- Want comprehensive design system with proven accessibility and usability patterns
+- Need cross-platform consistency across web, Android, iOS, and desktop
+- Building enterprise applications requiring professional, polished interface
+- Team lacks dedicated design resources and needs ready-made design decisions
+- Developing applications for international audiences (excellent i18n support)
+- Want design system that follows web standards and accessibility guidelines
+- Building admin dashboards, data-heavy applications, or business tools
+
+### ❌ **Avoid Material Design When**
+- Brand requires unique visual identity that conflicts with Material aesthetics
+- Building creative, artistic, or highly customized user interfaces
+- Target audience expects platform-specific native design patterns (iOS HIG)
+- Working on gaming applications or entertainment apps requiring custom themes
+- Need minimal bundle sizes and Material components add unnecessary weight
+- Team has strong design expertise and prefers building custom components
+- Building applications where Material's opinionated design decisions don't fit
+
+## AI Agent Decision Matrix
+
+### Application Type Assessment
+| Application Type | Material Design Fit | Implementation Choice |
+|------------------|-------------------|---------------------|
+| Admin Dashboard | ✅ **Perfect** - Data tables, forms, navigation | MUI (React) or Angular Material |
+| Business Application | ✅ **Excellent** - Professional appearance | Full Material 3 implementation |
+| Consumer Mobile App | ✅ **Good** - Familiar patterns | Material Components for Android/iOS |
+| Creative Portfolio | ❌ **Poor** - Too constrained | Custom design system |
+| Gaming Interface | ❌ **Poor** - Not designed for gaming | Custom UI framework |
+| E-commerce Site | 🔄 **Depends** - Professional vs unique branding | Consider brand requirements |
+
+### Framework Integration Assessment
+| Framework | Material Integration | Implementation Options |
+|-----------|-------------------|----------------------|
+| **React** | ✅ **Excellent** - MUI ecosystem | MUI v5+, Material-UI, React-MD |
+| **Angular** | ✅ **Excellent** - Angular Material | Official Angular Material library |
+| **Vue.js** | ✅ **Good** - Community libraries | Vuetify, Quasar, Vue Material |
+| **Vanilla JS** | ✅ **Available** - MDC Web | Material Components for Web |
 
 ## Installation & Setup
 ```bash

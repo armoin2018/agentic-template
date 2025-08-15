@@ -1,11 +1,69 @@
-# Framework Instructions Template
+---
+title: "Solidity Smart Contract Programming Language Instructions"
+description: "Comprehensive guide for Solidity smart contract development on Ethereum and EVM-compatible blockchains"
+category: "Blockchain Frameworks"
+author: "AI Assistant"
+tags: ["solidity", "ethereum", "smart-contracts", "blockchain", "defi", "web3", "evm", "hardhat", "truffle"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/*.sol"
+  - "**/contracts/**"
+  - "**/hardhat.config.*"
+  - "**/truffle-config.*"
+  - "**/foundry.toml"
+  - "**/remappings.txt"
+---
+
+# Solidity Smart Contract Programming Language Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Solidity
+- **Version**: 0.8.20+ (Latest stable with improved security and gas optimization)
+- **Type**: Smart Contract Programming Language
+- **Language**: Solidity (JavaScript-like syntax)
+- **Use Cases**: Ethereum smart contracts, DeFi protocols, NFTs, DAOs, tokenization, decentralized applications
+
+## When to Use Solidity
+
+### ✅ **Use Solidity When**
+- Building smart contracts for Ethereum mainnet or EVM-compatible chains
+- Developing DeFi protocols (lending, DEXs, yield farming, staking)
+- Creating NFT collections and marketplaces
+- Building decentralized autonomous organizations (DAOs)
+- Implementing tokenization systems (ERC-20, ERC-721, ERC-1155)
+- Need programmable money and automated financial instruments
+- Building trustless systems requiring blockchain immutability
+- Developing cross-chain bridges and interoperability solutions
+
+### ❌ **Avoid Solidity When**
+- Building applications that don't need blockchain/decentralization
+- Gas costs would make the application economically unviable
+- Need high-frequency transactions or real-time processing
+- Developing applications requiring private data or confidentiality
+- Working on chains that don't support EVM (Solana, Cardano, etc.)
+- Building simple static websites or traditional web applications
+- Need to store large amounts of data efficiently
+
+## AI Agent Decision Matrix
+
+### Project Type Assessment
+| Project Type | Solidity Recommendation | Development Framework |
+|--------------|----------------------|----------------------|
+| DeFi Protocol | ✅ **Essential** - Core requirement | Hardhat + OpenZeppelin |
+| NFT Collection | ✅ **Required** - Standard implementation | Foundry + ERC-721A |
+| DAO Governance | ✅ **Necessary** - Voting and treasury | Hardhat + Governor |
+| Token Launch | ✅ **Standard** - ERC-20/BEP-20 | OpenZeppelin + Remix |
+| Gaming Assets | ✅ **Recommended** - In-game economies | ERC-1155 multi-token |
+| Supply Chain | 🔄 **Consider** - May need off-chain data | Hybrid approach |
+
+### Complexity Assessment
+| Factor | Low Complexity | Medium Complexity | High Complexity |
+|--------|----------------|-------------------|-----------------|
+| **Development Time** | 1-2 weeks (basic token) | 1-2 months (DeFi protocol) | 3-6 months (complex DeFi) |
+| **Security Requirements** | Basic auditing | Professional audit | Multiple audits + formal verification |
+| **Gas Optimization** | Standard patterns | Custom optimization | Advanced assembly |
+| **Integration Complexity** | Single contract | Multiple contracts | Cross-chain systems |
 
 ## Installation & Setup
 ```bash

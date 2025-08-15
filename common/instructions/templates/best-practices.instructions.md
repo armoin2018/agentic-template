@@ -1,4 +1,3 @@
-````instructions
 # Best Practices Instructions Template
 
 ## Practice Overview
@@ -263,4 +262,3 @@ When helping with [Best Practice Name]:
 - Follow the principle of "secure by default"
 - Prioritize maintainability and readability
 - Consider performance implications
-````

@@ -1,4 +1,3 @@
-````instructions
 # Vite Build Tool Instructions
 
 ## Tool Overview

@@ -1,4 +1,3 @@
-````instructions
 # Git Version Control Instructions
 
 ## Tool Overview

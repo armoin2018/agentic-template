@@ -1,4 +1,3 @@
-````instructions
 # Webpack Build Tool Instructions
 
 ## Tool Overview

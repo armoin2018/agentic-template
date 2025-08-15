@@ -1,11 +1,70 @@
-# Framework Instructions Template
+---
+title: "Xamarin Cross-Platform Mobile Development Instructions"
+description: "Comprehensive guide for Xamarin cross-platform mobile development with C# and .NET for iOS, Android, and Windows"
+category: "Mobile Frameworks"
+author: "AI Assistant"
+tags: ["xamarin", "csharp", "dotnet", "cross-platform", "mobile", "ios", "android", "maui"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/*.xaml"
+  - "**/*.cs"
+  - "**/App.xaml*"
+  - "**/MainPage.xaml*"
+  - "**/Platforms/**"
+  - "**/MauiProgram.cs"
+---
+
+# Xamarin Cross-Platform Mobile Development Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Xamarin / .NET MAUI
+- **Version**: .NET 8+ with MAUI (Multi-platform App UI - evolution of Xamarin)
+- **Type**: Cross-Platform Mobile Development Framework
+- **Language**: C#, XAML, .NET
+- **Use Cases**: Enterprise mobile apps, cross-platform business applications, native performance mobile development
+
+## When to Use Xamarin/.NET MAUI
+
+### ✅ **Use Xamarin/MAUI When**
+- Team has strong C# and .NET expertise
+- Building enterprise applications requiring native performance
+- Need to share significant business logic across platforms
+- Working in Microsoft-centric development environments
+- Building applications requiring complex data processing or calculations
+- Need integration with existing .NET backend services and libraries
+- Developing business applications with forms, data entry, and reporting
+- Working on applications requiring offline capabilities and data synchronization
+- Need platform-specific features while maintaining shared codebase
+
+### ❌ **Avoid Xamarin/MAUI When**
+- Team lacks C# experience and training budget is limited
+- Building simple consumer apps where web technologies are sufficient
+- Need cutting-edge mobile features immediately (often delayed compared to native)
+- Building games or graphics-intensive applications
+- Working on projects with tight timelines where React Native/Flutter might be faster
+- Need extensive customization of platform-specific UI patterns
+- Building apps primarily for a single platform
+
+## AI Agent Decision Matrix
+
+### Project Type Assessment
+| Project Type | Xamarin/MAUI Recommendation | Key Advantages |
+|--------------|---------------------------|----------------|
+| Enterprise Mobile App | ✅ **Excellent** - Perfect fit | .NET integration, security |
+| Business Forms App | ✅ **Ideal** - Data handling strength | Complex business logic |
+| Field Service App | ✅ **Recommended** - Offline capabilities | Data sync, device integration |
+| Consumer Social App | 🔄 **Consider** - May be overkill | React Native might be better |
+| Gaming App | ❌ **Avoid** - Not designed for games | Unity with C# instead |
+| Simple Utility App | 🔄 **Depends** - Consider development time | PWA might be sufficient |
+
+### Enterprise Suitability Assessment
+| Factor | Xamarin/MAUI Strength | Enterprise Benefit |
+|--------|---------------------|-------------------|
+| **Security** | ✅ **Excellent** - Enterprise-grade | Active Directory integration |
+| **Performance** | ✅ **Native** - Compiled to native code | CPU-intensive operations |
+| **Maintenance** | ✅ **Strong** - Mature ecosystem | Long-term support |
+| **Integration** | ✅ **Seamless** - .NET ecosystem | Existing enterprise systems |
 
 ## Installation & Setup
 ```bash

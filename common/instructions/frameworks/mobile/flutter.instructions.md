@@ -1037,51 +1037,114 @@ class ErrorHandler {
 ### Code Style
 
 - [Coding conventions specific to this framework]
-- [Naming conventions]
-- [File organization patterns]
+- Use consistent naming: camelCase for variables, PascalCase for classes
+- Prefix private variables with underscore (_privateVariable)
+- Use descriptive names for widgets and functions
+- Follow Dart package naming conventions (lowercase with underscores)
+- Organize imports: Dart SDK, Flutter SDK, third-party packages, local files
 
 ### Architecture Patterns
 
-- [Recommended architectural patterns]
-- [State management approaches]
-- [Component/module organization]
+- **BLoC Pattern**: Business Logic Component for scalable state management
+- **MVVM Pattern**: Model-View-ViewModel with Provider or Riverpod
+- **Clean Architecture**: Separate data, domain, and presentation layers
+- **Repository Pattern**: Abstract data access and API interactions
+- **Dependency Injection**: Use GetIt, injectable, or Riverpod for DI
+- **Feature-First Organization**: Group files by feature rather than type
 
 ## Integration Points
 
-### [External Service/Tool 1]
+### Firebase Integration
 
-- **Purpose**: [What it integrates with]
-- **Setup**: [How to configure]
-- **Usage**: [Implementation examples]
+- **Purpose**: Backend services, authentication, analytics, and cloud storage
+- **Setup**: `flutter pub add firebase_core firebase_auth cloud_firestore`
+- **Usage**: 
+  ```dart
+  await Firebase.initializeApp();
+  FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+  ```
 
-### [External Service/Tool 2]
+### API Integration (HTTP/REST)
 
-- **Purpose**: [What it integrates with]
-- **Setup**: [How to configure]
-- **Usage**: [Implementation examples]
+- **Purpose**: Communicate with REST APIs and web services
+- **Setup**: `flutter pub add http dio retrofit json_annotation`
+- **Usage**: 
+  ```dart
+  final response = await http.get(Uri.parse('https://api.example.com/data'));
+  final data = json.decode(response.body);
+  ```
+
+### Local Storage Integration
+
+- **Purpose**: Persist data locally using SQLite, Hive, or shared preferences
+- **Setup**: `flutter pub add sqflite hive shared_preferences`
+- **Usage**: 
+  ```dart
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('key', 'value');
+  ```
+
+### Native Platform Integration
+
+- **Purpose**: Access platform-specific features through method channels
+- **Setup**: Configure platform channels in android/ and ios/ directories
+- **Usage**: 
+  ```dart
+  static const platform = MethodChannel('com.example.app/battery');
+  final batteryLevel = await platform.invokeMethod('getBatteryLevel');
+  ```
 
 ## Version Compatibility
 
-- **Node.js**: [Supported versions]
-- **Dependencies**: [Key dependency versions]
-- **Browser Support**: [If applicable]
-- **OS Support**: [If applicable]
+- **Flutter SDK**: 3.16+ (latest stable recommended)
+- **Dart SDK**: 3.2+ (comes with Flutter)
+- **Android**: API level 21+ (Android 5.0+)
+- **iOS**: iOS 12.0+ 
+- **Web**: Modern browsers (Chrome 84+, Safari 14+, Firefox 72+)
+- **Desktop**: Windows 10+, macOS 10.14+, Linux (Ubuntu 18.04+)
 
 ## Troubleshooting
 
 ### Debug Mode
 
 ```bash
-[debug commands]
+# Run app in debug mode
+flutter run --debug
+
+# Enable verbose logging
+flutter run --verbose
+
+# Profile performance
+flutter run --profile
+
+# Analyze code
+flutter analyze
+
+# Check doctor for setup issues
+flutter doctor -v
 ```
 
 ### Log Analysis
 
-- [Where to find logs]
-- [How to interpret common error messages]
+- **Console logs**: Use `print()` statements or `debugPrint()` for debug output
+- **Flutter Inspector**: Use DevTools for widget tree inspection
+- **Performance**: Monitor frame rendering and memory usage in DevTools
+- **Crash logs**: Check platform-specific crash reports (Crashlytics, Bugsnag)
 
 ### Common Error Messages
 
-- **Error**: `[error message]`
-  **Cause**: [Why this happens]
-  **Solution**: [How to fix]
+- **Error**: `RenderFlex overflowed by X pixels`
+  **Cause**: Widget content exceeds available space
+  **Solution**: Wrap with `Expanded`, `Flexible`, or `SingleChildScrollView`
+
+- **Error**: `setState() called after dispose()`
+  **Cause**: Attempting to update state on a disposed widget
+  **Solution**: Check `mounted` property before calling `setState()`
+
+- **Error**: `A RenderFlex overflowed by X pixels on the right`
+  **Cause**: Row widget children exceed horizontal space
+  **Solution**: Use `Expanded` widgets or reduce content size
+
+- **Error**: `Could not resolve all artifacts for configuration ':app:debugRuntimeClasspath'`
+  **Cause**: Gradle dependency resolution issues
+  **Solution**: Run `flutter clean` and `flutter pub get`, check gradle version compatibility

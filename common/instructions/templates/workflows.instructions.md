@@ -1,4 +1,3 @@
-````instructions
 # Workflow Instructions Template
 
 ## Workflow Overview
@@ -310,4 +309,3 @@ When helping with [Workflow Name]:
 - Consider security and compliance requirements
 - Plan for monitoring and alerting
 - Include documentation for automated processes
-````

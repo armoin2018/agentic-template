@@ -1,11 +1,70 @@
-# Framework Instructions Template
+---
+title: "Angular Enterprise Frontend Framework Instructions"
+description: "Comprehensive guide for Angular framework with TypeScript, standalone components, signals, and enterprise-grade development patterns"
+category: "Frontend Frameworks"
+author: "AI Assistant"
+tags: ["angular", "typescript", "frontend", "spa", "enterprise", "rxjs", "signals", "standalone-components"]
+version: "1.0"
+last_updated: "2025-08-14"
+applyTo:
+  - "**/angular.json"
+  - "**/tsconfig.*"
+  - "**/*.component.*"
+  - "**/*.service.*"
+  - "**/*.module.*"
+  - "**/app.config.*"
+---
+
+# Angular Enterprise Frontend Framework Instructions
 
 ## Framework Overview
-- **Framework Name**: [Name of the framework]
-- **Version**: [Current stable version]
-- **Type**: [Web framework, mobile framework, desktop framework, etc.]
-- **Language**: [Primary programming language]
-- **Use Cases**: [Common applications and scenarios]
+- **Framework Name**: Angular
+- **Version**: 17+ (Latest stable with standalone components, signals, and new control flow)
+- **Type**: Enterprise Frontend Framework
+- **Language**: TypeScript (primary), JavaScript, HTML, CSS/SCSS
+- **Use Cases**: Enterprise applications, large-scale SPAs, progressive web apps, complex business applications
+
+## When to Use Angular
+
+### ✅ **Use Angular When**
+- Building large-scale enterprise applications with complex business logic
+- Team prefers strongly-typed development with TypeScript-first approach
+- Need comprehensive framework with built-in solutions (routing, forms, HTTP, testing)
+- Working on applications requiring strict architectural patterns and conventions
+- Building applications with complex state management and data flow requirements
+- Need excellent tooling support with Angular CLI for scaffolding and development
+- Developing progressive web apps with advanced service worker integration
+- Working in enterprise environments requiring long-term support and stability
+- Building applications with internationalization (i18n) requirements
+
+### ❌ **Avoid Angular When**
+- Building simple websites or landing pages that don't need complex interactivity
+- Team prefers lightweight solutions or has limited TypeScript experience
+- Need fastest possible development iteration for prototypes or MVPs
+- Working on projects with tight bundle size constraints
+- Team has strong React ecosystem expertise and established toolchain
+- Building mobile-first applications where React Native ecosystem is preferred
+- Need maximum flexibility in architectural decisions
+
+## AI Agent Decision Matrix
+
+### Project Type Assessment
+| Project Type | Angular Recommendation | Key Strengths |
+|--------------|----------------------|---------------|
+| Enterprise Dashboard | ✅ **Excellent** - Built for complex UIs | Data tables, forms, charts |
+| Admin Panel | ✅ **Ideal** - CRUD operations and permissions | Role-based access, forms |
+| Financial Application | ✅ **Perfect** - Complex business logic | Type safety, RxJS streams |
+| E-commerce Platform | ✅ **Recommended** - Feature-rich requirements | PWA, i18n, performance |
+| Content Website | 🔄 **Overkill** - Too complex for simple content | Consider Next.js, Nuxt |
+| Mobile-first App | 🔄 **Consider** - Ionic for hybrid approach | React Native might be better |
+
+### Team Size and Expertise Assessment
+| Team Characteristics | Angular Suitability | Considerations |
+|---------------------|-------------------|----------------|
+| **Large Team (10+)** | ✅ **Excellent** - Clear structure and conventions | Built-in architectural patterns |
+| **Enterprise Experience** | ✅ **Ideal** - Familiar enterprise patterns | Java/.NET developers adapt well |
+| **TypeScript Expertise** | ✅ **Perfect** - TypeScript-first design | Leverage existing TS knowledge |
+| **JavaScript-only Team** | 🔄 **Learning Curve** - TypeScript required | Consider training investment |
 
 ## Installation & Setup
 ```bash
