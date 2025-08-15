@@ -31,7 +31,7 @@ You are an expert business analyst and technical architect.
 5. **Validation**:
    - Ensure no requirement from `project/ASK.md` is lost
    - Flag any items that need clarification with a `[TODO: ...]` marker
-   - Verify alignment with `.github/copilot-instructions.md`, `.github/instructions/*.md` and `.github/personas/*.md` if provided
+   - Verify alignment with `.github/copilot-instructions.md`, `.github/instructions/**/*.md` and `.github/personas/**/*.md` if provided
 
 6. **Deliver**:
    - Output the updated `project/REQUIREMENTS.md` (overwriting the existing one if it exists)

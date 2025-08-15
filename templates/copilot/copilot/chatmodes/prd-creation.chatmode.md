@@ -108,7 +108,7 @@ Following `build-requirements.prompt.md` protocol:
    - Ensure every ASK.md item is addressed
    - Add [TODO: ...] markers for items needing clarification
    - Generate `project/REQUIREMENTS-CHANGELOG.md` with changes
-   - Reference appropriate `.github/personas/` and `.github/instructions/`
+   - Reference appropriate `.github/personas/**/*.md` and `.github/instructions/**/*.md`
 ```
 
 ### Workflow 2: Requirements to Build Plan Integration
@@ -128,8 +128,8 @@ Supporting `build-plan.prompt.md` workflow:
    - Flag items requiring specialized personas or instructions
 
 3. **Implementation Guidance**:
-   - Reference specific `.github/instructions/` files for technical implementation
-   - Suggest appropriate `.github/personas/` for different aspects
+   - Reference specific `.github/instructions/**/*.md` files for technical implementation
+   - Suggest appropriate `.github/personas/**/*.md` for different aspects
    - Identify integration points and architectural considerations
    - Provide testing and validation criteria
 ```
