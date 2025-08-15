@@ -1,0 +1,324 @@
+{
+  "participants": [
+    {
+      "id": "instructions",
+      "name": "Instruction Creation Assistant",
+      "description": "Specialized assistant for creating, optimizing, and managing AI instruction files for the agentic system",
+      "when": "Use when creating new instructions, optimizing existing ones, or managing the instruction collection",
+      "commands": [
+        {
+          "name": "create",
+          "description": "Create a new instruction from template",
+          "usage": "@instructions /create [category] [technology]",
+          "examples": [
+            "@instructions /create languages python",
+            "@instructions /create cloud-platforms aws",
+            "@instructions /create frameworks react"
+          ]
+        },
+        {
+          "name": "optimize",
+          "description": "Optimize an existing instruction for specific use case",
+          "usage": "@instructions /optimize [instruction-file] for [use-case]",
+          "examples": [
+            "@instructions /optimize python.instructions.md for data-science",
+            "@instructions /optimize react.instructions.md for enterprise"
+          ]
+        },
+        {
+          "name": "score",
+          "description": "Evaluate instruction quality across 4 dimensions",
+          "usage": "@instructions /score [instruction-file]",
+          "examples": [
+            "@instructions /score languages/python.instructions.md",
+            "@instructions /score tools/containerization/docker.instructions.md"
+          ]
+        },
+        {
+          "name": "review",
+          "description": "Comprehensive quality assessment and improvement suggestions",
+          "usage": "@instructions /review [instruction-file]",
+          "examples": [
+            "@instructions /review frameworks/nodejs-typescript/react.instructions.md",
+            "@instructions /review tools/cloud-platforms/aws.instructions.md"
+          ]
+        },
+        {
+          "name": "enhance",
+          "description": "Targeted improvement of specific instruction aspects",
+          "usage": "@instructions /enhance [instruction-file] [focus-area]",
+          "examples": [
+            "@instructions /enhance docker.instructions.md security",
+            "@instructions /enhance python.instructions.md performance"
+          ]
+        },
+        {
+          "name": "validate",
+          "description": "Check template compliance and structure",
+          "usage": "@instructions /validate [instruction-file]",
+          "examples": [
+            "@instructions /validate languages/javascript.instructions.md",
+            "@instructions /validate tools/testing/jest.instructions.md"
+          ]
+        },
+        {
+          "name": "index",
+          "description": "Generate or update the instruction index",
+          "usage": "@instructions /index [directory]",
+          "examples": [
+            "@instructions /index common/instructions/",
+            "@instructions /index common/instructions/languages/"
+          ]
+        },
+        {
+          "name": "compare",
+          "description": "Compare quality and content between instructions",
+          "usage": "@instructions /compare [instruction1] [instruction2]",
+          "examples": [
+            "@instructions /compare python.instructions.md javascript.instructions.md",
+            "@instructions /compare docker.instructions.md kubernetes.instructions.md"
+          ]
+        },
+        {
+          "name": "template",
+          "description": "Create domain-specific instruction template",
+          "usage": "@instructions /template [domain]",
+          "examples": [
+            "@instructions /template machine-learning",
+            "@instructions /template mobile-development"
+          ]
+        },
+        {
+          "name": "modernize",
+          "description": "Update instruction with current best practices",
+          "usage": "@instructions /modernize [instruction-file]",
+          "examples": [
+            "@instructions /modernize languages/javascript.instructions.md",
+            "@instructions /modernize tools/build-tools/webpack.instructions.md"
+          ]
+        },
+        {
+          "name": "cross-reference",
+          "description": "Identify related instructions and integration points",
+          "usage": "@instructions /cross-reference [instruction-file]",
+          "examples": [
+            "@instructions /cross-reference react.instructions.md",
+            "@instructions /cross-reference aws.instructions.md"
+          ]
+        },
+        {
+          "name": "dependencies",
+          "description": "Identify technology dependencies and prerequisites",
+          "usage": "@instructions /dependencies [instruction-file]",
+          "examples": [
+            "@instructions /dependencies kubernetes.instructions.md",
+            "@instructions /dependencies react-native.instructions.md"
+          ]
+        }
+      ],
+      "capabilities": [
+        "Quality scoring across 4 dimensions (Accuracy, Relevance, Detail, AI Usability)",
+        "Template compliance validation and enforcement",
+        "Technology-specific instruction creation and optimization",
+        "Cross-reference mapping and dependency analysis",
+        "Modern best practices integration and updates",
+        "AI optimization for decision-making frameworks",
+        "Content enhancement with practical examples",
+        "Instruction index generation and maintenance",
+        "Quality improvement tracking and recommendations",
+        "Integration pattern development and validation"
+      ],
+      "specializations": [
+        "Programming Languages (Python, JavaScript, TypeScript, Java, Go, Rust)",
+        "Web Frameworks (React, Vue, Angular, Express, FastAPI)",
+        "Cloud Platforms (AWS, Azure, GCP services and patterns)",
+        "Development Tools (Git, Docker, CI/CD, package managers)",
+        "Infrastructure as Code (Terraform, CloudFormation, Kubernetes)",
+        "Testing Frameworks (Jest, Pytest, Cypress, Playwright)",
+        "Database Technologies (PostgreSQL, MongoDB, Redis)",
+        "Development Methodologies (Agile, planning, troubleshooting)",
+        "Build Tools and Bundlers (Webpack, Vite, esbuild)",
+        "Mobile Development (React Native, Flutter, Ionic)"
+      ],
+      "integration": {
+        "file_patterns": [
+          "common/instructions/**/*.md",
+          "common/instructions/templates/*.md",
+          ".github/prompts/update-instructions.prompt.md"
+        ],
+        "related_commands": [
+          "update-instructions",
+          "instruction-optimization",
+          "ai-agent-guidance"
+        ],
+        "output_formats": [
+          "Structured markdown instructions",
+          "Quality assessment reports",
+          "Instruction index files",
+          "Template compliance reports",
+          "Enhancement recommendation lists",
+          "Cross-reference mapping documents"
+        ]
+      },
+      "best_practices": [
+        "Always validate against current technology standards",
+        "Ensure AI-optimized language and decision frameworks",
+        "Include practical examples with good/bad comparisons",
+        "Maintain template consistency across all instructions",
+        "Regular quality assessment and modernization cycles",
+        "Clear cross-reference and dependency mapping",
+        "Measurable quality criteria and success metrics",
+        "Comprehensive documentation and version control"
+      ]
+    },
+    {
+      "id": "personas",
+      "name": "Persona Creation Assistant",
+      "description": "Specialized assistant for creating, optimizing, and managing AI personas for the agentic system",
+      "when": "Use when creating new personas, optimizing existing ones, or managing the persona collection",
+      "commands": [
+        {
+          "name": "create",
+          "description": "Create a new persona from template",
+          "usage": "@personas /create [type] [domain]",
+          "examples": [
+            "@personas /create backend-engineer nodejs",
+            "@personas /create security-expert cloud-infrastructure"
+          ]
+        },
+        {
+          "name": "optimize",
+          "description": "Optimize an existing persona for specific domain",
+          "usage": "@personas /optimize [persona-file] for [domain]",
+          "examples": [
+            "@personas /optimize backend-engineer.md for microservices",
+            "@personas /optimize frontend-engineer.md for react"
+          ]
+        },
+        {
+          "name": "score",
+          "description": "Evaluate persona quality across 4 dimensions",
+          "usage": "@personas /score [persona-file]",
+          "examples": [
+            "@personas /score developer/backend-engineer.md",
+            "@personas /score ai/ml-engineer.md"
+          ]
+        },
+        {
+          "name": "review",
+          "description": "Comprehensive quality assessment and improvement suggestions",
+          "usage": "@personas /review [persona-file]",
+          "examples": [
+            "@personas /review developer/frontend-engineer.md",
+            "@personas /review experts/security-expert.md"
+          ]
+        },
+        {
+          "name": "enhance",
+          "description": "Targeted improvement of specific persona aspects",
+          "usage": "@personas /enhance [persona-file] [focus-area]",
+          "examples": [
+            "@personas /enhance devops/ci-cd-expert.md workflows",
+            "@personas /enhance ai/data-scientist.md tools"
+          ]
+        },
+        {
+          "name": "validate",
+          "description": "Check template compliance and structure",
+          "usage": "@personas /validate [persona-file]",
+          "examples": [
+            "@personas /validate developer/mobile-developer.md",
+            "@personas /validate finance/trading-expert.md"
+          ]
+        },
+        {
+          "name": "index",
+          "description": "Generate or update the personas index",
+          "usage": "@personas /index [directory]",
+          "examples": [
+            "@personas /index common/personas/",
+            "@personas /index common/personas/developer/"
+          ]
+        },
+        {
+          "name": "compare",
+          "description": "Compare quality and capabilities between personas",
+          "usage": "@personas /compare [persona1] [persona2]",
+          "examples": [
+            "@personas /compare backend-engineer.md fullstack-developer.md",
+            "@personas /compare security-expert.md devops-engineer.md"
+          ]
+        },
+        {
+          "name": "template",
+          "description": "Create domain-specific persona template",
+          "usage": "@personas /template [domain]",
+          "examples": [
+            "@personas /template blockchain",
+            "@personas /template machine-learning"
+          ]
+        },
+        {
+          "name": "modernize",
+          "description": "Update persona with current best practices",
+          "usage": "@personas /modernize [persona-file]",
+          "examples": [
+            "@personas /modernize developer/javascript-developer.md",
+            "@personas /modernize devops/kubernetes-expert.md"
+          ]
+        }
+      ],
+      "capabilities": [
+        "Quality scoring across 4 dimensions (Accuracy, Relevance, Detail, AI Usability)",
+        "Template compliance validation and enforcement",
+        "Domain-specific persona creation and optimization",
+        "Multi-persona collaboration pattern design",
+        "Workflow and interaction pattern development",
+        "Technology-specific capability mapping",
+        "AI optimization for machine-readable format",
+        "Cross-reference index generation and maintenance",
+        "Persona evolution tracking and version control",
+        "Performance metric definition and monitoring"
+      ],
+      "specializations": [
+        "Software Development Personas (Backend, Frontend, Full-Stack, Mobile)",
+        "DevOps and Infrastructure Personas (CI/CD, Cloud, Kubernetes, Security)",
+        "AI/ML Personas (Data Science, ML Engineering, AI Research)",
+        "Business Personas (Product Management, Technical Writing, Architecture)",
+        "Domain Experts (Finance, Healthcare, Gaming, Blockchain)",
+        "Quality Assurance and Testing Personas",
+        "Design and UX Personas",
+        "Management and Leadership Personas"
+      ],
+      "integration": {
+        "file_patterns": [
+          "common/personas/**/*.md",
+          "common/personas/templates/*.md",
+          ".github/prompts/update-personas.prompt.md"
+        ],
+        "related_commands": [
+          "update-personas",
+          "persona-optimization",
+          "ai-agent-configuration"
+        ],
+        "output_formats": [
+          "Structured markdown personas",
+          "Quality assessment reports",
+          "Persona index files",
+          "Template compliance reports",
+          "Enhancement recommendation lists"
+        ]
+      },
+      "best_practices": [
+        "Always validate against current domain knowledge",
+        "Ensure AI-optimized language and structure",
+        "Include specific, actionable examples",
+        "Maintain template consistency across all personas",
+        "Regular quality assessment and improvement cycles",
+        "Clear collaboration and escalation patterns",
+        "Measurable performance criteria and success metrics",
+        "Comprehensive documentation and version control"
+      ]
+    }
+  ]
+}
