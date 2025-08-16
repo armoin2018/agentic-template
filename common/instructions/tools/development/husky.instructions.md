@@ -1228,4 +1228,3 @@ When helping with [Tool Name]:
 - Provide multiple options when appropriate
 - Include validation and error checking
 - Follow the project's existing patterns and conventions
-````

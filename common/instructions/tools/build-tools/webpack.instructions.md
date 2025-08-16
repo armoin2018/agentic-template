@@ -1124,8 +1124,6 @@ npx webpack-bundle-analyzer stats.json
 - **Error**: `ReferenceError: process is not defined`
   **Cause**: Node.js globals not available in browser
   **Solution**: Use DefinePlugin or configure fallbacks
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

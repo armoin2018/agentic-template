@@ -709,8 +709,6 @@ yarn dlx @yarnpkg/doctor
 - **Error**: `Workspace not found`
   **Cause**: Incorrect workspace configuration
   **Solution**: Verify workspace paths in package.json
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

@@ -480,4 +480,3 @@ git config --list --show-origin
 - **Error**: `Please commit your changes or stash them before you merge`
   **Cause**: Uncommitted changes preventing merge
   **Solution**: Commit changes or use `git stash`
-````

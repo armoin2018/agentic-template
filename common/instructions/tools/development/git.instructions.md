@@ -927,4 +927,3 @@ When helping with Git:
 - Generate branch protection and security configurations for team repositories
 - Provide cross-platform compatible commands and configurations
 - Include performance optimization settings for large repositories and teams
-````

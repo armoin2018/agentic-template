@@ -934,8 +934,6 @@ bun build --verbose src/index.ts
 - **Error**: `Permission denied`
   **Cause**: File permissions or execution rights
   **Solution**: Check file permissions, use `chmod +x`
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

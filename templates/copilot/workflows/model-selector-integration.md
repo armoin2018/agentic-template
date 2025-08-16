@@ -6,7 +6,7 @@ This workflow demonstrates how to integrate the dynamic model selector with exis
 
 ### 1. PRD Creation Workflow Integration
 
-````markdown
+`````markdown
 # Enhanced PRD Creation with Model Selection
 
 When creating PRDs, the model selector can:
@@ -34,11 +34,10 @@ stories_result = executor.execute_task(
     user_preferences={'style_preference': 'creative'}
 )
 ```
-````
 
 ### 2. Build Plan Workflow Integration
 
-````markdown
+`````markdown
 # Smart Build Planning with Model Selection
 
 For build planning tasks:
@@ -62,7 +61,6 @@ tasks_result = executor.execute_task(
     user_preferences={'complexity': 'moderate'}
 )
 ```
-````
 
 ### 3. Code Review and Analysis
 
@@ -84,7 +82,6 @@ review_result = executor.execute_task(
     user_preferences={'style': 'technical', 'complexity': 'high'}
 )
 ```
-````
 
 ## Workflow Configuration Examples
 
@@ -348,3 +345,6 @@ class WorkflowAnalytics:
 - Regular feedback collection and iteration
 
 This integration framework allows teams to leverage the dynamic model selector while maintaining their existing workflows and adding intelligent model routing capabilities.
+````
+`````
+`````

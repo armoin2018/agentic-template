@@ -1032,8 +1032,6 @@ composer validate --strict
 - **Error**: `Class 'App\Example' not found`
   **Cause**: Autoloader not updated after adding classes
   **Solution**: Run `composer dump-autoload` to regenerate autoloader
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

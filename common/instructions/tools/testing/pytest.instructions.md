@@ -834,8 +834,6 @@ pytest -rs
 - **Error**: `RuntimeError: There is no current event loop in thread`
   **Cause**: Async test configuration issues
   **Solution**: Install pytest-asyncio and configure properly
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

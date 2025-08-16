@@ -380,5 +380,3 @@ Desktop (NW.js):
 | Educational projects | Event sheets for visual learning | Text-based programming |
 | Browser games | HTML5 export with WebGL | Desktop-only frameworks |
 | Team collaboration | Construct 3 cloud saves | Local-only development |
-
-````

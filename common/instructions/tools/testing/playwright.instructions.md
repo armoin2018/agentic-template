@@ -1120,8 +1120,6 @@ DEBUG=pw:api npx playwright test
 - **Error**: `Error: Browser executable not found`
   **Cause**: Playwright browsers not installed
   **Solution**: Run `npx playwright install`
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

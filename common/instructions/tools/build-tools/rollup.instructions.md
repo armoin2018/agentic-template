@@ -1194,8 +1194,6 @@ DEBUG=rollup:* rollup -c
 - **Error**: `'default' is not exported by module`
   **Cause**: Named/default export mismatch
   **Solution**: Configure commonjs plugin with namedExports
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

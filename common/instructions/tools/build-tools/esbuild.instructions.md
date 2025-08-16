@@ -1001,8 +1001,6 @@ cat meta.json | jq '.inputs'
 - **Error**: `Transform failed with X errors`
   **Cause**: Syntax errors in source code
   **Solution**: Check source code syntax and TypeScript configuration
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

@@ -1332,8 +1332,6 @@ npx vitest --run --reporter=verbose button.test.ts
 - **Error**: `TypeError: Cannot read property 'mockImplementation' of undefined`
   **Cause**: Incorrect mock syntax
   **Solution**: Use `vi.fn()` instead of `jest.fn()`
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

@@ -1198,8 +1198,6 @@ npx vite optimize
 - **Error**: `[vite] Internal server error: Failed to load url`
   **Cause**: Asset loading issues or incorrect base path
   **Solution**: Check asset paths and base configuration
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

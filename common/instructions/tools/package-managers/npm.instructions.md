@@ -656,8 +656,6 @@ npm doctor                      # Diagnose npm setup
 - **Error**: `Network timeout`
   **Cause**: Network connectivity issues
   **Solution**: Configure registry timeout or use different registry
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

@@ -843,8 +843,6 @@ python -c "import requests; print(requests.__version__)"
 - **Error**: `Permission denied`
   **Cause**: Insufficient permissions for installation
   **Solution**: Use virtual environment or --user flag
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]

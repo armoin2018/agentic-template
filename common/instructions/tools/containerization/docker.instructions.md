@@ -2034,4 +2034,3 @@ When helping with Docker:
 - Include security measures like non-root users
 - Follow the project's existing patterns and conventions
 - Provide both development and production configurations
-````

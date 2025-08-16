@@ -862,8 +862,6 @@ pnpm store prune --dry-run
 - **Error**: `ERR_PNPM_NO_MATCHING_VERSION`
   **Cause**: Version constraint cannot be satisfied
   **Solution**: Check version ranges and update constraints
-````
-
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]
