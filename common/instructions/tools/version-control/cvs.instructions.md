@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "cvs, version-control, **/.cvs, **/CVSROOT"
 ---
@@ -907,4 +907,3 @@ When helping teams with CVS:
 - ✅ Promote migration planning for long-term sustainability
 - ✅ Enforce access controls and security measures
 - ✅ Require documentation of legacy procedures and knowledge
-````

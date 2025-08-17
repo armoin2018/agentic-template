@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "turbo, build-tools, monorepo, **/turbo.json, **/package.json, turborepo"
 ---
@@ -809,4 +809,3 @@ When helping teams choose Turbo configurations:
 - ✅ Enforce proper remote cache configuration for team environments
 - ✅ Promote incremental migration strategies for existing projects
 - ✅ Require performance monitoring and optimization documentation
-````

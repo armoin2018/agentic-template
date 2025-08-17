@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "r, rstudio, cran, tidyverse, shiny, **/*.r, **/*.R, **/*.Rmd"
 ---
@@ -1424,4 +1424,3 @@ When helping teams with R:
 - ✅ Promote reproducible research practices with R Markdown
 - ✅ Require unit tests for critical functions
 - ✅ Enforce secure coding practices for production deployments
-````

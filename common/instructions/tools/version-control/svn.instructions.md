@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "svn, subversion, version-control, **/.svn, **/svnignore"
 ---
@@ -807,4 +807,3 @@ When helping teams with SVN:
 - ✅ Enforce access controls and security permissions
 - ✅ Promote regular repository maintenance and cleanup procedures
 - ✅ Require backup and disaster recovery procedures for repositories
-````

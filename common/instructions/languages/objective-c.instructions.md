@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "objective-c, objc, cocoa, ios, macos, **/*.m, **/*.h, **/*.mm"
 ---
@@ -1667,4 +1667,3 @@ When helping teams with Objective-C:
 - ✅ Promote use of Apple frameworks over custom implementations
 - ✅ Require unit tests for business logic and critical functionality
 - ✅ Enforce security best practices for data handling and storage
-````

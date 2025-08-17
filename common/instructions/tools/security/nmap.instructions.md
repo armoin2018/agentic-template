@@ -1,4 +1,4 @@
-````instructions
+`
 ---
 applyTo: "nmap, network-scanner, security-scanning, port-scanning, vulnerability-assessment"
 ---
@@ -1311,4 +1311,3 @@ When helping teams with Nmap:
 - ✅ Promote integration with established security workflows and procedures
 - ✅ Require regular updates of scanning tools and vulnerability databases
 - ✅ Enforce compliance with organizational security policies and legal requirements
-````
