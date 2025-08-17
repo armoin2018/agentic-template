@@ -4,23 +4,35 @@ Agentic Template Provisioning Script
 Provisions AI-specific configurations and project types based on user selection.
 """
 
+import argparse
 import os
 import shutil
-import json
-import yaml
-import argparse
-import re
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError:
+    print("Error: PyYAML is required. Install it with: pip install PyYAML")
+    exit(1)
+
 
 class TemplateProvisioner:
     def __init__(self):
         self.base_dir = Path(__file__).parent
         self.templates_dir = self.base_dir / "templates"
         self.common_dir = self.base_dir / "common"
-        
+        self.external_resources_map = self.base_dir / "external-resources.map.yaml"
+
     def load_config(self):
         """Load the mapping configuration from map.yaml"""
-        with open(self.base_dir / "map.yaml", 'r') as f:
+        with open(self.base_dir / "map.yaml", 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+
+    def load_external_resources_config(self):
+        """Load external resources repo mapping from external-resources.map.yaml"""
+        if not self.external_resources_map.exists():
+            raise FileNotFoundError(f"Missing external resources map: {self.external_resources_map}")
+        with open(self.external_resources_map, 'r', encoding='utf-8') as f:
             return yaml.safe_load(f)
     
     def substitute_variables(self, content, variables):
@@ -160,16 +172,53 @@ class TemplateProvisioner:
                     
         print(f"Cleanup for {ai_tool} completed!")
 
+    def pull_external_repo(self, repo_key, target_dir):
+        """Clone or update external repo and copy mapped folders into target_dir/subfolder"""
+        config = self.load_external_resources_config()
+        if not config or not isinstance(config, dict) or 'repos' not in config or not config['repos'] or repo_key not in config['repos']:
+            raise ValueError(f"Unknown repo key: {repo_key}")
+        repo_cfg = config['repos'][repo_key]
+        repo_url = repo_cfg['url']
+        subfolder = repo_cfg['subfolder']
+        folders = repo_cfg['folders']
+
+        # Use a cache directory for repo clones
+        cache_dir = self.base_dir / '.external_repo_cache'
+        cache_dir.mkdir(exist_ok=True)
+        repo_local = cache_dir / repo_key
+
+        # Clone or update repo
+        if repo_local.exists():
+            print(f"Updating repo {repo_key}...")
+            os.system(f"cd {repo_local} && git pull")
+        else:
+            print(f"Cloning repo {repo_key} from {repo_url}...")
+            os.system(f"git clone {repo_url} {repo_local}")
+
+        # Copy mapped folders into target_dir/subfolder
+        target_base = Path(target_dir) / subfolder
+        for folder in folders:
+            src_folder = repo_local / folder
+            dst_folder = target_base / folder
+            if src_folder.exists():
+                if dst_folder.exists():
+                    shutil.rmtree(dst_folder)
+                shutil.copytree(src_folder, dst_folder)
+                print(f"  Copied {src_folder} -> {dst_folder}")
+            else:
+                print(f"  Warning: {src_folder} not found in repo {repo_key}")
+
+        print(f"External resources from {repo_key} pulled into {target_base}")
+
 def main():
     parser = argparse.ArgumentParser(description='Provision AI tool templates and project types')
-    
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
-    
+
     # List command
     list_parser = subparsers.add_parser('list', help='List available templates')
     list_parser.add_argument('--type', choices=['ai-tools', 'projects', 'all'], 
                            default='all', help='Type of templates to list')
-    
+
     # Provision command
     provision_parser = subparsers.add_parser('provision', help='Provision templates')
     provision_parser.add_argument('--ai-tool', '-t', 
@@ -186,39 +235,41 @@ def main():
                                 help='Project URL for variable substitution')
     provision_parser.add_argument('--project-repo-url', 
                                 help='Project repository URL for variable substitution')
-    
+
     # Clean command
     clean_parser = subparsers.add_parser('clean', help='Clean provisioned files')
     clean_parser.add_argument('--ai-tool', '-t', required=True,
                             help='AI tool to clean (claude-code, copilot, windsurf, cursor)')
-    
+
+    # Pull external repo resources command
+    pull_repo_parser = subparsers.add_parser('pull-repo', help='Pull resources from external repo')
+    pull_repo_parser.add_argument('--repo', required=True, help='Repo key from external-resources.map.yaml')
+    pull_repo_parser.add_argument('--target-dir', required=True, help='Target directory in client project')
+
     args = parser.parse_args()
-    
+
     if not args.command:
         parser.print_help()
         return 1
-    
+
     provisioner = TemplateProvisioner()
-    
+
     try:
         if args.command == 'list':
-            config = provisioner.load_config()
-            
             if args.type in ['ai-tools', 'all']:
                 ai_tools = provisioner.list_available_ai_tools()
                 print("Available AI Tools:")
                 for tool in ai_tools:
                     print(f"  - {tool}")
                 print()
-            
             if args.type in ['projects', 'all']:
                 project_types = provisioner.list_available_project_types()
-                print("Available Project Types:")
-                for ptype, config in project_types.items():
-                    print(f"  - {ptype}: {config['name']}")
-                    print(f"    {config['description']}")
-                print()
-                
+                if isinstance(project_types, dict):
+                    print("Available Project Types:")
+                    for ptype, pconfig in project_types.items():
+                        print(f"  - {ptype}: {pconfig.get('name', '')}")
+                        print(f"    {pconfig.get('description', '')}")
+                    print()
         elif args.command == 'provision':
             variables = {
                 'PROJECT_NAME': args.project_name,
@@ -229,27 +280,23 @@ def main():
                 'PROJECT_BASE_URL': '/',
                 'PROJECT_TAGLINE': args.project_description,
             }
-            
             if args.project_type:
                 provisioner.provision_project_type(args.project_type, variables)
-            
             if args.ai_tool:
                 provisioner.provision_ai_tool(args.ai_tool)
-                
             if not args.project_type and not args.ai_tool:
                 print("Error: Specify either --project-type or --ai-tool (or both)")
                 return 1
-                
         elif args.command == 'clean':
             provisioner.clean_provisioned_files(args.ai_tool)
-            
+        elif args.command == 'pull-repo':
+            provisioner.pull_external_repo(args.repo, args.target_dir)
     except ValueError as e:
         print(f"Error: {e}")
         return 1
-    except Exception as e:
-        print(f"Unexpected error: {e}")
+    except FileNotFoundError as e:
+        print(f"File not found: {e}")
         return 1
-            
     return 0
 
 if __name__ == "__main__":

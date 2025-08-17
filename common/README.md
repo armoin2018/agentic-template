@@ -29,6 +29,7 @@ common/
 ## 📋 Instructions
 
 ### Languages
+
 Comprehensive programming language instructions covering modern best practices, patterns, and AI coding assistant guidelines:
 
 - **[C](instructions/languages/c.md)** - Modern C with memory safety and RAII patterns
@@ -46,6 +47,7 @@ Comprehensive programming language instructions covering modern best practices, 
 - **And more...**
 
 ### Frameworks
+
 Framework-specific instructions for popular development frameworks:
 
 - **[Express.js](instructions/frameworks/nodejs-typescript/express-api.instructions.md)** - Node.js REST API development
@@ -53,6 +55,7 @@ Framework-specific instructions for popular development frameworks:
 - **[Cobra CLI](instructions/frameworks/cobra-cli-go/charmbracelet-cli.instructions.md)** - Go CLI applications with Charm libraries
 
 ### Tools
+
 Instructions for development tools, platforms, and infrastructure:
 
 - **[Terraform](instructions/tools/infra-as-code/terraform/)** - Infrastructure as Code
@@ -61,6 +64,7 @@ Instructions for development tools, platforms, and infrastructure:
 - **[WordPress](instructions/tools/cms/wordpress.md)** - WordPress development
 
 ### Workflows
+
 Development workflow and process instructions:
 
 - **[AI Development](instructions/workflows/ai-development-instructions/)** - AI-assisted development processes
@@ -69,6 +73,7 @@ Development workflow and process instructions:
   - Task Generation
 
 ### Best Practices
+
 General coding and development best practices:
 
 - **[Clean Code](instructions/best-practices/clean-code.md)** - Code quality and maintainability
@@ -79,6 +84,7 @@ General coding and development best practices:
 AI assistant personas organized by specialization:
 
 ### Language Specialists
+
 - **[Senior Python Developer](personas/languages/senior-python-developer.md)**
 - **[Senior Go Developer](personas/languages/senior-go-developer.md)**
 - **[Senior Java Developer](personas/languages/senior-java-developer.md)**
@@ -87,12 +93,14 @@ AI assistant personas organized by specialization:
 - **And more language specialists...**
 
 ### Framework Experts
+
 - **[React Developer](personas/frameworks/react-developer.md)**
 - **[React Native Developer](personas/frameworks/react-native-developer.md)**
 - **[Bootstrap Expert](personas/frameworks/bootstrap-expert.md)**
 - **[jQuery Expert](personas/frameworks/jquery-expert.md)**
 
 ### Role-Based Personas
+
 - **[Solution Architect](personas/roles/solution-architect.md)**
 - **[Backend Engineer](personas/roles/backend-engineer.md)**
 - **[Frontend Engineer](personas/roles/frontend-engineer.md)**
@@ -103,6 +111,7 @@ AI assistant personas organized by specialization:
 - **[Project Manager](personas/roles/project-manager.md)**
 
 ### Domain Experts
+
 - **[Blockchain Developer](personas/domains/blockchain-developer.md)**
 - **[AI Engineer](personas/domains/ai-engineer.md)**
 - **[Mobile Developer](personas/domains/mobile-developer.md)**
@@ -110,10 +119,12 @@ AI assistant personas organized by specialization:
 - **[NLP Expert](personas/domains/nlp-expert.md)**
 
 ### Platform Specialists
+
 - **[AWS Architect](personas/platforms/aws-architect.md)**
 - **[Azure Architect](personas/platforms/azure-architect.md)**
 
 ### Database Specialists
+
 - **[SQL Developer](personas/database/sql-developer.md)** - Multi-platform SQL expertise
 - **[Database Administrator](personas/database/database-administrator.md)**
 - **[Database Architect](personas/database/database-architect.md)**
@@ -128,26 +139,33 @@ Reusable prompts and templates for common development tasks:
 ## 📖 Usage Guidelines
 
 ### For AI Coding Assistants
+
 These resources are designed to be referenced by AI coding assistants to:
+
 - Provide consistent, high-quality code generation
 - Follow established best practices and conventions
 - Maintain code style and architectural patterns
 - Offer domain-specific expertise
 
 ### For Developers
+
 Use these resources to:
+
 - Understand coding standards for different languages and frameworks
 - Learn best practices for specific technologies
 - Get guidance on architectural decisions
 - Access role-specific expertise and workflows
 
 ### File Naming Conventions
+
 - **Instructions**: `{topic}.md` or `{topic}.instructions.md`
 - **Personas**: `{role-or-specialty}.md`
 - **Prompts**: `{task-name}.prompt.md`
 
 ### Contributing
+
 When adding new resources:
+
 1. Follow the established directory structure
 2. Use clear, descriptive naming
 3. Include comprehensive examples and best practices
@@ -161,9 +179,16 @@ These common resources are automatically provisioned to AI-specific template dir
 ## 📝 Maintenance
 
 This directory is actively maintained to ensure:
+
 - Instructions reflect current best practices
 - Personas are comprehensive and accurate
 - Prompts are effective and well-tested
 - Documentation is up-to-date and clear
 
 For questions or contributions, please refer to the main project documentation.
+
+## Other projects that can be downloaded and have provided some influence to this project are:
+
+[Awesome Copilot Instructions](https://github.com/Code-and-Sorts/awesome-copilot-instructions)
+[Awesome Copilot](https://github.com/github/awesome-copilot)
+[Awesome Copilot Chatmodes](https://github.com/dfinke/awesome-copilot-chatmodes)
