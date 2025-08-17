@@ -1,8 +1,8 @@
 # Project types define the base project structure
 project_types:
   docusaurus:
-    name: "Docusaurus Documentation Site"
-    description: "React-based documentation website with MDX support"
+    name: 'Docusaurus Documentation Site'
+    description: 'React-based documentation website with MDX support'
     files:
       - from: templates/projects/docusaurus/package.json
         to: package.json
@@ -19,8 +19,8 @@ project_types:
       - from: templates/projects/docusaurus/.gitignore
         to: .gitignore
   mkdocs:
-    name: "MkDocs Documentation Site"
-    description: "Python-based documentation with Material theme"
+    name: 'MkDocs Documentation Site'
+    description: 'Python-based documentation with Material theme'
     files:
       - from: templates/projects/mkdocs/mkdocs.yml
         to: mkdocs.yml
@@ -31,8 +31,8 @@ project_types:
       - from: templates/projects/mkdocs/.gitignore
         to: .gitignore
   minimal:
-    name: "Minimal Project"
-    description: "Basic project structure with only essential files"
+    name: 'Minimal Project'
+    description: 'Basic project structure with only essential files'
     files:
       - from: templates/projects/minimal/.gitignore
         to: .gitignore
@@ -43,51 +43,23 @@ project_types:
 targets:
   claude-code:
     copies:
-      - from: common/prompts/
-        to: templates/claude-code/prompts/
+      - from: templates/claude-code/
+        to: .claude/
       - from: common/instructions/
-        to: templates/claude-code/instructions/
+        to: .claude/agents/instructions/
       - from: common/personas/
-        to: templates/claude-code/personas/
-      - from: templates/claude-code/commands/
-        to: .claude/commands/
-      - from: templates/claude-code/claude-instructions.md
-        to: .claude/claude-instructions.md
-      - from: templates/claude-code/settings.local.json
-        to: .claude/settings.local.json
+        to: .claude/agents/personas/
   copilot:
     copies:
-      - from: common/prompts/
-        to: templates/copilot/prompts/
+      - from: templates/copilot/
+        to: .github/
       - from: common/instructions/
-        to: templates/copilot/instructions/
+        to: .github/instructions/
       - from: common/personas/
-        to: templates/copilot/personas/
-      - from: templates/copilot/copilot/
-        to: .copilot/
-      - from: templates/copilot/copilot-instructions.md
-        to: .github/copilot-instructions.md
-  windsurf:
-    copies:
-      - from: common/prompts/
-        to: templates/windsurf/prompts/
-      - from: common/instructions/
-        to: templates/windsurf/instructions/
-      - from: common/personas/
-        to: templates/windsurf/personas/
-      - from: templates/windsurf/windsurf-config.json
-        to: .windsurf/config.json
-  cursor:
-    copies:
-      - from: common/prompts/
-        to: templates/cursor/prompts/
-      - from: common/instructions/
-        to: templates/cursor/instructions/
-      - from: common/personas/
-        to: templates/cursor/personas/
-      - from: templates/cursor/cursor-config.json
-        to: .cursor/config.json
+        to: .github/personas/
+      - from: templates/copilot/copilot/chatmodes/
+        to: .github/copilot/chatmodes/
 # Optional text substitution tokens used in target files:
 template_vars:
-  ORG: "Acme"
-  OWNER_EMAIL: "dev@acme.com"
+  ORG: 'Acme'
+  OWNER_EMAIL: 'dev@acme.com'

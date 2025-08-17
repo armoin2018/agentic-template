@@ -135,8 +135,57 @@ class TemplateProvisioner:
                 print(f"  Copied directory {from_path} -> {to_path}")
             else:
                 print(f"  Warning: Source not found: {from_path}")
+        
+        # Handle common/prompts copying with special rules
+        self._copy_prompts_for_ai_tool(ai_tool)
                 
         print(f"AI tool configuration for {ai_tool} completed!")
+    
+    def _copy_prompts_for_ai_tool(self, ai_tool):
+        """Copy prompts with AI tool specific rules"""
+        # Check for prompts in both common/prompts and docs/prompts
+        prompts_sources = [
+            self.common_dir / "prompts",
+            self.base_dir / "docs" / "prompts"
+        ]
+        
+        prompts_source = None
+        for source in prompts_sources:
+            if source.exists() and any(source.iterdir()):
+                prompts_source = source
+                break
+        
+        if not prompts_source:
+            print(f"  Warning: No prompts found in {[str(s) for s in prompts_sources]}")
+            return
+            
+        if ai_tool == "claude-code":
+            # For Claude: copy to .claude/commands and remove .prompt extension
+            prompts_target = self.base_dir / ".claude" / "commands"
+            prompts_target.mkdir(parents=True, exist_ok=True)
+            
+            for prompt_file in prompts_source.glob("*.prompt"):
+                target_name = prompt_file.name.replace(".prompt", "")
+                target_file = prompts_target / target_name
+                shutil.copy2(prompt_file, target_file)
+                print(f"  Copied {prompt_file} -> {target_file}")
+                
+            # Also copy non-.prompt files (including .puml files)
+            for prompt_file in prompts_source.iterdir():
+                if prompt_file.is_file() and not prompt_file.name.endswith(".prompt"):
+                    target_file = prompts_target / prompt_file.name
+                    shutil.copy2(prompt_file, target_file)
+                    print(f"  Copied {prompt_file} -> {target_file}")
+                    
+        elif ai_tool == "copilot":
+            # For Copilot: copy to .github/prompts
+            prompts_target = self.base_dir / ".github" / "prompts"
+            prompts_target.mkdir(parents=True, exist_ok=True)
+            
+            if prompts_target.exists():
+                shutil.rmtree(prompts_target)
+            shutil.copytree(prompts_source, prompts_target)
+            print(f"  Copied directory {prompts_source} -> {prompts_target}")
         
     def list_available_ai_tools(self):
         """List all available AI tool templates"""
@@ -222,7 +271,7 @@ def main():
     # Provision command
     provision_parser = subparsers.add_parser('provision', help='Provision templates')
     provision_parser.add_argument('--ai-tool', '-t', 
-                                help='AI tool to provision (claude-code, copilot, windsurf, cursor)')
+                                help='AI tool to provision (claude-code, copilot)')
     provision_parser.add_argument('--project-type', '-p',
                                 help='Project type to provision (docusaurus, mkdocs, minimal)')
     provision_parser.add_argument('--project-name', default='my-project',
@@ -239,7 +288,7 @@ def main():
     # Clean command
     clean_parser = subparsers.add_parser('clean', help='Clean provisioned files')
     clean_parser.add_argument('--ai-tool', '-t', required=True,
-                            help='AI tool to clean (claude-code, copilot, windsurf, cursor)')
+                            help='AI tool to clean (claude-code, copilot)')
 
     # Pull external repo resources command
     pull_repo_parser = subparsers.add_parser('pull-repo', help='Pull resources from external repo')
