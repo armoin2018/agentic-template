@@ -647,4 +647,14 @@ Thanks to the contributions of:
 
 ## License
 
-[Add your license information here]
+This project is released into the public domain under the **Creative Commons CC0 1.0 Universal** license.
+
+### What this means:
+- ✅ **Use for any purpose** - commercial, personal, educational
+- ✅ **Modify freely** - adapt, remix, transform the content
+- ✅ **No attribution required** - though attribution is appreciated
+- ✅ **No restrictions** - use in proprietary projects, redistribute freely
+
+This template system is designed to be a foundation for your AI-powered development workflows. You are free to use, modify, and distribute it without any legal obligations.
+
+For the complete license text, see the [LICENSE](LICENSE) file in this repository.
