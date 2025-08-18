@@ -1,0 +1,259 @@
+# Code Quality Analysis
+name: Quality
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run weekly quality checks
+    - cron: '0 2 * * 1'
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  # CodeQL Analysis
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  # SonarCloud Analysis
+  sonarcloud:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for better analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  # Code complexity analysis
+  complexity:
+    name: Code Complexity Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install complexity analyzer
+        run: npm install -g complexity-report
+
+      - name: Analyze complexity
+        run: |
+          cr --format=json --output=complexity.json src/
+          cr --format=plain src/ > complexity.txt
+
+      - name: Check complexity thresholds
+        run: |
+          # Check if any functions have complexity > 10
+          HIGH_COMPLEXITY=$(cat complexity.json | jq '.functions[] | select(.complexity.cyclomatic > 10) | .name' | wc -l)
+          if [ "$HIGH_COMPLEXITY" -gt 0 ]; then
+            echo "⚠️ Found $HIGH_COMPLEXITY functions with high complexity (>10)"
+            cat complexity.json | jq '.functions[] | select(.complexity.cyclomatic > 10) | {name: .name, complexity: .complexity.cyclomatic}'
+          else
+            echo "✅ All functions have acceptable complexity"
+          fi
+
+      - name: Upload complexity report
+        uses: actions/upload-artifact@v4
+        with:
+          name: complexity-report
+          path: |
+            complexity.json
+            complexity.txt
+          retention-days: 30
+
+  # Documentation quality check
+  docs-quality:
+    name: Documentation Quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check JSDoc coverage
+        run: |
+          # Install jsdoc-to-markdown for documentation extraction
+          npm install -g jsdoc-to-markdown
+          
+          # Generate documentation
+          jsdoc2md "src/**/*.ts" > api-docs.md
+          
+          # Check if documentation was generated
+          if [ -s api-docs.md ]; then
+            echo "✅ API documentation generated successfully"
+            echo "📄 Documentation size: $(wc -l < api-docs.md) lines"
+          else
+            echo "⚠️ No API documentation found"
+          fi
+
+      - name: Validate OpenAPI spec
+        run: |
+          npm install -g swagger-cli
+          swagger-cli validate openapi.yaml
+          echo "✅ OpenAPI specification is valid"
+
+      - name: Check README completeness
+        run: |
+          # Check if README has required sections
+          REQUIRED_SECTIONS=("Installation" "Usage" "API" "Configuration" "Contributing")
+          MISSING_SECTIONS=""
+          
+          for section in "${REQUIRED_SECTIONS[@]}"; do
+            if ! grep -i "## $section\|# $section" README.md > /dev/null; then
+              MISSING_SECTIONS="$MISSING_SECTIONS $section"
+            fi
+          done
+          
+          if [ -n "$MISSING_SECTIONS" ]; then
+            echo "⚠️ README is missing sections:$MISSING_SECTIONS"
+          else
+            echo "✅ README contains all required sections"
+          fi
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-docs
+          path: api-docs.md
+          retention-days: 7
+
+  # Performance benchmarks
+  performance:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run performance tests
+        run: |
+          # Create basic performance test
+          cat > perf-test.js << 'EOF'
+          const { performance } = require('perf_hooks');
+          
+          // Test server startup time
+          const start = performance.now();
+          require('./dist/server.js');
+          const end = performance.now();
+          
+          const startupTime = end - start;
+          console.log(`Server startup time: ${startupTime.toFixed(2)}ms`);
+          
+          // Check against SLA requirement (10s = 10000ms)
+          if (startupTime > 10000) {
+            console.log('❌ Startup time exceeds 10s requirement');
+            process.exit(1);
+          } else {
+            console.log('✅ Startup time meets requirement');
+          }
+          EOF
+          
+          timeout 30s node perf-test.js
+
+      - name: Bundle size analysis
+        run: |
+          # Analyze bundle size
+          du -sh dist/
+          echo "📦 Bundle size:"
+          ls -lh dist/
+          
+          # Check if bundle is reasonable size
+          BUNDLE_SIZE=$(du -s dist/ | cut -f1)
+          if [ "$BUNDLE_SIZE" -gt 51200 ]; then  # 50MB in KB
+            echo "⚠️ Bundle size is large: ${BUNDLE_SIZE}KB"
+          else
+            echo "✅ Bundle size is acceptable: ${BUNDLE_SIZE}KB"
+          fi
