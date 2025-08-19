@@ -2,6 +2,8 @@
 Model Router - Routes tasks to appropriate models based on analysis
 """
 
+import json
+import os
 from typing import Any, Dict, List, Optional, Tuple
 
 from .task_analyzer import TaskAnalyzer, TaskComplexity, TaskStyle
@@ -46,91 +48,56 @@ class ModelRouter:
     
     def _initialize_models(self) -> Dict[str, ModelConfig]:
         """Initialize available models and their configurations"""
-        return {
-            # OpenAI Models
-            'gpt-4': ModelConfig(
-                name='gpt-4',
-                provider='openai',
-                temperature=0.3,
-                max_tokens=8192,
-                cost_per_token=0.03,
-                capabilities=['reasoning', 'analysis', 'code', 'complex_tasks']
-            ),
-            'gpt-3.5-turbo': ModelConfig(
-                name='gpt-3.5-turbo',
-                provider='openai', 
-                temperature=0.5,
-                max_tokens=4096,
-                cost_per_token=0.002,
-                capabilities=['general', 'fast', 'cost_effective']
-            ),
-            
-            # Anthropic Models
-            'claude-3-opus': ModelConfig(
-                name='claude-3-opus',
-                provider='anthropic',
-                temperature=0.3,
-                max_tokens=4096,
-                cost_per_token=0.015,
-                capabilities=['reasoning', 'analysis', 'creative', 'expert']
-            ),
-            'claude-3-sonnet': ModelConfig(
-                name='claude-3-sonnet',
-                provider='anthropic',
-                temperature=0.7,
-                max_tokens=4096,
-                cost_per_token=0.003,
-                capabilities=['creative', 'balanced', 'reasoning']
-            ),
-            'claude-3-haiku': ModelConfig(
-                name='claude-3-haiku',
-                provider='anthropic',
-                temperature=0.5,
-                max_tokens=4096,
-                cost_per_token=0.00025,
-                capabilities=['fast', 'cost_effective', 'simple_tasks']
-            ),
-            
-            # Google Models
-            'gemini-pro': ModelConfig(
-                name='gemini-pro',
-                provider='google',
-                temperature=0.4,
-                max_tokens=4096,
-                cost_per_token=0.001,
-                capabilities=['multimodal', 'reasoning', 'analysis']
-            )
-        }
+        # Load from external JSON file if available
+        return self._load_models_from_file()
+
+    def _load_models_from_file(self) -> Dict[str, ModelConfig]:
+        """Load model configurations from models.json in the same directory.
+
+        Falls back to an empty dict if file not found or invalid.
+        """
+        models_path = os.path.join(os.path.dirname(__file__), 'models.json')
+        models: Dict[str, ModelConfig] = {}
+        try:
+            with open(models_path, 'r', encoding='utf-8') as fh:
+                raw = json.load(fh)
+            for name, cfg in raw.items():
+                models[name] = ModelConfig(
+                    name=cfg.get('name', name),
+                    provider=cfg.get('provider', 'unknown'),
+                    temperature=cfg.get('temperature', 0.5),
+                    max_tokens=cfg.get('max_tokens'),
+                    cost_per_token=cfg.get('cost_per_token', 0.0),
+                    capabilities=cfg.get('capabilities', [])
+                )
+        except Exception:
+            # If loading fails, return empty dict and the rest of the system will
+            # gracefully fallback to defaults where appropriate.
+            models = {}
+        return models
+        
     
     def _initialize_routing_rules(self) -> Dict[str, Dict[str, str]]:
         """Initialize routing rules based on complexity and style"""
-        return {
-            # Complexity-based routing
-            TaskComplexity.EXPERT.value: {
-                TaskStyle.ANALYTICAL.value: 'claude-3-opus',
-                TaskStyle.CREATIVE.value: 'claude-3-opus', 
-                TaskStyle.TECHNICAL.value: 'gpt-4',
-                TaskStyle.DEFAULT.value: 'gpt-4'
-            },
-            TaskComplexity.HIGH.value: {
-                TaskStyle.ANALYTICAL.value: 'gpt-4',
-                TaskStyle.CREATIVE.value: 'claude-3-sonnet',
-                TaskStyle.TECHNICAL.value: 'gpt-4',
-                TaskStyle.DEFAULT.value: 'gpt-4'
-            },
-            TaskComplexity.MODERATE.value: {
-                TaskStyle.ANALYTICAL.value: 'claude-3-sonnet',
-                TaskStyle.CREATIVE.value: 'claude-3-sonnet',
-                TaskStyle.TECHNICAL.value: 'gpt-3.5-turbo',
-                TaskStyle.DEFAULT.value: 'gpt-3.5-turbo'
-            },
-            TaskComplexity.SIMPLE.value: {
-                TaskStyle.ANALYTICAL.value: 'gpt-3.5-turbo',
-                TaskStyle.CREATIVE.value: 'claude-3-haiku',
-                TaskStyle.TECHNICAL.value: 'gpt-3.5-turbo',
-                TaskStyle.DEFAULT.value: 'claude-3-haiku'
-            }
-        }
+        # Load routing rules from external JSON
+        return self._load_routing_from_file()
+
+    def _load_routing_from_file(self) -> Dict[str, Dict[str, str]]:
+        """Load routing rules from routing_rules.json in the same directory.
+
+        Falls back to an empty mapping if the file is missing or invalid.
+        """
+        rules_path = os.path.join(os.path.dirname(__file__), 'routing_rules.json')
+        try:
+            with open(rules_path, 'r', encoding='utf-8') as fh:
+                raw = json.load(fh)
+            # Ensure keys are strings and values are dicts
+            cleaned: Dict[str, Dict[str, str]] = {}
+            for complexity, mapping in raw.items():
+                cleaned[complexity] = {k: v for k, v in mapping.items()}
+            return cleaned
+        except Exception:
+            return {}
     
     def route_task(self, 
                    task_description: str,
