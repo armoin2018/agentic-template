@@ -117,7 +117,7 @@ git_repos:
 # Global settings
 settings:
   # When true, removes target directories before copying
-  clean_target_dirs: true
+  clean_target_dirs: false
 
   # When true, creates backup of existing files
   backup_existing: false
@@ -128,7 +128,6 @@ settings:
   # Priority order when multiple prompts sources exist
   prompts_source_priority:
     - 'common/prompts'
-    - 'docs/prompts'
 
   # File extensions to treat as text files for variable substitution
   text_extensions:

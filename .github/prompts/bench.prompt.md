@@ -4,11 +4,30 @@ You are an AI quality assessment tool designed to benchmark and evaluate instruc
 
 ## Your Task
 
-Evaluate the quality of instruction files from `common/instructions/**/*.md` and persona files from `common/personas/**/*.md` across multiple dimensions:
+- Evaluate the quality of instruction files from `common/instructions/**/*.md` and persona files from `common/personas/**/*.md` across multiple dimensions detailed in this document. This should be a recursive process to include all subfolders.
+  - Exclude the files: `common/instructions/MAINTENANCE-GUIDE.md`, `common/instructions/instructions-index.md`, `common/personas/personas-index.md`, `common/personas/personas-CHANGES.md`, `common/personas/OPTIMIZATION-SUMMARY.md`, `common/instructions/templates/*.md`, `common/personas/templates/*.md`, `*/*README*.md`, `.DS_Store`
+  - Get a list of all impacted md5 using
+
+```bash
+find common/. -type f -exec md5sum {} \; > common/md5sums.txt
+```
+
+- Work through each file systematically
+- create a high level summary under `output/benchmark-summary.md`
+- Create a detailed report for each file under `output/{filePath}/{fileName}`
+- Capture the progress in `output/benchmark-progress.md`
+  - allow for incremental updates by leveraging a comparison of md5 hashes using
+
+```bash
+diff <(md5sum $(find . -type f | sort)) common/md5sums.txt | grep '^>' | awk '{print $2}'
+```
+
+- Use md5 in progress to resume
 
 ### Quality Metrics to Assess:
 
 1. **Content Quality (0-100)**
+
    - Clarity and specificity of instructions
    - Technical accuracy and depth
    - Completeness of coverage
@@ -16,6 +35,7 @@ Evaluate the quality of instruction files from `common/instructions/**/*.md` and
    - Code examples quality (if applicable)
 
 2. **Structure & Organization (0-100)**
+
    - Logical flow and hierarchy
    - Consistent formatting
    - Clear section breaks
@@ -23,6 +43,7 @@ Evaluate the quality of instruction files from `common/instructions/**/*.md` and
    - Navigation ease
 
 3. **Actionability (0-100)**
+
    - Clear, executable steps
    - Specific implementation guidance
    - Concrete examples and use cases
@@ -30,6 +51,7 @@ Evaluate the quality of instruction files from `common/instructions/**/*.md` and
    - Practical workflow integration
 
 4. **Completeness (0-100)**
+
    - Covers essential concepts
    - Addresses common edge cases
    - Includes error handling
@@ -55,14 +77,31 @@ For each file you evaluate:
 
 1. **Read and analyze** the entire content
 2. **Score each quality metric** (0-100) with detailed justification
-3. **Test practical application** by simulating use scenarios
-4. **Measure performance** characteristics
-5. **Calculate composite score** using weighted average:
-   - Content Quality: 30%
-   - Structure & Organization: 20%
-   - Actionability: 25%
-   - Completeness: 15%
-   - Relevance & Currency: 10%
+3. **Generate a prompt** by creating a simulated scenario prompt tailored to specific instruction or persona
+   - Capture the generated prompt to the ouput file
+4. **Clear Memory** Clear the context memory to ensure no residual information affects the test
+5. **Test the prompt without any context (Baseline)** to evaluate its standalone effectiveness
+6. **Measure (Baseline) performance** characteristics
+7. **Calculate (Baseline) composite score** using weighted average:
+
+- Content Quality: 30%
+- Structure & Organization: 20%
+- Actionability: 25%
+- Completeness: 15%
+- Relevance & Currency: 10%
+
+8. **Clear Memory** Clear the context memory to ensure no residual information affects the test
+9. **Test the prompt with context** to evaluate its effectiveness
+10. **Measure (Context) performance** characteristics
+11. **Calculate (Context) composite score** using weighted average:
+
+- Content Quality: 30%
+- Structure & Organization: 20%
+- Actionability: 25%
+- Completeness: 15%
+- Relevance & Currency: 10%
+
+12. **Clear Memory** Clear the context memory to ensure no residual information affects the test
 
 ### Output Format:
 
@@ -70,33 +109,67 @@ For each file, provide:
 
 ```markdown
 ## File: [filename]
+
 **Path**: [full file path]
 **Category**: [instruction/persona type]
+**Prompt**: [captured prompt]
 
-### Quality Scores:
+### Baseline
+
+#### Quality Scores:
+
 - Content Quality: X/100 - [brief justification]
-- Structure & Organization: X/100 - [brief justification]  
+- Structure & Organization: X/100 - [brief justification]
 - Actionability: X/100 - [brief justification]
 - Completeness: X/100 - [brief justification]
 - Relevance & Currency: X/100 - [brief justification]
 
-### Performance Metrics:
+#### Performance Metrics:
+
+- Response Time: Xms
+- Token Usage: X tokens
+- Context Efficiency: X/100
+
+### Context Enhancement
+
+#### Quality Scores:
+
+- Content Quality: X/100 - [brief justification]
+- Structure & Organization: X/100 - [brief justification]
+- Actionability: X/100 - [brief justification]
+- Completeness: X/100 - [brief justification]
+- Relevance & Currency: X/100 - [brief justification]
+
+#### Performance Metrics:
+
 - Estimated Response Time: Xms
 - Estimated Token Usage: X tokens
 - Context Efficiency: X/100
 
-### Composite Score: X/100
+#### Composite Score: X/100
 
-### Key Strengths:
+#### Key Strengths:
+
 - [2-3 specific strengths]
 
-### Areas for Improvement:
+#### Areas for Improvement:
+
 - [2-3 specific improvement suggestions]
 
-### Recommended Priority: [High/Medium/Low] for updates
-```
+### [filename] Summary Report:
 
-### Summary Report:
+- **Recommended Priority:** [High/Medium/Low] for updates
+- **Response Time Comparison Ratio:** X:X
+- **Token Usage Comparison Ratio:** X:X
+- **Context Efficiency Comparison Ratio:** X:X
+- **Content Quality Comparison Ratio:** X:X - [brief justification]
+- **Structure & Organization Comparison Ratio:** X:X - [brief justification]
+- **Actionability Comparison Ratio:** X:X - [brief justification]
+- **Completeness Comparison Ratio:** X:X - [brief justification]
+- **Relevance & Currency Comparison Ratio:** X:X - [brief justification]
+
+---
+```
 
 After evaluating all files, provide a comprehensive summary:
 
@@ -104,41 +177,52 @@ After evaluating all files, provide a comprehensive summary:
 # Benchmark Summary Report
 
 ## Overall Statistics:
+
 - Total Files Evaluated: X
 - Average Composite Score: X/100
 - Highest Scoring File: [filename] (X/100)
 - Lowest Scoring File: [filename] (X/100)
 
 ## Category Breakdown:
+
 ### Instructions:
+
 - Count: X files
 - Average Score: X/100
 - Top Performers: [list top 3]
 
-### Personas:  
+### Personas:
+
 - Count: X files
 - Average Score: X/100
 - Top Performers: [list top 3]
 
 ## Priority Recommendations:
+
 ### High Priority Updates (Score < 60):
+
 [List files needing immediate attention]
 
 ### Medium Priority Updates (Score 60-79):
+
 [List files needing moderate improvement]
 
 ### Excellence Candidates (Score 90+):
+
 [List files that could serve as templates]
 
 ## Performance Insights:
+
 - Most Efficient Files: [by token usage]
 - Fastest Processing: [by response time]
 - Best Context Utilization: [by density score]
 
 ## Common Issues Identified:
+
 [List recurring problems across files]
 
 ## Best Practices Observed:
+
 [List effective patterns to replicate]
 ```
 
@@ -154,6 +238,7 @@ After evaluating all files, provide a comprehensive summary:
 6. **Analysis**: Compare performance metrics and generate impact report
 
 ### Metrics for Copilot Performance
+
 - **Response Quality**: Accuracy and helpfulness of Copilot responses
 - **Code Generation Speed**: Time taken for Copilot to generate suggestions
 - **Token Efficiency**: Input/output token consumption in Copilot
@@ -162,12 +247,11 @@ After evaluating all files, provide a comprehensive summary:
 
 ### Copilot-Specific Output Format
 
-Results should be saved to `common/copilot-PERFORMANCE.md`:
-
 ```markdown
 # Copilot Performance Benchmark Report
 
 ## Test Summary
+
 - **Test Date**: YYYY-MM-DD HH:MM:SS
 - **Files Evaluated**: X
 - **Copilot Version**: [version]
@@ -177,9 +261,10 @@ Results should be saved to `common/copilot-PERFORMANCE.md`:
 ## Individual File Results
 
 ### [filename.md]
+
 - **File Type**: instruction/persona
 - **Baseline Copilot Performance**: X seconds, X suggestions
-- **Enhanced Copilot Performance**: X seconds, X suggestions  
+- **Enhanced Copilot Performance**: X seconds, X suggestions
 - **Quality Scores**: Content(X), Structure(X), Actionability(X), Completeness(X), Relevance(X)
 - **Composite Score**: X/100
 - **Copilot Impact**: +X% accuracy, +X% speed
