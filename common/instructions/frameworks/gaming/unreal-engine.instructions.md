@@ -1,25 +1,36 @@
 ---
-title: "Unreal Engine Game Development Instructions"
-description: "Comprehensive guide for Unreal Engine game development using Blueprint visual scripting and C++ programming for AAA game creation"
-version: "1.0.0"
-last_updated: "2025-08-15"
-author: "AI Instruction Generator"
-tags: ["game-engine", "unreal-engine", "blueprint", "cpp", "visual-scripting", "aaa-games", "3d-graphics", "cross-platform"]
-category: "Framework"
-subcategory: "Gaming"
-applies_to: 
-  - "**/*.uproject"
-  - "**/Source/**/*.h"
-  - "**/Source/**/*.cpp"
-  - "**/Content/**/*.uasset"
-  - "**/Blueprints/**/*.uasset"
-  - "**/Config/**/*.ini"
-  - "**/Plugins/**/*.uplugin"
+title: 'Unreal Engine Game Development Instructions'
+description: 'Comprehensive guide for Unreal Engine game development using Blueprint visual scripting and C++ programming for AAA game creation'
+version: '1.0.0'
+last_updated: '2025-08-15'
+
+tags:
+  [
+    'game-engine',
+    'unreal-engine',
+    'blueprint',
+    'cpp',
+    'visual-scripting',
+    'aaa-games',
+    '3d-graphics',
+    'cross-platform',
+  ]
+category: 'Framework'
+subcategory: 'Gaming'
+applies_to:
+  - '**/*.uproject'
+  - '**/Source/**/*.h'
+  - '**/Source/**/*.cpp'
+  - '**/Content/**/*.uasset'
+  - '**/Blueprints/**/*.uasset'
+  - '**/Config/**/*.ini'
+  - '**/Plugins/**/*.uplugin'
 ---
 
 # Unreal Engine Game Development Instructions
 
 ## Framework Overview
+
 - **Framework Name**: Unreal Engine
 - **Version**: 5.4+ (Latest LTS recommended)
 - **Type**: AAA Game Engine and Development Platform
@@ -29,6 +40,7 @@ applies_to:
 ## When to Use Unreal Engine
 
 ### ✅ **Choose Unreal Engine When:**
+
 - Creating high-fidelity 3D games with photorealistic graphics
 - Developing AAA or large-scale indie games
 - Building VR/AR experiences requiring advanced rendering
@@ -39,6 +51,7 @@ applies_to:
 - Need integrated version control and team collaboration tools
 
 ### ❌ **Avoid Unreal Engine When:**
+
 - Creating simple 2D games or mobile-first applications
 - Working with limited storage space (engine size 15GB+)
 - Team lacks 3D graphics experience
@@ -48,18 +61,19 @@ applies_to:
 
 ## AI Agent Decision Matrix
 
-| Project Criteria | Unity | Unreal Engine | Godot | Custom Engine |
-|------------------|-------|---------------|--------|---------------|
-| **AAA Game Development** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
-| **Visual Scripting** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐ |
-| **Graphics Quality** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Learning Curve** | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ |
-| **Mobile Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Console Development** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
+| Project Criteria         | Unity      | Unreal Engine | Godot      | Custom Engine |
+| ------------------------ | ---------- | ------------- | ---------- | ------------- |
+| **AAA Game Development** | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐    | ⭐⭐       | ⭐⭐⭐        |
+| **Visual Scripting**     | ⭐⭐⭐     | ⭐⭐⭐⭐⭐    | ⭐⭐⭐⭐   | ⭐            |
+| **Graphics Quality**     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐    | ⭐⭐⭐     | ⭐⭐⭐⭐      |
+| **Learning Curve**       | ⭐⭐⭐⭐   | ⭐⭐          | ⭐⭐⭐⭐⭐ | ⭐            |
+| **Mobile Performance**   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐        | ⭐⭐⭐⭐   | ⭐⭐⭐⭐      |
+| **Console Development**  | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐    | ⭐⭐       | ⭐⭐⭐        |
 
 ## Installation & Setup
 
 ### Epic Games Launcher Installation
+
 ```bash
 # Download Epic Games Launcher from official website
 # https://www.unrealengine.com/download
@@ -76,6 +90,7 @@ make
 ```
 
 ### Project Creation
+
 ```bash
 # Create new project via Epic Games Launcher or command line
 # Recommended project settings:
@@ -86,6 +101,7 @@ make
 ```
 
 ### Development Environment Setup
+
 ```bash
 # Recommended IDEs:
 # - Visual Studio 2022 (Windows) - Primary recommendation
@@ -98,6 +114,7 @@ make
 ```
 
 ## Project Structure
+
 ```
 ProjectName/
 ├── Binaries/              # Compiled executables and libraries
@@ -127,6 +144,7 @@ ProjectName/
 ## Core Concepts
 
 ### Actor-Component Architecture
+
 - **Purpose**: Foundation of all game objects in Unreal Engine
 - **Usage**: Everything in the game world inherits from AActor
 - **Example**: Pawns, Characters, StaticMeshActors, Lights
@@ -156,17 +174,20 @@ public:
 ```
 
 ### Blueprint Visual Scripting
+
 - **Purpose**: Node-based visual programming system
 - **Usage**: Rapid prototyping, designer-friendly logic, event handling
 - **Example**: Event graphs, construction scripts, animation blueprints
 
 **Blueprint Best Practices:**
+
 - Use Blueprint for game logic, events, and UI
 - Use C++ for performance-critical systems and complex algorithms
 - Create Blueprint-callable C++ functions for heavy lifting
 - Organize Blueprint graphs with comments and reroute nodes
 
 ### C++ Integration Patterns
+
 - **Purpose**: Performance-critical code and complex systems
 - **Usage**: Core systems, AI, physics, networking
 - **Example**: Custom components, game modes, player controllers
@@ -187,6 +208,7 @@ virtual void PerformSpecialAttack_Implementation();
 ```
 
 ### Level Design and World Building
+
 - **Purpose**: Creating game environments and level layouts
 - **Usage**: Level streaming, world composition, landscape system
 - **Example**: Open world games, seamless level transitions
@@ -214,6 +236,7 @@ private:
 ## Development Workflow
 
 ### 1. **Project Setup and Configuration**
+
 ```ini
 ; DefaultEngine.ini configuration examples
 [/Script/Engine.Engine]
@@ -229,12 +252,14 @@ bBlueprintPerformanceAnalysisTools=True
 ```
 
 ### 2. **Development and Iteration**
+
 - **Live Coding**: Hot reload C++ changes during development
 - **Blueprint Compilation**: Real-time visual script compilation
 - **Play in Editor (PIE)**: Test gameplay without full builds
 - **Simulate Mode**: Test physics and systems without player control
 
 ### 3. **Testing and Debugging**
+
 ```cpp
 // Debug logging
 UE_LOG(LogTemp, Warning, TEXT("Player health: %f"), PlayerHealth);
@@ -248,6 +273,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 ```
 
 ### 4. **Building and Packaging**
+
 ```bash
 # Command line building
 "C:\Program Files\Epic Games\UE_5.4\Engine\Build\BatchFiles\Build.bat" MyGameEditor Win64 Development
@@ -257,6 +283,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 ```
 
 ### 5. **Platform Deployment**
+
 - **Windows**: Direct executable or Microsoft Store
 - **Console**: Platform-specific SDKs and certification
 - **Mobile**: Android APK or iOS App Store
@@ -265,6 +292,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 ## Best Practices
 
 ### ✅ **Performance Optimization**
+
 - Use object pooling for frequently spawned actors
 - Implement level-of-detail (LOD) systems for meshes
 - Optimize texture streaming and memory usage
@@ -272,6 +300,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 - Use instanced static meshes for repeated objects
 
 ### ✅ **Code Organization**
+
 - Separate game logic from presentation logic
 - Use composition over inheritance where possible
 - Create reusable component-based systems
@@ -279,6 +308,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 - Document complex systems with code comments
 
 ### ✅ **Asset Management**
+
 - Organize content browser with clear folder structure
 - Use consistent naming conventions for assets
 - Create master materials with instances for variations
@@ -286,6 +316,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 - Use reference viewer to track asset dependencies
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - Don't use Tick events excessively in Blueprints
 - Avoid hard references between unrelated systems
 - Don't ignore memory leaks and garbage collection
@@ -295,6 +326,7 @@ DrawDebugSphere(GetWorld(), GetActorLocation(), 100.0f, 12, FColor::Red, false, 
 ## Common Patterns
 
 ### Game Mode and Game State Architecture
+
 ```cpp
 // Custom Game Mode
 UCLASS()
@@ -307,7 +339,7 @@ public:
 
 protected:
     virtual void BeginPlay() override;
-    
+
     UFUNCTION(BlueprintCallable, Category = "Game Management")
     void StartNewRound();
 
@@ -317,6 +349,7 @@ protected:
 ```
 
 ### Component-Based Entity System
+
 ```cpp
 // Reusable Health Component
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
@@ -347,6 +380,7 @@ protected:
 ```
 
 ### Singleton Pattern for Managers
+
 ```cpp
 // Game Instance Singleton
 UCLASS()
@@ -379,6 +413,7 @@ protected:
 ## Configuration
 
 ### Engine Configuration (DefaultEngine.ini)
+
 ```ini
 [/Script/Engine.Engine]
 +ActiveGameNameRedirects=(OldGameName="MyOldGame",NewGameName="/Script/MyGame")
@@ -396,6 +431,7 @@ n.VerifyPeer=False
 ```
 
 ### Game Configuration (DefaultGame.ini)
+
 ```ini
 [/Script/EngineSettings.GeneralProjectSettings]
 ProjectID=12345678-1234-5678-9012-123456789012
@@ -412,6 +448,7 @@ StagingDirectory=(Path="C:/MyGameBuilds")
 ```
 
 ### Input Configuration (DefaultInput.ini)
+
 ```ini
 [/Script/Engine.InputSettings]
 -AxisConfig=(AxisKeyName="Gamepad_LeftX",AxisProperties=(DeadZone=0.25,Exponent=1.f,Sensitivity=1.f))
@@ -430,6 +467,7 @@ StagingDirectory=(Path="C:/MyGameBuilds")
 ## Essential Development Commands
 
 ### Editor Console Commands
+
 ```bash
 # Performance profiling
 stat fps              # Show FPS counter
@@ -452,6 +490,7 @@ showdebug physics    # Physics debugging
 ```
 
 ### Build and Packaging Commands
+
 ```bash
 # Hot reload (during development)
 Ctrl+Alt+F11         # Compile and hot reload C++ changes
@@ -466,16 +505,20 @@ Ctrl+Alt+F11         # Compile and hot reload C++ changes
 ## Common Issues & Solutions
 
 ### Blueprint Compilation Errors
+
 **Problem**: "Blueprint could not be compiled" with cryptic error messages
-**Solution**: 
+**Solution**:
+
 - Check for circular dependencies between Blueprint classes
 - Verify all referenced assets exist and are not corrupted
 - Use "Compile" button instead of "Compile on Save" for debugging
 - Clear intermediate and saved folders if corruption is suspected
 
 ### C++ Hot Reload Failures
+
 **Problem**: Changes to C++ code not reflecting in editor
 **Solution**:
+
 ```cpp
 // Close editor before major header changes
 // Use UPROPERTY() meta tags properly
@@ -487,8 +530,10 @@ float MyValue = 50.0f;
 ```
 
 ### Performance Issues
+
 **Problem**: Low frame rate and stuttering during gameplay
 **Solution**:
+
 - Profile with Stat commands to identify bottlenecks
 - Reduce draw calls using instanced static meshes
 - Optimize texture streaming settings
@@ -496,8 +541,10 @@ float MyValue = 50.0f;
 - Implement object pooling for frequently spawned actors
 
 ### Memory Leaks
+
 **Problem**: Memory usage increasing over time during gameplay
 **Solution**:
+
 ```cpp
 // Properly clean up dynamic objects
 UFUNCTION(BlueprintCallable, Category = "Cleanup")
@@ -521,6 +568,7 @@ TWeakObjectPtr<AActor> OptionalActorReference;
 ## Performance Optimization
 
 ### Rendering Optimization
+
 - **LOD Systems**: Automatically reduce polygon count based on distance
 - **Instanced Static Meshes**: Render many identical objects efficiently
 - **Occlusion Culling**: Hide objects blocked by other geometry
@@ -551,11 +599,13 @@ private:
 ```
 
 ### Memory Management
+
 - **Object Pooling**: Reuse objects instead of creating/destroying
 - **Garbage Collection**: Understand UE's automatic memory management
 - **Asset Streaming**: Load/unload content based on player location
 
 ### CPU Optimization
+
 - **Reduce Tick Events**: Use timers instead of constant ticking
 - **Efficient Algorithms**: Use appropriate data structures (TMap, TArray)
 - **Threading**: Utilize background tasks for heavy computations
@@ -563,11 +613,13 @@ private:
 ## Security Considerations
 
 ### Code Protection
+
 - **Obfuscation**: Use shipping builds with optimized code
 - **Asset Encryption**: Encrypt sensitive game assets
 - **Anti-Cheat**: Implement server-side validation for multiplayer
 
 ### Network Security
+
 ```cpp
 // Server-side validation example
 UFUNCTION(Server, Reliable, WithValidation)
@@ -587,6 +639,7 @@ void ServerProcessPlayerAction_Implementation(const FPlayerAction& Action)
 ```
 
 ### Data Protection
+
 - **Save Game Encryption**: Encrypt player save data
 - **Config File Validation**: Verify configuration files haven't been tampered with
 - **Asset Integrity**: Checksum important game assets
@@ -594,6 +647,7 @@ void ServerProcessPlayerAction_Implementation(const FPlayerAction& Action)
 ## Advanced Features
 
 ### Virtual Reality Development
+
 ```cpp
 // VR-specific functionality
 UCLASS()
@@ -617,6 +671,7 @@ protected:
 ```
 
 ### Multiplayer Networking
+
 ```cpp
 // Replicated actor for multiplayer
 UCLASS()
@@ -642,6 +697,7 @@ protected:
 ```
 
 ### Plugin Development
+
 ```cpp
 // Custom plugin module
 class FMyGamePluginModule : public IModuleInterface
@@ -662,7 +718,7 @@ public:
 - **Official Documentation**: https://docs.unrealengine.com/
 - **Unreal Engine Source Code**: https://github.com/EpicGames/UnrealEngine
 - **Community Hub**: https://unrealengine.com/community
-- **Learning Resources**: 
+- **Learning Resources**:
   - Unreal Engine Online Learning Platform
   - GameDev.tv Unreal Engine Courses
   - Epic Games' Official YouTube Channel
@@ -678,6 +734,7 @@ public:
 ## Framework-Specific Guidelines
 
 ### Code Style and Conventions
+
 ```cpp
 // Epic Games coding standards
 class MYGAME_API UMyClass : public UObject  // API macro for DLL export
@@ -702,12 +759,14 @@ protected:
 ```
 
 ### Project Organization Patterns
+
 - **Content Browser Structure**: Organize by feature, not by asset type
 - **Code Modules**: Separate game logic, UI, and platform-specific code
 - **Blueprint Hierarchy**: Use parent classes for shared functionality
-- **Asset Naming**: Consistent prefixes (BP_ for Blueprints, M_ for Materials)
+- **Asset Naming**: Consistent prefixes (BP* for Blueprints, M* for Materials)
 
 ### Architecture Patterns
+
 - **Model-View-Controller**: Separate data, presentation, and logic
 - **Component-Entity-System**: Use composition over inheritance
 - **Event-Driven Architecture**: Use delegates and event dispatchers
@@ -716,6 +775,7 @@ protected:
 ## Integration Points
 
 ### Version Control (Perforce/Git)
+
 - **Purpose**: Source control optimized for binary assets
 - **Setup**: Configure .uproject and .gitignore/.p4ignore files
 - **Usage**: Binary asset handling, large file support
@@ -729,6 +789,7 @@ git lfs track "*.upk"
 ```
 
 ### Continuous Integration
+
 - **Purpose**: Automated building and testing
 - **Setup**: BuildGraph scripts for complex build pipelines
 - **Usage**: Platform-specific builds, automated testing
@@ -748,6 +809,7 @@ git lfs track "*.upk"
 ```
 
 ### External Libraries
+
 - **Purpose**: Integrate third-party C++ libraries
 - **Setup**: Create plugin wrappers for external dependencies
 - **Usage**: Physics engines, audio systems, analytics
@@ -755,6 +817,7 @@ git lfs track "*.upk"
 ## Platform Compatibility
 
 ### Engine Requirements
+
 - **Windows**: Windows 10/11, Visual Studio 2019/2022
 - **Mac**: macOS 10.15+, Xcode 12+
 - **Linux**: Ubuntu 18.04+, GCC 9+
@@ -762,6 +825,7 @@ git lfs track "*.upk"
 - **Console**: Platform-specific SDKs required
 
 ### Target Platform Support
+
 - **Desktop**: Windows, macOS, Linux
 - **Mobile**: iOS, Android
 - **Console**: PlayStation 4/5, Xbox One/Series X|S, Nintendo Switch
@@ -771,6 +835,7 @@ git lfs track "*.upk"
 ## Troubleshooting
 
 ### Debug Configuration
+
 ```ini
 ; Development debug settings
 [/Script/Engine.Engine]
@@ -802,6 +867,7 @@ LogExec=Warning
 **Solution**: Validate all asset references, check platform-specific settings
 
 ### Performance Debugging Tools
+
 ```bash
 # Profiling commands
 stat startfile        # Start recording performance data
@@ -814,6 +880,7 @@ memreport             # Detailed memory analysis
 ## Advanced Integration Patterns
 
 ### Custom Blueprint Nodes
+
 ```cpp
 // Custom Blueprint function library
 UCLASS()
@@ -831,6 +898,7 @@ public:
 ```
 
 ### Editor Scripting and Automation
+
 ```cpp
 // Editor utility widget for content creation
 UCLASS()

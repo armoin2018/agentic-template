@@ -78,6 +78,23 @@ ai_tools:
 
 # Git repositories to clone and integrate
 git_repos:
+  agentic-chatmodes:
+    url: 'https://github.com/armoin2018/agentic-chatmodes.git'
+    subfolder: 'external/armoin'
+    branch: 'main'
+    cache_dir: '.git_repo_cache'
+    folders:
+      - 'chatmodes'
+
+  # Private Repo
+  _agentic-chatmodes:
+    url: 'https://github.com/armoin2018/_agentic-chatmodes.git'
+    subfolder: 'external/armoin'
+    branch: 'main'
+    cache_dir: '.git_repo_cache'
+    folders:
+      - 'chatmodes'
+
   copilot-prompts:
     url: 'https://github.com/pnp/copilot-prompts.git'
     subfolder: 'external/pnp'

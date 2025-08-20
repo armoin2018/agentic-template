@@ -1,22 +1,32 @@
 ---
-title: "Husky Git Hooks Management Tool Instructions"
-description: "Comprehensive guide for using Husky to manage Git hooks, automate code quality checks, and enforce development workflow standards"
-category: "Development Tools"
-author: "AI Assistant"
-tags: ["husky", "git-hooks", "code-quality", "pre-commit", "development-workflow", "automation", "lint-staged"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Husky Git Hooks Management Tool Instructions'
+description: 'Comprehensive guide for using Husky to manage Git hooks, automate code quality checks, and enforce development workflow standards'
+category: 'Development Tools'
+
+tags:
+  [
+    'husky',
+    'git-hooks',
+    'code-quality',
+    'pre-commit',
+    'development-workflow',
+    'automation',
+    'lint-staged',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/.husky/**"
-  - "**/package.json"
-  - "**/.huskyrc*"
-  - "**/husky.config.*"
-  - "**/.gitignore"
+  - '**/.husky/**'
+  - '**/package.json'
+  - '**/.huskyrc*'
+  - '**/husky.config.*'
+  - '**/.gitignore'
 ---
 
 # Husky Git Hooks Management Tool Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Husky
 - **Version**: 9.0+ (Latest stable with improved performance)
 - **Category**: Development Tools - Git Hooks Management
@@ -26,6 +36,7 @@ applyTo:
 ## When to Use Husky
 
 ### ✅ **Use Husky When**
+
 - Working in team environments requiring consistent code quality standards
 - Need to automate code formatting, linting, and testing before commits
 - Want to prevent bad commits from entering the repository
@@ -37,6 +48,7 @@ applyTo:
 - Want to run security scans or dependency audits on code changes
 
 ### ❌ **Avoid Husky When**
+
 - Working on solo projects where automation overhead isn't justified
 - Git repository doesn't support hooks or has restrictions on hook execution
 - Team strongly prefers manual code review processes without automation
@@ -47,26 +59,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Husky Recommendation | Configuration Priority |
-|--------------|---------------------|----------------------|
-| Team Development | ✅ **Essential** - Enforces standards across team | High - Pre-commit + pre-push |
-| Open Source Project | ✅ **Strongly Recommended** - Maintains code quality | High - Full workflow automation |
-| Enterprise Application | ✅ **Essential** - Security and compliance | High - Security + quality checks |
-| Personal Project | 🔄 **Consider** - Useful for good habits | Medium - Basic pre-commit |
-| Legacy Codebase | 🔄 **Consider** - Gradual adoption | Low - Start with formatting only |
-| CI/CD Pipeline | ✅ **Recommended** - Local validation before remote | Medium - Mirror CI checks locally |
+
+| Project Type           | Husky Recommendation                                 | Configuration Priority            |
+| ---------------------- | ---------------------------------------------------- | --------------------------------- |
+| Team Development       | ✅ **Essential** - Enforces standards across team    | High - Pre-commit + pre-push      |
+| Open Source Project    | ✅ **Strongly Recommended** - Maintains code quality | High - Full workflow automation   |
+| Enterprise Application | ✅ **Essential** - Security and compliance           | High - Security + quality checks  |
+| Personal Project       | 🔄 **Consider** - Useful for good habits             | Medium - Basic pre-commit         |
+| Legacy Codebase        | 🔄 **Consider** - Gradual adoption                   | Low - Start with formatting only  |
+| CI/CD Pipeline         | ✅ **Recommended** - Local validation before remote  | Medium - Mirror CI checks locally |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 10 minutes (basic hooks) | 30 minutes (multiple tools) | 2+ hours (custom scripts) |
-| **Team Size** | 1-3 developers | 4-10 developers | 10+ developers |
-| **Tools Integration** | ESLint + Prettier | + Jest + TypeScript | + Security + Custom validation |
-| **Hook Types** | Pre-commit only | Pre-commit + pre-push | Multiple Git hooks |
+
+| Factor                | Low Complexity           | Medium Complexity           | High Complexity                |
+| --------------------- | ------------------------ | --------------------------- | ------------------------------ |
+| **Setup Time**        | 10 minutes (basic hooks) | 30 minutes (multiple tools) | 2+ hours (custom scripts)      |
+| **Team Size**         | 1-3 developers           | 4-10 developers             | 10+ developers                 |
+| **Tools Integration** | ESLint + Prettier        | + Jest + TypeScript         | + Security + Custom validation |
+| **Hook Types**        | Pre-commit only          | Pre-commit + pre-push       | Multiple Git hooks             |
 
 ## Installation & Setup
 
 ### Package Manager Installation
+
 ```bash
 # npm installation (recommended for most projects)
 npm install husky --save-dev
@@ -86,6 +101,7 @@ pnpm dlx husky init
 ```
 
 ### Project Integration
+
 ```bash
 # Initialize Husky (creates .husky directory and installs Git hooks)
 npx husky init
@@ -102,6 +118,7 @@ cat .husky/pre-commit
 ```
 
 ### Package.json Scripts Integration
+
 ```json
 {
   "scripts": {
@@ -127,6 +144,7 @@ cat .husky/pre-commit
 ## Configuration
 
 ### Basic Hook Configuration
+
 ```bash
 # .husky/pre-commit - Basic pre-commit hook
 #!/usr/bin/env sh
@@ -138,6 +156,7 @@ npm run test
 ```
 
 ### Advanced Pre-commit Hook
+
 ```bash
 # .husky/pre-commit - Advanced with error handling
 #!/usr/bin/env sh
@@ -179,6 +198,7 @@ echo "✅ All pre-commit checks passed!"
 ```
 
 ### Pre-push Hook Configuration
+
 ```bash
 # .husky/pre-push - Comprehensive pre-push validation
 #!/usr/bin/env sh
@@ -218,6 +238,7 @@ echo "✅ All pre-push checks passed! Safe to push."
 ```
 
 ### Lint-staged Integration
+
 ```bash
 # Install lint-staged for performance
 npm install lint-staged --save-dev
@@ -227,19 +248,10 @@ npm install lint-staged --save-dev
 // package.json - lint-staged configuration
 {
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{css,scss,less}": [
-      "prettier --write"
-    ],
-    "*.{json,md,yaml,yml}": [
-      "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "jest --bail --findRelatedTests --passWithNoTests"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{css,scss,less}": ["prettier --write"],
+    "*.{json,md,yaml,yml}": ["prettier --write"],
+    "*.{js,jsx,ts,tsx}": ["jest --bail --findRelatedTests --passWithNoTests"]
   }
 }
 ```
@@ -253,6 +265,7 @@ npx lint-staged
 ```
 
 ### Commit Message Hook
+
 ```bash
 # .husky/commit-msg - Enforce conventional commits
 #!/usr/bin/env sh
@@ -270,31 +283,33 @@ module.exports = {
       2,
       'always',
       [
-        'feat',     // New feature
-        'fix',      // Bug fix
-        'docs',     // Documentation changes
-        'style',    // Code style changes (formatting, etc.)
+        'feat', // New feature
+        'fix', // Bug fix
+        'docs', // Documentation changes
+        'style', // Code style changes (formatting, etc.)
         'refactor', // Code refactoring
-        'test',     // Adding or updating tests
-        'chore',    // Build process or auxiliary tool changes
-        'perf',     // Performance improvements
-        'ci',       // CI/CD changes
-        'revert'    // Reverting changes
-      ]
+        'test', // Adding or updating tests
+        'chore', // Build process or auxiliary tool changes
+        'perf', // Performance improvements
+        'ci', // CI/CD changes
+        'revert', // Reverting changes
+      ],
     ],
     'subject-case': [2, 'never', ['start-case', 'pascal-case', 'upper-case']],
     'subject-max-length': [2, 'always', 100],
-    'body-max-line-length': [2, 'always', 150]
-  }
+    'body-max-line-length': [2, 'always', 150],
+  },
 };
 ```
 
 ## Core Features
 
 ### Git Hook Automation
+
 - **Purpose**: Automatically executes scripts at specific Git lifecycle events
 - **Usage**: Enforces code quality standards before commits, pushes, or merges
-- **Example**: 
+- **Example**:
+
 ```bash
 # Create pre-commit hook
 echo "npm run lint && npm run test" > .husky/pre-commit
@@ -306,9 +321,11 @@ chmod +x .husky/pre-push
 ```
 
 ### Lint-staged Integration
+
 - **Purpose**: Runs linting and formatting only on staged files for performance
 - **Usage**: Speeds up pre-commit checks by processing only changed files
 - **Example**:
+
 ```bash
 # Install lint-staged
 npm install lint-staged --save-dev
@@ -325,9 +342,11 @@ echo "npx lint-staged" > .husky/pre-commit
 ```
 
 ### Cross-platform Compatibility
+
 - **Purpose**: Ensures hooks work across Windows, macOS, and Linux environments
 - **Usage**: Provides consistent behavior regardless of development environment
 - **Example**:
+
 ```bash
 # .husky/pre-commit - Cross-platform script
 #!/usr/bin/env sh
@@ -339,9 +358,11 @@ npm run test
 ```
 
 ### Hook Bypassing and Debugging
+
 - **Purpose**: Allows temporary bypassing of hooks for emergency commits or debugging
 - **Usage**: Provides escape mechanisms while maintaining normal workflow enforcement
 - **Example**:
+
 ```bash
 # Bypass hooks for emergency commit
 git commit --no-verify -m "hotfix: critical security patch"
@@ -380,6 +401,7 @@ git config --unset core.hooksPath   # Reset hooks path
 ## Workflow Integration
 
 ### Development Workflow
+
 1. **Setup**: Install Husky and configure initial hooks for code quality
 2. **Development**: Automatic validation runs on every commit and push
 3. **Team Onboarding**: New developers automatically get hooks via npm install
@@ -387,6 +409,7 @@ git config --unset core.hooksPath   # Reset hooks path
 5. **CI/CD**: Local validation mirrors remote pipeline checks
 
 ### Team Setup Workflow
+
 ```bash
 # Team lead setup
 npm install husky lint-staged --save-dev
@@ -436,6 +459,7 @@ git commit -m "feat: add Husky Git hooks for code quality"
 ```
 
 ### New Developer Onboarding
+
 ```bash
 # New developer workflow
 git clone <repository>
@@ -453,6 +477,7 @@ git commit -m "docs: test commit with hooks"
 ```
 
 ### CI/CD Integration
+
 ```yaml
 # .github/workflows/validate.yml
 name: Code Quality
@@ -467,22 +492,22 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - run: npm ci
-      
+
       # Run the same checks as local hooks
       - name: Lint code
         run: npm run lint
-        
+
       - name: Check formatting
         run: npm run format:check
-        
+
       - name: Type check
         run: npm run type-check
-        
+
       - name: Run tests
         run: npm run test:coverage
-        
+
       - name: Build project
         run: npm run build
 ```
@@ -490,6 +515,7 @@ jobs:
 ## Best Practices
 
 ### ✅ **Configuration Best Practices**
+
 - **Keep hooks fast** - Use lint-staged to process only changed files
 - **Make hooks informative** - Add clear echo statements showing progress
 - **Handle errors gracefully** - Provide helpful error messages and exit codes
@@ -498,6 +524,7 @@ jobs:
 - **Test hooks thoroughly** - Verify hook behavior across different scenarios
 
 ### ✅ **Performance Optimization**
+
 - **Use lint-staged** for file-specific operations to reduce execution time
 - **Cache dependencies** in CI/CD to speed up hook validation
 - **Parallelize independent checks** where possible using concurrent execution
@@ -506,6 +533,7 @@ jobs:
 - **Monitor hook execution time** and optimize slow operations
 
 ### ✅ **Team Collaboration**
+
 - **Establish clear bypass policies** for emergency commits with --no-verify
 - **Document hook requirements** in project README and contributing guidelines
 - **Provide debugging instructions** for when hooks fail unexpectedly
@@ -514,6 +542,7 @@ jobs:
 - **Handle cross-platform differences** in hook scripts and dependencies
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't make hooks too strict** - Balance quality with development velocity
 - **Avoid platform-specific scripts** - Ensure hooks work on Windows, macOS, Linux
 - **Don't skip hook testing** - Test hooks with various commit scenarios
@@ -524,6 +553,7 @@ jobs:
 ## Advanced Hook Configurations
 
 ### Multi-stage Validation Hook
+
 ```bash
 # .husky/pre-commit - Multi-stage with early exit
 #!/usr/bin/env sh
@@ -571,6 +601,7 @@ echo "${GREEN}✅ All pre-commit checks passed!${NC}"
 ```
 
 ### Conditional Hook Execution
+
 ```bash
 # .husky/pre-commit - Conditional based on changed files
 #!/usr/bin/env sh
@@ -609,6 +640,7 @@ npm run test
 ```
 
 ### Environment-aware Hook
+
 ```bash
 # .husky/pre-commit - Environment-aware execution
 #!/usr/bin/env sh
@@ -640,29 +672,20 @@ npm run test
 ## Integration with Development Tools
 
 ### ESLint and Prettier Integration
+
 ```json
 // package.json - Complete lint-staged configuration
 {
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{css,scss,less}": [
-      "stylelint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{json,md,yaml,yml}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write", "git add"],
+    "*.{css,scss,less}": ["stylelint --fix", "prettier --write", "git add"],
+    "*.{json,md,yaml,yml}": ["prettier --write", "git add"]
   }
 }
 ```
 
 ### Jest Testing Integration
+
 ```bash
 # .husky/pre-commit - Jest with coverage thresholds
 #!/usr/bin/env sh
@@ -683,6 +706,7 @@ fi
 ```
 
 ### TypeScript Integration
+
 ```bash
 # .husky/pre-commit - TypeScript with incremental checking
 #!/usr/bin/env sh
@@ -704,6 +728,7 @@ npx eslint --ext .ts,.tsx src/ || {
 ```
 
 ### Docker Integration
+
 ```bash
 # .husky/pre-commit - Docker environment validation
 #!/usr/bin/env sh
@@ -712,18 +737,18 @@ npx eslint --ext .ts,.tsx src/ || {
 # Check if Docker is available and project uses Docker
 if command -v docker >/dev/null 2>&1 && [ -f "Dockerfile" ]; then
   echo "🐳 Validating Docker configuration..."
-  
+
   # Lint Dockerfile
   docker run --rm -i hadolint/hadolint < Dockerfile || {
     echo "⚠️  Dockerfile linting issues found"
   }
-  
+
   # Test Docker build (quick check)
   docker build --target development . -t temp-build-test || {
     echo "❌ Docker build failed"
     exit 1
   }
-  
+
   # Cleanup
   docker rmi temp-build-test >/dev/null 2>&1
 fi
@@ -734,9 +759,11 @@ fi
 ### Common Issues
 
 #### Hooks Not Executing
+
 **Problem**: Git hooks are not running when expected
 **Symptoms**: Commits succeed without running validation scripts
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check if Husky is properly installed
 ls -la .husky/
@@ -756,9 +783,11 @@ chmod +x .husky/*
 ```
 
 #### Permission Denied Errors
+
 **Problem**: Hooks fail with permission denied errors
 **Symptoms**: "Permission denied" error when Git tries to execute hooks
-**Solution**: 
+**Solution**:
+
 ```bash
 # Make hooks executable (Unix/Linux/macOS)
 chmod +x .husky/pre-commit
@@ -772,9 +801,11 @@ ls -la .husky/
 ```
 
 #### Hook Script Failures
+
 **Problem**: Hook scripts fail with cryptic error messages
 **Symptoms**: Hooks exit with non-zero status but unclear error information
-**Solution**: 
+**Solution**:
+
 ```bash
 # Add debugging to hook script
 #!/usr/bin/env sh
@@ -795,9 +826,11 @@ npm run lint  # Run individual commands to isolate issues
 ```
 
 #### Performance Issues
+
 **Problem**: Hooks take too long to execute, slowing down development
 **Symptoms**: Long delays during commits, developer frustration
-**Solution**: 
+**Solution**:
+
 ```bash
 # Use lint-staged for file-specific operations
 npm install lint-staged --save-dev
@@ -820,6 +853,7 @@ echo "Hook execution time: $((end_time - start_time)) seconds"
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable Husky debugging
 HUSKY_DEBUG=1 git commit -m "debug commit"
@@ -836,6 +870,7 @@ git config --list | grep hooks
 ```
 
 ### Performance Optimization
+
 ```bash
 # Measure hook performance
 time ./.husky/pre-commit
@@ -859,6 +894,7 @@ time npm run test
 ## Security Considerations
 
 ### Security Best Practices
+
 - **Validate hook scripts** for malicious code before committing to repository
 - **Use trusted sources** for hook script templates and avoid copying unknown scripts
 - **Limit hook permissions** to only necessary operations and file access
@@ -867,6 +903,7 @@ time npm run test
 - **Use secure communication** when hooks interact with external services
 
 ### Sensitive Data Handling
+
 ```bash
 # .husky/pre-commit - Secure environment handling
 #!/usr/bin/env sh
@@ -888,6 +925,7 @@ fi
 ```
 
 ### Network Security
+
 ```bash
 # .husky/pre-commit - Network-aware security
 #!/usr/bin/env sh
@@ -916,6 +954,7 @@ When helping with Husky:
 8. **Provide performance optimization** techniques for large projects and teams
 
 ### Code Generation Rules
+
 - Generate executable shell scripts with proper shebang and Husky initialization
 - Include error handling and informative output messages in hook scripts
 - Provide both basic and advanced hook configurations based on project complexity
@@ -926,7 +965,9 @@ When helping with Husky:
 - Follow security best practices for hook script content and execution
 
 ## Installation & Setup
+
 ### Package Manager Installation
+
 ```bash
 # npm/yarn installation
 npm install -g [tool-name]
@@ -944,6 +985,7 @@ brew install [tool-name]
 ```
 
 ### Project Integration
+
 ```bash
 # Initialize in project
 [tool] init
@@ -953,13 +995,16 @@ brew install [tool-name]
 ```
 
 ## Configuration
+
 ### Configuration File
+
 ```[config-format]
 # [config-file-name] (e.g., .toolrc, tool.config.js, tool.yaml)
 [configuration-example]
 ```
 
 ### Environment Variables
+
 ```bash
 # Environment-specific settings
 [TOOL_ENV_VAR]=[value]
@@ -967,6 +1012,7 @@ brew install [tool-name]
 ```
 
 ### CLI Configuration
+
 ```bash
 # Global configuration
 [tool] config set [option] [value]
@@ -976,31 +1022,39 @@ brew install [tool-name]
 ```
 
 ## Core Features
+
 ### [Feature 1]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
-- **Example**: 
+- **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 2]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 3]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ## Common Commands
+
 ```bash
 # Essential daily commands
 [tool] [basic-command]              # Description
@@ -1015,7 +1069,9 @@ brew install [tool-name]
 ```
 
 ## Workflow Integration
+
 ### Development Workflow
+
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]
@@ -1023,6 +1079,7 @@ brew install [tool-name]
 5. **CI/CD**: [Continuous integration usage]
 
 ### Automation Scripts
+
 ```bash
 # Package.json scripts (if applicable)
 {
@@ -1034,6 +1091,7 @@ brew install [tool-name]
 ```
 
 ### Git Hooks Integration
+
 ```bash
 # Pre-commit hook example
 #!/bin/sh
@@ -1041,75 +1099,98 @@ brew install [tool-name]
 ```
 
 ## Best Practices
+
 ### Configuration Best Practices
+
 - [Best practice 1 with explanation]
 - [Best practice 2 with explanation]
 - [Best practice 3 with explanation]
 
 ### Usage Patterns
+
 - [Pattern 1: When and how to use]
 - [Pattern 2: When and how to use]
 - [Pattern 3: When and how to use]
 
 ### Performance Optimization
+
 - [Optimization tip 1]
 - [Optimization tip 2]
 - [Optimization tip 3]
 
 ## Common Use Cases
+
 ### [Use Case 1]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 2]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 3]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ## Integration with Other Tools
+
 ### [Related Tool 1]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ### [Related Tool 2]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ## Troubleshooting
+
 ### Common Issues
+
 #### [Issue 1]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 2]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 3]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 ### Debug Mode
+
 ```bash
 # Enable verbose/debug output
 [tool] --verbose [command]
@@ -1121,58 +1202,71 @@ brew install [tool-name]
 ```
 
 ### Performance Issues
+
 - [Performance issue 1 and solution]
 - [Performance issue 2 and solution]
 - [Performance issue 3 and solution]
 
 ## Security Considerations
+
 ### Security Best Practices
+
 - [Security practice 1]
 - [Security practice 2]
 - [Security practice 3]
 
 ### Sensitive Data Handling
+
 - [How the tool handles secrets]
 - [Configuration for secure usage]
 - [Best practices for credentials]
 
 ### Network Security
+
 - [Network-related security considerations]
 - [Proxy and firewall configurations]
 - [Certificate and SSL handling]
 
 ## Advanced Configuration
+
 ### Custom Plugins/Extensions
+
 ```[config-format]
 # Plugin configuration
 [plugin-config-example]
 ```
 
 ### Scripting and Automation
+
 ```bash
 # Advanced scripting examples
 [automation-script-example]
 ```
 
 ### Performance Tuning
+
 ```[config-format]
 # Performance optimization settings
 [performance-config-example]
 ```
 
 ## Version Management
+
 ### Version Compatibility
+
 - **Tool Version**: [Version requirements]
 - **Node.js**: [If applicable]
 - **Python**: [If applicable]
 - **OS Support**: [Supported operating systems]
 
 ### Migration Guides
+
 - **From [Old Version]**: [Migration steps]
 - **Breaking Changes**: [Important changes to note]
 - **Deprecation Notices**: [Features being deprecated]
 
 ## Useful Resources
+
 - **Official Documentation**: [URL]
 - **GitHub Repository**: [URL]
 - **Community Resources**: [URLs]
@@ -1181,36 +1275,44 @@ brew install [tool-name]
 - **Stack Overflow Tag**: [Tag name]
 
 ## Tool-Specific Guidelines
+
 ### Code Organization
+
 - [How the tool affects code structure]
 - [File organization recommendations]
 - [Naming conventions]
 
 ### Maintenance
+
 - [Regular maintenance tasks]
 - [Update procedures]
 - [Cleanup and optimization]
 
 ## Examples and Templates
+
 ### Basic Example
+
 ```[language]
 // Example usage in context
 [practical-example]
 ```
 
 ### Advanced Example
+
 ```[language]
 // Advanced usage pattern
 [advanced-example]
 ```
 
 ### Template Files
+
 ```[format]
 # Template configuration
 [template-example]
 ```
 
 ## AI Assistant Guidelines
+
 When helping with [Tool Name]:
 
 1. **Always suggest the most current stable version**
@@ -1223,6 +1325,7 @@ When helping with [Tool Name]:
 8. **Reference official documentation**
 
 ### Code Generation Rules
+
 - Generate configurations that follow tool best practices
 - Include comments explaining important settings
 - Provide multiple options when appropriate

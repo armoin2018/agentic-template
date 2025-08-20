@@ -1,23 +1,34 @@
 ---
-title: "Git Version Control System Instructions"
-description: "Comprehensive guide for using Git for version control, collaboration, and code management in software development projects"
-category: "Development Tools"
-author: "AI Assistant"
-tags: ["git", "version-control", "collaboration", "branching", "merging", "github", "gitlab", "workflow"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Git Version Control System Instructions'
+description: 'Comprehensive guide for using Git for version control, collaboration, and code management in software development projects'
+category: 'Development Tools'
+
+tags:
+  [
+    'git',
+    'version-control',
+    'collaboration',
+    'branching',
+    'merging',
+    'github',
+    'gitlab',
+    'workflow',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/.git/**"
-  - "**/.gitignore"
-  - "**/.gitattributes"
-  - "**/.gitmodules"
-  - "**/git.config"
-  - "**/gitconfig"
+  - '**/.git/**'
+  - '**/.gitignore'
+  - '**/.gitattributes'
+  - '**/.gitmodules'
+  - '**/git.config'
+  - '**/gitconfig'
 ---
 
 # Git Version Control System Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Git
 - **Version**: 2.40+ (Latest stable with improved performance and security)
 - **Category**: Development Tools - Version Control
@@ -27,6 +38,7 @@ applyTo:
 ## When to Use Git
 
 ### ✅ **Use Git When**
+
 - Working on any software development project requiring version tracking
 - Collaborating with team members on shared codebases
 - Need to maintain history of code changes and ability to revert
@@ -38,6 +50,7 @@ applyTo:
 - Requiring code review processes and merge request workflows
 
 ### ❌ **Consider Alternatives When**
+
 - Working with very large binary files (consider Git LFS or alternative VCS)
 - Need centralized workflow with strict access controls (consider Perforce for enterprise)
 - Working primarily with non-code assets requiring different versioning approaches
@@ -47,26 +60,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Git Recommendation | Configuration Priority |
-|--------------|-------------------|----------------------|
-| Software Development | ✅ **Essential** - Industry standard | High - Full workflow setup |
-| Open Source Project | ✅ **Essential** - Required for collaboration | High - Advanced branching + hooks |
-| Enterprise Application | ✅ **Essential** - Enterprise features needed | High - Security + compliance |
-| Personal Scripts | ✅ **Recommended** - Good practice | Medium - Basic versioning |
-| Documentation Project | ✅ **Recommended** - Track content changes | Medium - Simple workflow |
-| Learning/Tutorial Code | ✅ **Recommended** - Version practice | Low - Basic commands |
+
+| Project Type           | Git Recommendation                            | Configuration Priority            |
+| ---------------------- | --------------------------------------------- | --------------------------------- |
+| Software Development   | ✅ **Essential** - Industry standard          | High - Full workflow setup        |
+| Open Source Project    | ✅ **Essential** - Required for collaboration | High - Advanced branching + hooks |
+| Enterprise Application | ✅ **Essential** - Enterprise features needed | High - Security + compliance      |
+| Personal Scripts       | ✅ **Recommended** - Good practice            | Medium - Basic versioning         |
+| Documentation Project  | ✅ **Recommended** - Track content changes    | Medium - Simple workflow          |
+| Learning/Tutorial Code | ✅ **Recommended** - Version practice         | Low - Basic commands              |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 15 minutes (basic) | 1 hour (team workflow) | 4+ hours (enterprise) |
-| **Team Size** | 1-2 developers | 3-10 developers | 10+ developers |
-| **Branching Strategy** | Single branch | Feature branches | GitFlow/advanced strategies |
-| **Integration** | Local only | GitHub/GitLab | Enterprise + CI/CD + hooks |
+
+| Factor                 | Low Complexity     | Medium Complexity      | High Complexity             |
+| ---------------------- | ------------------ | ---------------------- | --------------------------- |
+| **Setup Time**         | 15 minutes (basic) | 1 hour (team workflow) | 4+ hours (enterprise)       |
+| **Team Size**          | 1-2 developers     | 3-10 developers        | 10+ developers              |
+| **Branching Strategy** | Single branch      | Feature branches       | GitFlow/advanced strategies |
+| **Integration**        | Local only         | GitHub/GitLab          | Enterprise + CI/CD + hooks  |
 
 ## Installation & Setup
 
 ### Package Manager Installation
+
 ```bash
 # macOS installation via Homebrew (recommended)
 brew install git
@@ -92,6 +108,7 @@ which git
 ```
 
 ### Project Integration
+
 ```bash
 # Initialize new Git repository
 git init
@@ -114,6 +131,7 @@ git clone --depth 1 https://github.com/username/repository.git
 ```
 
 ### Global Configuration
+
 ```bash
 # Set user identity (required for commits)
 git config --global user.name "Your Full Name"
@@ -144,6 +162,7 @@ git config --global push.autoSetupRemote true
 ## Configuration
 
 ### Local Repository Configuration
+
 ```bash
 # .gitconfig for repository-specific settings
 git config user.name "Project Specific Name"
@@ -159,6 +178,7 @@ git config merge.tool code     # VS Code as merge tool
 ```
 
 ### .gitignore Configuration
+
 ```gitignore
 # .gitignore - Comprehensive example
 
@@ -254,6 +274,7 @@ __pycache__/
 ```
 
 ### .gitattributes Configuration
+
 ```gitattributes
 # .gitattributes - Line ending and merge strategies
 
@@ -317,9 +338,11 @@ yarn.lock merge=ours
 ## Core Features
 
 ### Repository Management
+
 - **Purpose**: Initialize, clone, and manage Git repositories
 - **Usage**: Essential for starting new projects or contributing to existing ones
-- **Example**: 
+- **Example**:
+
 ```bash
 # Create new repository
 mkdir my-project
@@ -335,9 +358,11 @@ git push -u origin main
 ```
 
 ### Staging and Committing
+
 - **Purpose**: Track changes and create snapshots of project state
 - **Usage**: Fundamental workflow for recording development progress
 - **Example**:
+
 ```bash
 # Stage specific files
 git add file1.js file2.css
@@ -367,9 +392,11 @@ git commit --amend --no-edit  # Just add staged changes
 ```
 
 ### Branching and Merging
+
 - **Purpose**: Manage parallel development lines and integrate changes
 - **Usage**: Essential for feature development and collaboration
 - **Example**:
+
 ```bash
 # Create and switch to new branch
 git checkout -b feature/user-authentication
@@ -397,9 +424,11 @@ git push origin --delete feature/user-authentication
 ```
 
 ### Remote Repository Operations
+
 - **Purpose**: Synchronize changes with remote repositories and collaborate
 - **Usage**: Essential for team collaboration and backup
 - **Example**:
+
 ```bash
 # Add remote repository
 git remote add origin https://github.com/username/repository.git
@@ -469,6 +498,7 @@ git clean -fd                     # Remove untracked files and directories
 ## Workflow Integration
 
 ### Feature Branch Workflow
+
 1. **Setup**: Create feature branch from main development branch
 2. **Development**: Make changes, commit regularly with descriptive messages
 3. **Testing**: Test changes locally before pushing to remote
@@ -476,6 +506,7 @@ git clean -fd                     # Remove untracked files and directories
 5. **Integration**: Merge approved changes back to main branch
 
 ### Team Development Workflow
+
 ```bash
 # Daily development workflow
 git checkout main
@@ -493,6 +524,7 @@ git branch -d feature/new-feature      # Clean up local branch
 ```
 
 ### GitFlow Workflow
+
 ```bash
 # Initialize GitFlow
 git flow init
@@ -517,14 +549,15 @@ git flow hotfix finish critical-fix
 ```
 
 ### CI/CD Integration
+
 ```yaml
 # .github/workflows/ci.yml - GitHub Actions example
 name: CI/CD Pipeline
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -532,18 +565,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full history for better Git operations
-      
+          fetch-depth: 0 # Full history for better Git operations
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - run: npm ci
       - run: npm test
       - run: npm run build
-      
+
       - name: Create Release
         if: github.ref == 'refs/heads/main'
         run: |
@@ -556,6 +589,7 @@ jobs:
 ## Best Practices
 
 ### ✅ **Configuration Best Practices**
+
 - **Set up global configuration** - Configure user name, email, and core settings globally
 - **Use meaningful .gitignore** - Exclude build artifacts, dependencies, and sensitive files
 - **Configure line endings** - Set core.autocrlf appropriately for cross-platform development
@@ -564,6 +598,7 @@ jobs:
 - **Set up aliases** - Create shortcuts for frequently used commands
 
 ### ✅ **Commit Best Practices**
+
 - **Write clear commit messages** - Use imperative mood and explain what and why
 - **Make atomic commits** - Each commit should represent a single logical change
 - **Commit frequently** - Regular commits create better history and easier debugging
@@ -572,6 +607,7 @@ jobs:
 - **Test before committing** - Ensure code compiles and tests pass
 
 ### ✅ **Branching and Merging**
+
 - **Use feature branches** - Develop features in isolation from main development line
 - **Keep branches focused** - One feature or fix per branch for easier review
 - **Update branches regularly** - Rebase or merge from main to stay current
@@ -580,6 +616,7 @@ jobs:
 - **Protect main branch** - Prevent direct pushes to main in team environments
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't commit secrets** - Use environment variables and .gitignore for sensitive data
 - **Avoid large binary files** - Use Git LFS for large assets or find alternatives
 - **Don't force push shared branches** - Can corrupt collaborator's work and history
@@ -590,6 +627,7 @@ jobs:
 ## Advanced Git Usage
 
 ### Interactive Rebase
+
 ```bash
 # Interactive rebase for cleaning up commit history
 git rebase -i HEAD~3
@@ -613,6 +651,7 @@ git rebase --continue
 ```
 
 ### Advanced Merge Strategies
+
 ```bash
 # Squash merge (combines all commits into one)
 git merge --squash feature-branch
@@ -628,6 +667,7 @@ git merge --no-commit feature-branch
 ```
 
 ### Stash Management
+
 ```bash
 # Save current work temporarily
 git stash
@@ -657,6 +697,7 @@ git stash clear
 ```
 
 ### Submodules and Subtrees
+
 ```bash
 # Add submodule
 git submodule add https://github.com/user/library.git lib/library
@@ -681,6 +722,7 @@ git subtree pull --prefix=lib/library https://github.com/user/library.git main -
 ## Integration with Other Tools
 
 ### GitHub Integration
+
 ```bash
 # GitHub CLI integration
 gh repo create my-project --public
@@ -695,6 +737,7 @@ git push -u origin main
 ```
 
 ### IDE Integration
+
 ```bash
 # VS Code integration
 code .  # Open current directory in VS Code
@@ -711,6 +754,7 @@ git config --global core.editor "code --wait"
 ```
 
 ### Continuous Integration
+
 ```bash
 # Jenkins pipeline integration
 pipeline {
@@ -742,9 +786,11 @@ pipeline {
 ### Common Issues
 
 #### Merge Conflicts
+
 **Problem**: Conflicting changes in the same file sections during merge
 **Symptoms**: Git reports merge conflicts and stops the merge process
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check conflict status
 git status
@@ -765,9 +811,11 @@ git mergetool
 ```
 
 #### Detached HEAD State
+
 **Problem**: HEAD is not pointing to a branch, commits may be lost
 **Symptoms**: Git warns "You are in 'detached HEAD' state"
-**Solution**: 
+**Solution**:
+
 ```bash
 # Create branch from current state
 git checkout -b new-branch-name
@@ -782,9 +830,11 @@ git merge temp-branch
 ```
 
 #### Undoing Changes
+
 **Problem**: Need to undo commits, staging, or file changes
 **Symptoms**: Mistakes in commits or unwanted changes
-**Solution**: 
+**Solution**:
+
 ```bash
 # Undo last commit but keep changes
 git reset HEAD~1
@@ -804,9 +854,11 @@ git revert commit-hash
 ```
 
 #### Remote Synchronization Issues
+
 **Problem**: Local and remote repositories are out of sync
 **Symptoms**: Push rejected or pull conflicts
-**Solution**: 
+**Solution**:
+
 ```bash
 # Update local repository
 git fetch origin
@@ -825,6 +877,7 @@ git reset --hard origin/main
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable Git tracing
 GIT_TRACE=1 git command
@@ -842,6 +895,7 @@ git count-objects -v
 ```
 
 ### Performance Optimization
+
 ```bash
 # Optimize repository
 git gc                # Garbage collection
@@ -863,6 +917,7 @@ git count-objects -vH
 ## Security Considerations
 
 ### Security Best Practices
+
 - **Use SSH keys** - More secure than HTTPS passwords for authentication
 - **Enable two-factor authentication** - Additional security layer for Git hosting services
 - **Protect sensitive data** - Never commit passwords, API keys, or credentials
@@ -871,6 +926,7 @@ git count-objects -vH
 - **Use branch protection** - Require reviews and status checks before merging
 
 ### Sensitive Data Handling
+
 ```bash
 # Remove sensitive data from history
 git filter-branch --force --index-filter \
@@ -887,6 +943,7 @@ git commit -m "Add secrets.txt to gitignore"
 ```
 
 ### GPG Commit Signing
+
 ```bash
 # Generate GPG key
 gpg --full-generate-key
@@ -910,7 +967,7 @@ git log --show-signature
 When helping with Git:
 
 1. **Always suggest current Git 2.40+** with modern command syntax (switch/restore over checkout)
-2. **Provide complete workflow examples** that integrate with team development practices  
+2. **Provide complete workflow examples** that integrate with team development practices
 3. **Include safety measures** like --force-with-lease instead of --force for pushes
 4. **Suggest branch protection** and pull request workflows for team environments
 5. **Provide troubleshooting steps** for common issues like merge conflicts and sync problems
@@ -919,6 +976,7 @@ When helping with Git:
 8. **Suggest automation opportunities** with hooks, CI/CD, and workflow improvements
 
 ### Code Generation Rules
+
 - Generate .gitignore files appropriate for the technology stack and environment
 - Include comprehensive .gitattributes for line ending and merge strategy management
 - Provide workflow scripts that follow Git best practices and conventions

@@ -1,23 +1,33 @@
 ---
-title: "Netlify JAMstack Deployment Platform Instructions"
-description: "Comprehensive guide for using Netlify for modern web application deployment, continuous deployment, serverless functions, and edge computing"
-category: "Cloud Platforms"
-author: "AI Assistant"
-tags: ["netlify", "jamstack", "deployment", "serverless", "edge-functions", "cdn", "continuous-deployment"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Netlify JAMstack Deployment Platform Instructions'
+description: 'Comprehensive guide for using Netlify for modern web application deployment, continuous deployment, serverless functions, and edge computing'
+category: 'Cloud Platforms'
+
+tags:
+  [
+    'netlify',
+    'jamstack',
+    'deployment',
+    'serverless',
+    'edge-functions',
+    'cdn',
+    'continuous-deployment',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/netlify.toml"
-  - "**/_redirects"
-  - "**/_headers"
-  - "**/netlify/**"
-  - "**/functions/**"
-  - "**/.netlify/**"
+  - '**/netlify.toml'
+  - '**/_redirects'
+  - '**/_headers'
+  - '**/netlify/**'
+  - '**/functions/**'
+  - '**/.netlify/**'
 ---
 
 # Netlify JAMstack Deployment Platform Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Netlify
 - **Version**: Platform service with CLI 17.0+ (Latest stable with Edge Functions support)
 - **Category**: Cloud Platforms - JAMstack Deployment
@@ -27,6 +37,7 @@ applyTo:
 ## When to Use Netlify
 
 ### ✅ **Use Netlify When**
+
 - Deploying JAMstack applications (static sites with dynamic functionality)
 - Need fast global CDN with automatic HTTPS and custom domains
 - Want simple continuous deployment from Git repositories
@@ -38,6 +49,7 @@ applyTo:
 - Want simple A/B testing and feature flags for frontend applications
 
 ### ❌ **Avoid Netlify When**
+
 - Building complex backend applications requiring persistent databases
 - Need full server-side rendering with complex server logic
 - Working with applications requiring dedicated server resources
@@ -49,26 +61,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Netlify Recommendation | Configuration Priority |
-|--------------|----------------------|----------------------|
-| React/Vue/Angular SPA | ✅ **Essential** - Perfect fit | High - Build optimization |
-| Static Website | ✅ **Essential** - Excellent performance | High - CDN + forms |
-| JAMstack E-commerce | ✅ **Essential** - Serverless functions | High - Payment integration |
-| Documentation Site | ✅ **Recommended** - Fast deployment | Medium - Basic setup |
-| Portfolio Website | ✅ **Recommended** - Easy management | Medium - Custom domain |
-| Enterprise Web App | 🔄 **Consider** - May need enterprise plan | Medium - Security features |
+
+| Project Type          | Netlify Recommendation                     | Configuration Priority     |
+| --------------------- | ------------------------------------------ | -------------------------- |
+| React/Vue/Angular SPA | ✅ **Essential** - Perfect fit             | High - Build optimization  |
+| Static Website        | ✅ **Essential** - Excellent performance   | High - CDN + forms         |
+| JAMstack E-commerce   | ✅ **Essential** - Serverless functions    | High - Payment integration |
+| Documentation Site    | ✅ **Recommended** - Fast deployment       | Medium - Basic setup       |
+| Portfolio Website     | ✅ **Recommended** - Easy management       | Medium - Custom domain     |
+| Enterprise Web App    | 🔄 **Consider** - May need enterprise plan | Medium - Security features |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 15 minutes (basic deploy) | 2 hours (functions + forms) | 1 day (enterprise setup) |
-| **Features Used** | Static hosting + CDN | Functions + forms | Full platform features |
-| **Build Process** | Simple static build | Framework builds | Complex build pipelines |
-| **Backend Needs** | None | Serverless functions | External services |
+
+| Factor            | Low Complexity            | Medium Complexity           | High Complexity          |
+| ----------------- | ------------------------- | --------------------------- | ------------------------ |
+| **Setup Time**    | 15 minutes (basic deploy) | 2 hours (functions + forms) | 1 day (enterprise setup) |
+| **Features Used** | Static hosting + CDN      | Functions + forms           | Full platform features   |
+| **Build Process** | Simple static build       | Framework builds            | Complex build pipelines  |
+| **Backend Needs** | None                      | Serverless functions        | External services        |
 
 ## Installation & Setup
 
 ### Netlify CLI Installation
+
 ```bash
 # npm installation (recommended)
 npm install -g netlify-cli
@@ -89,6 +104,7 @@ netlify auth:login
 ```
 
 ### Project Integration
+
 ```bash
 # Initialize Netlify in existing project
 cd your-project
@@ -109,6 +125,7 @@ netlify dev
 ```
 
 ### Git Repository Setup
+
 ```bash
 # Initialize Git repository (if not already done)
 git init
@@ -125,19 +142,20 @@ git push -u origin main
 ## Configuration
 
 ### netlify.toml Configuration
+
 ```toml
 # netlify.toml - Main configuration file
 
 [build]
   # Build command
   command = "npm run build"
-  
+
   # Directory to publish (build output)
   publish = "dist"
-  
+
   # Base directory for build
   base = "."
-  
+
   # Environment variables for build
   environment = { NODE_VERSION = "18", YARN_VERSION = "1.22.19" }
 
@@ -211,6 +229,7 @@ git push -u origin main
 ```
 
 ### Advanced React/Next.js Configuration
+
 ```toml
 # netlify.toml for React/Next.js applications
 
@@ -268,7 +287,8 @@ git push -u origin main
   pretty_urls = true
 ```
 
-### _redirects File Configuration
+### \_redirects File Configuration
+
 ```bash
 # _redirects file for client-side routing and API proxying
 
@@ -297,7 +317,8 @@ git push -u origin main
 /  /es  302  Language=es
 ```
 
-### _headers File Configuration
+### \_headers File Configuration
+
 ```bash
 # _headers file for custom HTTP headers
 
@@ -334,9 +355,11 @@ git push -u origin main
 ## Core Features
 
 ### Continuous Deployment
+
 - **Purpose**: Automatically deploy applications when code is pushed to Git repository
 - **Usage**: Connect Git repository for automatic builds and deployments
-- **Example**: 
+- **Example**:
+
 ```bash
 # Connect repository via Netlify dashboard or CLI
 netlify sites:create --name my-awesome-app
@@ -356,24 +379,26 @@ git push origin main
 ```
 
 ### Serverless Functions
+
 - **Purpose**: Add backend functionality without managing servers
 - **Usage**: Create API endpoints, form handlers, and background processing
 - **Example**:
+
 ```javascript
 // netlify/functions/hello.js
 exports.handler = async (event, context) => {
   const { name = 'World' } = event.queryStringParameters || {};
-  
+
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify({
       message: `Hello, ${name}!`,
-      timestamp: new Date().toISOString()
-    })
+      timestamp: new Date().toISOString(),
+    }),
   };
 };
 
@@ -382,43 +407,45 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
+      body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
-  
+
   const data = JSON.parse(event.body);
-  
+
   // Process form data
   console.log('Form submission:', data);
-  
+
   // Send email, save to database, etc.
-  
+
   return {
     statusCode: 200,
-    body: JSON.stringify({ success: true, message: 'Form submitted successfully' })
+    body: JSON.stringify({ success: true, message: 'Form submitted successfully' }),
   };
 };
 
 // Usage from frontend
 fetch('/.netlify/functions/hello?name=Alice')
-  .then(response => response.json())
-  .then(data => console.log(data));
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 ```
 
 ### Form Handling
+
 - **Purpose**: Handle form submissions without backend infrastructure
 - **Usage**: Collect contact forms, newsletter signups, and user feedback
 - **Example**:
+
 ```html
 <!-- HTML form with Netlify handling -->
 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="contact" />
-  
+
   <!-- Honeypot field for spam protection -->
   <p hidden>
     <label>Don't fill this out: <input name="bot-field" /></label>
   </p>
-  
+
   <p>
     <label>Name: <input type="text" name="name" required /></label>
   </p>
@@ -434,56 +461,34 @@ fetch('/.netlify/functions/hello?name=Alice')
 </form>
 
 <!-- React form component -->
-import React, { useState } from 'react';
-
-function ContactForm() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'contact',
-          ...formData
-        }).toString()
-      });
-      
-      alert('Thank you for your message!');
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      alert('Error submitting form. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-  
-  return (
-    <form onSubmit={handleSubmit} data-netlify="true" name="contact">
-      <input type="hidden" name="form-name" value="contact" />
-      {/* Form fields */}
-    </form>
-  );
-}
+import React, { useState } from 'react'; function ContactForm() { const [formData, setFormData] =
+useState({ name: '', email: '', message: '' }); const [isSubmitting, setIsSubmitting] =
+useState(false); const handleSubmit = async (e) => { e.preventDefault(); setIsSubmitting(true); try
+{ await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded'
+}, body: new URLSearchParams({ 'form-name': 'contact', ...formData }).toString() }); alert('Thank
+you for your message!'); setFormData({ name: '', email: '', message: '' }); } catch (error) {
+alert('Error submitting form. Please try again.'); } finally { setIsSubmitting(false); } }; return (
+<form onSubmit="{handleSubmit}" data-netlify="true" name="contact">
+  <input type="hidden" name="form-name" value="contact" />
+  {/* Form fields */}
+</form>
+); }
 ```
 
 ### Edge Functions
+
 - **Purpose**: Run code at the edge for personalization and performance
 - **Usage**: Geographic personalization, A/B testing, authentication
 - **Example**:
+
 ```javascript
 // netlify/edge-functions/geolocation.js
 export default async (request, context) => {
   const country = context.geo?.country?.code || 'US';
   const city = context.geo?.city || 'Unknown';
-  
+
   const url = new URL(request.url);
-  
+
   // Redirect based on location
   if (url.pathname === '/') {
     if (country === 'CA') {
@@ -493,28 +498,28 @@ export default async (request, context) => {
       return Response.redirect(`${url.origin}/uk`, 302);
     }
   }
-  
+
   // Add location headers
   const response = await context.next();
   response.headers.set('X-Country', country);
   response.headers.set('X-City', city);
-  
+
   return response;
 };
 
 // netlify/edge-functions/auth.js
 export default async (request, context) => {
   const url = new URL(request.url);
-  
+
   // Check authentication for protected routes
   if (url.pathname.startsWith('/dashboard')) {
-    const token = request.headers.get('Authorization') || 
+    const token = request.headers.get('Authorization') ||
                   context.cookies.get('auth-token');
-    
+
     if (!token) {
       return Response.redirect(`${url.origin}/login`, 302);
     }
-    
+
     // Validate token
     try {
       await validateToken(token);
@@ -522,7 +527,7 @@ export default async (request, context) => {
       return Response.redirect(`${url.origin}/login`, 302);
     }
   }
-  
+
   return context.next();
 };
 
@@ -578,6 +583,7 @@ netlify addons:list                  # List available add-ons
 ## Workflow Integration
 
 ### Development Workflow
+
 1. **Local Development**: Use `netlify dev` for local testing with functions and redirects
 2. **Feature Development**: Create feature branches for deploy previews
 3. **Testing**: Automatic deploy previews for every pull request
@@ -585,6 +591,7 @@ netlify addons:list                  # List available add-ons
 5. **Monitoring**: Use analytics and function logs for performance monitoring
 
 ### CI/CD Integration with GitHub Actions
+
 ```yaml
 # .github/workflows/netlify.yml
 name: Netlify Deploy
@@ -599,36 +606,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - run: npm ci
-      
+
       - name: Run tests
         run: npm test
-      
+
       - name: Build project
         run: npm run build
         env:
           REACT_APP_API_URL: ${{ secrets.API_URL }}
-      
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
         with:
           publish-dir: './dist'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
+          deploy-message: 'Deploy from GitHub Actions'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 ```
 
 ### Package.json Scripts Integration
+
 ```json
 {
   "scripts": {
@@ -653,6 +661,7 @@ jobs:
 ## Best Practices
 
 ### ✅ **Deployment Best Practices**
+
 - **Use branch deploys** - Set up automatic deploy previews for all branches
 - **Configure build settings** - Optimize build commands and publish directories
 - **Set up custom domains** - Use custom domains with automatic HTTPS
@@ -661,6 +670,7 @@ jobs:
 - **Monitor build performance** - Optimize build times and bundle sizes
 
 ### ✅ **Performance Optimization**
+
 - **Enable asset optimization** - Use Netlify's built-in CSS and JS minification
 - **Configure caching headers** - Set appropriate cache headers for static assets
 - **Use CDN effectively** - Leverage Netlify's global CDN for fast content delivery
@@ -669,6 +679,7 @@ jobs:
 - **Monitor Core Web Vitals** - Track performance metrics and optimize accordingly
 
 ### ✅ **Security Best Practices**
+
 - **Set security headers** - Configure CSP, HSTS, and other security headers
 - **Use HTTPS everywhere** - Netlify provides automatic HTTPS for all sites
 - **Implement proper authentication** - Use Netlify Identity or third-party auth
@@ -677,6 +688,7 @@ jobs:
 - **Use environment variables** - Never commit secrets to repository
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't commit build artifacts** - Add build directories to .gitignore
 - **Avoid large file uploads** - Use external storage for large media files
 - **Don't hardcode URLs** - Use environment variables for different environments
@@ -687,6 +699,7 @@ jobs:
 ## Advanced Netlify Usage
 
 ### Split Testing and Feature Flags
+
 ```toml
 # netlify.toml - A/B testing configuration
 [build]
@@ -713,14 +726,14 @@ jobs:
 export default async (request, context) => {
   const url = new URL(request.url);
   const userId = context.cookies.get('user-id');
-  
+
   // Feature flag logic
   const showNewFeature = shouldShowFeature(userId, 'new-dashboard');
-  
+
   if (showNewFeature && url.pathname === '/dashboard') {
     return Response.redirect(`${url.origin}/dashboard-v2`, 302);
   }
-  
+
   return context.next();
 };
 
@@ -732,6 +745,7 @@ function shouldShowFeature(userId, featureName) {
 ```
 
 ### Large Media and Asset Optimization
+
 ```toml
 # netlify.toml - Large Media configuration
 [build]
@@ -754,53 +768,54 @@ function shouldShowFeature(userId, featureName) {
 ```
 
 ### Advanced Serverless Functions
+
 ```javascript
 // netlify/functions/api-proxy.js
 const https = require('https');
 
 exports.handler = async (event, context) => {
   const { httpMethod, path, headers, body } = event;
-  
+
   // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   };
-  
+
   if (httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: ''
+      body: '',
     };
   }
-  
+
   try {
     // Proxy to external API
     const apiResponse = await proxyRequest({
       method: httpMethod,
       url: `https://api.external-service.com${path}`,
       headers: {
-        'Authorization': `Bearer ${process.env.API_TOKEN}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
+        'Content-Type': 'application/json',
       },
-      body: body
+      body: body,
     });
-    
+
     return {
       statusCode: apiResponse.statusCode,
       headers: {
         ...corsHeaders,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: apiResponse.body
+      body: apiResponse.body,
     };
   } catch (error) {
     return {
       statusCode: 500,
       headers: corsHeaders,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -809,15 +824,15 @@ async function proxyRequest({ method, url, headers, body }) {
   return new Promise((resolve, reject) => {
     const req = https.request(url, { method, headers }, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      res.on('data', (chunk) => (data += chunk));
       res.on('end', () => {
         resolve({
           statusCode: res.statusCode,
-          body: data
+          body: data,
         });
       });
     });
-    
+
     req.on('error', reject);
     if (body) req.write(body);
     req.end();
@@ -828,6 +843,7 @@ async function proxyRequest({ method, url, headers, body }) {
 ## Integration with Other Tools
 
 ### React/Next.js Integration
+
 ```javascript
 // next.config.js for Next.js on Netlify
 /** @type {import('next').NextConfig} */
@@ -836,83 +852,85 @@ const nextConfig = {
   swcMinify: true,
   trailingSlash: true,
   output: 'export',
-  
+
   // Netlify specific configuration
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: '/.netlify/functions/:path*'
-      }
+        destination: '/.netlify/functions/:path*',
+      },
     ];
   },
-  
+
   // Environment variables
   env: {
     NETLIFY_SITE_ID: process.env.NETLIFY_SITE_ID,
-    NETLIFY_ENV: process.env.CONTEXT || 'development'
-  }
+    NETLIFY_ENV: process.env.CONTEXT || 'development',
+  },
 };
 
 module.exports = nextConfig;
 ```
 
 ### Vue.js/Nuxt.js Integration
+
 ```javascript
 // nuxt.config.ts for Nuxt.js on Netlify
 export default defineNuxtConfig({
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify',
   },
-  
+
   // Generate static site
   ssr: false,
   target: 'static',
-  
+
   // Netlify specific configuration
   generate: {
-    fallback: true
+    fallback: true,
   },
-  
+
   // Environment variables
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE_URL || 'http://localhost:3000'
-    }
-  }
+      apiBase: process.env.API_BASE_URL || 'http://localhost:3000',
+    },
+  },
 });
 ```
 
 ### WordPress Headless Integration
+
 ```javascript
 // netlify/functions/wordpress-webhook.js
 exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
-  
+
   const { headers } = event;
   const signature = headers['x-wp-signature'];
-  
+
   // Verify webhook signature
   if (!verifySignature(event.body, signature)) {
     return { statusCode: 401, body: 'Unauthorized' };
   }
-  
+
   // Trigger build on content change
   try {
     await fetch(`https://api.netlify.com/build_hooks/${process.env.BUILD_HOOK_ID}`, {
-      method: 'POST'
+      method: 'POST',
     });
-    
+
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Build triggered successfully' })
+      body: JSON.stringify({ message: 'Build triggered successfully' }),
     };
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to trigger build' })
+      body: JSON.stringify({ error: 'Failed to trigger build' }),
     };
   }
 };
@@ -923,9 +941,11 @@ exports.handler = async (event, context) => {
 ### Common Issues
 
 #### Build Failures
+
 **Problem**: Build process fails during deployment
 **Symptoms**: Build errors in Netlify deploy logs
-**Solution**: 
+**Solution**:
+
 ```bash
 # Debug build locally
 netlify build --dry
@@ -945,9 +965,11 @@ netlify build --clear-cache
 ```
 
 #### Function Errors
+
 **Problem**: Serverless functions returning errors or not executing
 **Symptoms**: 500 errors when calling function endpoints
-**Solution**: 
+**Solution**:
+
 ```javascript
 // Add proper error handling
 exports.handler = async (event, context) => {
@@ -961,9 +983,9 @@ exports.handler = async (event, context) => {
     console.error('Function error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Internal server error',
-        message: error.message 
+        message: error.message
       })
     };
   }
@@ -975,9 +997,11 @@ netlify functions:list
 ```
 
 #### Redirect Issues
+
 **Problem**: Redirects not working as expected
 **Symptoms**: 404 errors or incorrect redirects
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check _redirects file syntax and order
 # More specific rules should come first
@@ -996,6 +1020,7 @@ netlify dev
 ```
 
 ### Debug Mode
+
 ```bash
 # Verbose deployment
 netlify deploy --debug
@@ -1011,11 +1036,12 @@ netlify build --debug
 ```
 
 ### Performance Optimization
+
 ```toml
 # Optimize build performance
 [build]
   command = "npm ci && npm run build"  # Use npm ci for faster installs
-  
+
 [build.environment]
   NPM_FLAGS = "--production"
   NODE_ENV = "production"
@@ -1023,11 +1049,11 @@ netlify build --debug
 # Asset optimization
 [build.processing]
   skip_processing = false
-  
+
 [build.processing.css]
   bundle = true
   minify = true
-  
+
 [build.processing.js]
   bundle = true
   minify = true
@@ -1036,7 +1062,8 @@ netlify build --debug
 ## Security Considerations
 
 ### Security Best Practices
-- **Implement security headers** - Configure CSP, HSTS, and security headers in _headers file
+
+- **Implement security headers** - Configure CSP, HSTS, and security headers in \_headers file
 - **Use environment variables** - Store sensitive configuration in Netlify environment variables
 - **Validate function inputs** - Always validate and sanitize inputs in serverless functions
 - **Implement rate limiting** - Use Edge Functions or external services for rate limiting
@@ -1044,6 +1071,7 @@ netlify build --debug
 - **Use HTTPS only** - Netlify provides automatic HTTPS; ensure no mixed content
 
 ### Secure Function Implementation
+
 ```javascript
 // netlify/functions/secure-api.js
 const crypto = require('crypto');
@@ -1053,63 +1081,63 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
+      body: JSON.stringify({ error: 'Method not allowed' }),
     };
   }
-  
+
   // Validate content type
   if (!event.headers['content-type']?.includes('application/json')) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid content type' })
+      body: JSON.stringify({ error: 'Invalid content type' }),
     };
   }
-  
+
   // Rate limiting (simple implementation)
   const clientIP = event.headers['x-forwarded-for'] || event.headers['client-ip'];
   if (await isRateLimited(clientIP)) {
     return {
       statusCode: 429,
-      body: JSON.stringify({ error: 'Rate limit exceeded' })
+      body: JSON.stringify({ error: 'Rate limit exceeded' }),
     };
   }
-  
+
   // Validate request signature
   const signature = event.headers['x-signature'];
   if (!validateSignature(event.body, signature)) {
     return {
       statusCode: 401,
-      body: JSON.stringify({ error: 'Invalid signature' })
+      body: JSON.stringify({ error: 'Invalid signature' }),
     };
   }
-  
+
   try {
     const data = JSON.parse(event.body);
-    
+
     // Validate and sanitize input
     if (!isValidInput(data)) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Invalid input data' })
+        body: JSON.stringify({ error: 'Invalid input data' }),
       };
     }
-    
+
     // Process request
     const result = await processSecureRequest(data);
-    
+
     return {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-store'
+        'Cache-Control': 'no-store',
       },
-      body: JSON.stringify(result)
+      body: JSON.stringify(result),
     };
   } catch (error) {
     console.error('Secure API error:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Internal server error' })
+      body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
 };
@@ -1121,7 +1149,7 @@ function validateSignature(body, signature) {
     .digest('hex');
   return crypto.timingSafeEqual(
     Buffer.from(signature, 'hex'),
-    Buffer.from(expectedSignature, 'hex')
+    Buffer.from(expectedSignature, 'hex'),
   );
 }
 ```
@@ -1140,6 +1168,7 @@ When helping with Netlify:
 8. **Suggest integration patterns** with popular frameworks and external services
 
 ### Code Generation Rules
+
 - Generate netlify.toml files with environment-specific configurations
 - Include proper redirect rules for SPA routing and API proxying
 - Provide serverless functions with error handling and CORS support
@@ -1150,7 +1179,9 @@ When helping with Netlify:
 - Include CI/CD integration examples with GitHub Actions or other platforms
 
 ## Installation & Setup
+
 ### Package Manager Installation
+
 ```bash
 # npm/yarn installation
 npm install -g [tool-name]
@@ -1168,6 +1199,7 @@ brew install [tool-name]
 ```
 
 ### Project Integration
+
 ```bash
 # Initialize in project
 [tool] init
@@ -1177,13 +1209,16 @@ brew install [tool-name]
 ```
 
 ## Configuration
+
 ### Configuration File
+
 ```[config-format]
 # [config-file-name] (e.g., .toolrc, tool.config.js, tool.yaml)
 [configuration-example]
 ```
 
 ### Environment Variables
+
 ```bash
 # Environment-specific settings
 [TOOL_ENV_VAR]=[value]
@@ -1191,6 +1226,7 @@ brew install [tool-name]
 ```
 
 ### CLI Configuration
+
 ```bash
 # Global configuration
 [tool] config set [option] [value]
@@ -1200,31 +1236,39 @@ brew install [tool-name]
 ```
 
 ## Core Features
+
 ### [Feature 1]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
-- **Example**: 
+- **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 2]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 3]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ## Common Commands
+
 ```bash
 # Essential daily commands
 [tool] [basic-command]              # Description
@@ -1239,7 +1283,9 @@ brew install [tool-name]
 ```
 
 ## Workflow Integration
+
 ### Development Workflow
+
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]
@@ -1247,6 +1293,7 @@ brew install [tool-name]
 5. **CI/CD**: [Continuous integration usage]
 
 ### Automation Scripts
+
 ```bash
 # Package.json scripts (if applicable)
 {
@@ -1258,6 +1305,7 @@ brew install [tool-name]
 ```
 
 ### Git Hooks Integration
+
 ```bash
 # Pre-commit hook example
 #!/bin/sh
@@ -1265,75 +1313,98 @@ brew install [tool-name]
 ```
 
 ## Best Practices
+
 ### Configuration Best Practices
+
 - [Best practice 1 with explanation]
 - [Best practice 2 with explanation]
 - [Best practice 3 with explanation]
 
 ### Usage Patterns
+
 - [Pattern 1: When and how to use]
 - [Pattern 2: When and how to use]
 - [Pattern 3: When and how to use]
 
 ### Performance Optimization
+
 - [Optimization tip 1]
 - [Optimization tip 2]
 - [Optimization tip 3]
 
 ## Common Use Cases
+
 ### [Use Case 1]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 2]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 3]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ## Integration with Other Tools
+
 ### [Related Tool 1]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ### [Related Tool 2]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ## Troubleshooting
+
 ### Common Issues
+
 #### [Issue 1]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 2]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 3]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 ### Debug Mode
+
 ```bash
 # Enable verbose/debug output
 [tool] --verbose [command]
@@ -1345,58 +1416,71 @@ brew install [tool-name]
 ```
 
 ### Performance Issues
+
 - [Performance issue 1 and solution]
 - [Performance issue 2 and solution]
 - [Performance issue 3 and solution]
 
 ## Security Considerations
+
 ### Security Best Practices
+
 - [Security practice 1]
 - [Security practice 2]
 - [Security practice 3]
 
 ### Sensitive Data Handling
+
 - [How the tool handles secrets]
 - [Configuration for secure usage]
 - [Best practices for credentials]
 
 ### Network Security
+
 - [Network-related security considerations]
 - [Proxy and firewall configurations]
 - [Certificate and SSL handling]
 
 ## Advanced Configuration
+
 ### Custom Plugins/Extensions
+
 ```[config-format]
 # Plugin configuration
 [plugin-config-example]
 ```
 
 ### Scripting and Automation
+
 ```bash
 # Advanced scripting examples
 [automation-script-example]
 ```
 
 ### Performance Tuning
+
 ```[config-format]
 # Performance optimization settings
 [performance-config-example]
 ```
 
 ## Version Management
+
 ### Version Compatibility
+
 - **Tool Version**: [Version requirements]
 - **Node.js**: [If applicable]
 - **Python**: [If applicable]
 - **OS Support**: [Supported operating systems]
 
 ### Migration Guides
+
 - **From [Old Version]**: [Migration steps]
 - **Breaking Changes**: [Important changes to note]
 - **Deprecation Notices**: [Features being deprecated]
 
 ## Useful Resources
+
 - **Official Documentation**: [URL]
 - **GitHub Repository**: [URL]
 - **Community Resources**: [URLs]
@@ -1405,36 +1489,44 @@ brew install [tool-name]
 - **Stack Overflow Tag**: [Tag name]
 
 ## Tool-Specific Guidelines
+
 ### Code Organization
+
 - [How the tool affects code structure]
 - [File organization recommendations]
 - [Naming conventions]
 
 ### Maintenance
+
 - [Regular maintenance tasks]
 - [Update procedures]
 - [Cleanup and optimization]
 
 ## Examples and Templates
+
 ### Basic Example
+
 ```[language]
 // Example usage in context
 [practical-example]
 ```
 
 ### Advanced Example
+
 ```[language]
 // Advanced usage pattern
 [advanced-example]
 ```
 
 ### Template Files
+
 ```[format]
 # Template configuration
 [template-example]
 ```
 
 ## AI Assistant Guidelines
+
 When helping with [Tool Name]:
 
 1. **Always suggest the most current stable version**
@@ -1447,6 +1539,7 @@ When helping with [Tool Name]:
 8. **Reference official documentation**
 
 ### Code Generation Rules
+
 - Generate configurations that follow tool best practices
 - Include comments explaining important settings
 - Provide multiple options when appropriate

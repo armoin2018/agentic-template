@@ -1,23 +1,34 @@
 ---
-title: "Microsoft Azure Enterprise Cloud Platform Instructions"
-description: "Comprehensive guide for Microsoft Azure development, deployment, and management including App Service, Functions, AKS, and enterprise integration"
-category: "Cloud Platforms"
-author: "AI Assistant"
-tags: ["azure", "microsoft", "app-service", "azure-functions", "aks", "kubernetes", "devops", "enterprise"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Microsoft Azure Enterprise Cloud Platform Instructions'
+description: 'Comprehensive guide for Microsoft Azure development, deployment, and management including App Service, Functions, AKS, and enterprise integration'
+category: 'Cloud Platforms'
+
+tags:
+  [
+    'azure',
+    'microsoft',
+    'app-service',
+    'azure-functions',
+    'aks',
+    'kubernetes',
+    'devops',
+    'enterprise',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/azure-pipelines.yml"
-  - "**/azuredeploy.json"
-  - "**/bicep/**"
-  - "**/ARM/**"
-  - "**/docker-compose.yml"
-  - "**/.azure/**"
+  - '**/azure-pipelines.yml'
+  - '**/azuredeploy.json'
+  - '**/bicep/**'
+  - '**/ARM/**'
+  - '**/docker-compose.yml'
+  - '**/.azure/**'
 ---
 
 # Microsoft Azure Enterprise Cloud Platform Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Microsoft Azure
 - **Version**: Azure CLI 2.52+ (Latest stable with Bicep support)
 - **Category**: Cloud Platforms - Enterprise Integration
@@ -27,6 +38,7 @@ applyTo:
 ## When to Use Azure
 
 ### ✅ **Use Azure When**
+
 - Building enterprise applications requiring Microsoft ecosystem integration
 - Working with .NET, C#, and Microsoft development stack
 - Need hybrid cloud capabilities with on-premises Active Directory
@@ -37,6 +49,7 @@ applyTo:
 - Working in enterprises with existing Microsoft licensing agreements
 
 ### ❌ **Avoid Azure When**
+
 - Building simple static websites or basic web applications
 - Working primarily with open-source technologies without Microsoft integration
 - Team lacks experience with Microsoft technologies and Azure ecosystem
@@ -48,26 +61,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Azure Recommendation | Configuration Priority |
-|--------------|-------------------|----------------------|
-| Enterprise .NET App | ✅ **Essential** - Native integration | High - App Service + SQL |
-| Microservices Architecture | ✅ **Essential** - AKS + Service Fabric | High - Container orchestration |
-| Hybrid Cloud Application | ✅ **Essential** - Arc + hybrid services | High - Hybrid connectivity |
-| AI/ML Application | ✅ **Recommended** - Cognitive Services | Medium - AI platform setup |
-| Static Website | 🔄 **Consider** - May be overkill | Low - Static Web Apps |
-| Legacy Modernization | ✅ **Essential** - Migration tools | High - Assessment + migration |
+
+| Project Type               | Azure Recommendation                     | Configuration Priority         |
+| -------------------------- | ---------------------------------------- | ------------------------------ |
+| Enterprise .NET App        | ✅ **Essential** - Native integration    | High - App Service + SQL       |
+| Microservices Architecture | ✅ **Essential** - AKS + Service Fabric  | High - Container orchestration |
+| Hybrid Cloud Application   | ✅ **Essential** - Arc + hybrid services | High - Hybrid connectivity     |
+| AI/ML Application          | ✅ **Recommended** - Cognitive Services  | Medium - AI platform setup     |
+| Static Website             | 🔄 **Consider** - May be overkill        | Low - Static Web Apps          |
+| Legacy Modernization       | ✅ **Essential** - Migration tools       | High - Assessment + migration  |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 2 hours (App Service) | 1 day (AKS cluster) | 2 weeks (enterprise setup) |
+
+| Factor            | Low Complexity             | Medium Complexity      | High Complexity             |
+| ----------------- | -------------------------- | ---------------------- | --------------------------- |
+| **Setup Time**    | 2 hours (App Service)      | 1 day (AKS cluster)    | 2 weeks (enterprise setup)  |
 | **Services Used** | App Service + SQL Database | Multiple PaaS services | Full enterprise integration |
-| **Architecture** | Single service | Multi-tier application | Enterprise hybrid cloud |
-| **Integration** | Basic Azure services | Office 365 integration | Full Microsoft ecosystem |
+| **Architecture**  | Single service             | Multi-tier application | Enterprise hybrid cloud     |
+| **Integration**   | Basic Azure services       | Office 365 integration | Full Microsoft ecosystem    |
 
 ## Installation & Setup
 
 ### Azure CLI Installation
+
 ```bash
 # macOS installation
 brew install azure-cli
@@ -90,6 +106,7 @@ az account set --subscription "your-subscription-id"
 ```
 
 ### PowerShell and Development Tools
+
 ```powershell
 # Install Azure PowerShell
 Install-Module -Name Az -Repository PSGallery -Force
@@ -107,6 +124,7 @@ azd version
 ```
 
 ### Project Setup and Configuration
+
 ```bash
 # Create resource group
 az group create --name myResourceGroup --location eastus
@@ -132,6 +150,7 @@ az group list
 ## Configuration
 
 ### Azure App Service Configuration
+
 ```json
 // azuredeploy.json - ARM Template for App Service
 {
@@ -182,9 +201,7 @@ az group list
       "apiVersion": "2021-02-01",
       "name": "[parameters('appName')]",
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
-      ],
+      "dependsOn": ["[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"],
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
         "httpsOnly": true,
@@ -226,6 +243,7 @@ az group list
 ```
 
 ### Bicep Infrastructure Configuration
+
 ```bicep
 // main.bicep - Modern Azure infrastructure
 @description('Name of the application')
@@ -394,17 +412,18 @@ output storageAccountName string = storageAccount.name
 ```
 
 ### Azure DevOps Pipeline Configuration
+
 ```yaml
 # azure-pipelines.yml - Complete CI/CD pipeline
 trigger:
   branches:
     include:
-    - main
-    - develop
+      - main
+      - develop
   paths:
     exclude:
-    - README.md
-    - docs/*
+      - README.md
+      - docs/*
 
 variables:
   azureSubscription: 'my-azure-subscription'
@@ -414,132 +433,133 @@ variables:
   buildConfiguration: 'Release'
 
 stages:
-- stage: Build
-  displayName: 'Build and Test'
-  jobs:
-  - job: Build
-    displayName: 'Build job'
-    pool:
-      vmImage: $(vmImageName)
-    
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET 6 SDK'
-      inputs:
-        packageType: 'sdk'
-        version: '6.x'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore packages'
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Build application'
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests'
-      inputs:
-        command: 'test'
-        projects: '**/*Tests/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage" --logger trx'
-        publishTestResults: true
-    
-    - task: PublishCodeCoverageResults@1
-      displayName: 'Publish code coverage'
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Publish application'
-      inputs:
-        command: 'publish'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-build'
-        zipAfterPublish: true
-    
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish artifacts'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+  - stage: Build
+    displayName: 'Build and Test'
+    jobs:
+      - job: Build
+        displayName: 'Build job'
+        pool:
+          vmImage: $(vmImageName)
 
-- stage: Deploy_Staging
-  displayName: 'Deploy to Staging'
-  dependsOn: Build
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-  jobs:
-  - deployment: Deploy
-    displayName: 'Deploy to staging'
-    pool:
-      vmImage: $(vmImageName)
-    environment: 'staging'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureWebApp@1
-            displayName: 'Deploy to Azure App Service'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET 6 SDK'
             inputs:
-              azureSubscription: $(azureSubscription)
-              appType: 'webApp'
-              appName: '$(webAppName)-staging'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-              deploymentMethod: 'auto'
+              packageType: 'sdk'
+              version: '6.x'
 
-- stage: Deploy_Production
-  displayName: 'Deploy to Production'
-  dependsOn: Build
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-  jobs:
-  - deployment: Deploy
-    displayName: 'Deploy to production'
-    pool:
-      vmImage: $(vmImageName)
-    environment: 'production'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureResourceManagerTemplateDeployment@3
-            displayName: 'Deploy ARM template'
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore packages'
             inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: $(azureSubscription)
-              subscriptionId: $(subscriptionId)
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: $(resourceGroupName)
-              location: 'East US'
-              templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
-              overrideParameters: '-appName $(webAppName) -sku P1V2'
-              deploymentMode: 'Incremental'
-          
-          - task: AzureWebApp@1
-            displayName: 'Deploy to Azure App Service'
+              command: 'restore'
+              projects: '**/*.csproj'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Build application'
             inputs:
-              azureSubscription: $(azureSubscription)
-              appType: 'webApp'
-              appName: $(webAppName)
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-              deploymentMethod: 'auto'
-              
-          - task: AzureAppServiceManage@0
-            displayName: 'Restart App Service'
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-restore'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run unit tests'
             inputs:
-              azureSubscription: $(azureSubscription)
-              Action: 'Restart Azure App Service'
-              WebAppName: $(webAppName)
+              command: 'test'
+              projects: '**/*Tests/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage" --logger trx'
+              publishTestResults: true
+
+          - task: PublishCodeCoverageResults@1
+            displayName: 'Publish code coverage'
+            inputs:
+              codeCoverageTool: 'Cobertura'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish application'
+            inputs:
+              command: 'publish'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-build'
+              zipAfterPublish: true
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish artifacts'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+
+  - stage: Deploy_Staging
+    displayName: 'Deploy to Staging'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    jobs:
+      - deployment: Deploy
+        displayName: 'Deploy to staging'
+        pool:
+          vmImage: $(vmImageName)
+        environment: 'staging'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  displayName: 'Deploy to Azure App Service'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    appType: 'webApp'
+                    appName: '$(webAppName)-staging'
+                    package: '$(Pipeline.Workspace)/drop/*.zip'
+                    deploymentMethod: 'auto'
+
+  - stage: Deploy_Production
+    displayName: 'Deploy to Production'
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: Deploy
+        displayName: 'Deploy to production'
+        pool:
+          vmImage: $(vmImageName)
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureResourceManagerTemplateDeployment@3
+                  displayName: 'Deploy ARM template'
+                  inputs:
+                    deploymentScope: 'Resource Group'
+                    azureResourceManagerConnection: $(azureSubscription)
+                    subscriptionId: $(subscriptionId)
+                    action: 'Create Or Update Resource Group'
+                    resourceGroupName: $(resourceGroupName)
+                    location: 'East US'
+                    templateLocation: 'Linked artifact'
+                    csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
+                    overrideParameters: '-appName $(webAppName) -sku P1V2'
+                    deploymentMode: 'Incremental'
+
+                - task: AzureWebApp@1
+                  displayName: 'Deploy to Azure App Service'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    appType: 'webApp'
+                    appName: $(webAppName)
+                    package: '$(Pipeline.Workspace)/drop/*.zip'
+                    deploymentMethod: 'auto'
+
+                - task: AzureAppServiceManage@0
+                  displayName: 'Restart App Service'
+                  inputs:
+                    azureSubscription: $(azureSubscription)
+                    Action: 'Restart Azure App Service'
+                    WebAppName: $(webAppName)
 ```
 
 ### Azure Kubernetes Service (AKS) Configuration
+
 ```yaml
 # aks-deployment.yaml - AKS application deployment
 apiVersion: apps/v1
@@ -563,40 +583,40 @@ spec:
     spec:
       serviceAccountName: my-app-service-account
       containers:
-      - name: my-app
-        image: myregistry.azurecr.io/my-app:latest
-        ports:
-        - containerPort: 80
-          name: http
-        env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
-        - name: ConnectionStrings__DefaultConnection
-          valueFrom:
-            secretKeyRef:
-              name: sql-connection
-              key: connectionString
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health/ready
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: my-app
+          image: myregistry.azurecr.io/my-app:latest
+          ports:
+            - containerPort: 80
+              name: http
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: 'Production'
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: sql-connection
+                  key: connectionString
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '250m'
+            limits:
+              memory: '512Mi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
       imagePullSecrets:
-      - name: acr-secret
+        - name: acr-secret
 
 ---
 apiVersion: v1
@@ -610,10 +630,10 @@ spec:
   selector:
     app: my-app
   ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    name: http
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -622,32 +642,34 @@ metadata:
   name: my-app-ingress
   annotations:
     kubernetes.io/ingress.class: azure/application-gateway
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    appgw.ingress.kubernetes.io/ssl-redirect: 'true'
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
 spec:
   tls:
-  - hosts:
-    - myapp.example.com
-    secretName: my-app-tls
+    - hosts:
+        - myapp.example.com
+      secretName: my-app-tls
   rules:
-  - host: myapp.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-app-service
-            port:
-              number: 80
+    - host: myapp.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-app-service
+                port:
+                  number: 80
 ```
 
 ## Core Features
 
 ### Azure App Service
+
 - **Purpose**: Fully managed platform for building, deploying, and scaling web apps
 - **Usage**: Host web applications, APIs, and mobile backends
 - **Example**:
+
 ```csharp
 // Program.cs - ASP.NET Core application
 using Microsoft.ApplicationInsights;
@@ -710,9 +732,11 @@ az webapp deployment source config --name myUniqueAppName --resource-group myRes
 ```
 
 ### Azure Functions (Serverless)
+
 - **Purpose**: Event-driven serverless compute platform
 - **Usage**: Process events, integrate systems, build APIs
 - **Example**:
+
 ```csharp
 // HttpTriggerFunction.cs
 using Microsoft.Azure.Functions.Worker;
@@ -771,7 +795,7 @@ public class HttpTriggerFunction
     {
         // Simulate order processing
         await Task.Delay(100);
-        
+
         return new ProcessedOrder
         {
             OrderId = Guid.NewGuid().ToString(),
@@ -811,9 +835,11 @@ func azure functionapp publish myFunctionApp
 ```
 
 ### Azure Container Instances (ACI)
+
 - **Purpose**: Run containers without managing servers
 - **Usage**: Batch processing, microservices, CI/CD agents
 - **Example**:
+
 ```yaml
 # container-group.yaml
 apiVersion: 2021-03-01
@@ -821,33 +847,33 @@ location: eastus
 name: my-container-group
 properties:
   containers:
-  - name: my-app
-    properties:
-      image: myregistry.azurecr.io/my-app:latest
-      resources:
-        requests:
-          cpu: 1
-          memoryInGb: 1.5
-      ports:
-      - port: 80
-        protocol: TCP
-      environmentVariables:
-      - name: ASPNETCORE_ENVIRONMENT
-        value: Production
-      - name: ConnectionString
-        secureValue: "Server=tcp:myserver.database.windows.net,1433;Database=mydb;"
+    - name: my-app
+      properties:
+        image: myregistry.azurecr.io/my-app:latest
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1.5
+        ports:
+          - port: 80
+            protocol: TCP
+        environmentVariables:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+          - name: ConnectionString
+            secureValue: 'Server=tcp:myserver.database.windows.net,1433;Database=mydb;'
   osType: Linux
   restartPolicy: Always
   ipAddress:
     type: Public
     ports:
-    - protocol: TCP
-      port: 80
+      - protocol: TCP
+        port: 80
     dnsNameLabel: my-unique-app
   imageRegistryCredentials:
-  - server: myregistry.azurecr.io
-    username: myregistry
-    password: "registry-password"
+    - server: myregistry.azurecr.io
+      username: myregistry
+      password: 'registry-password'
 tags:
   environment: production
   team: development
@@ -859,9 +885,11 @@ az container create --resource-group myResourceGroup --file container-group.yaml
 ```
 
 ### Azure Service Bus
+
 - **Purpose**: Enterprise messaging service for reliable communication
 - **Usage**: Decouple applications, implement messaging patterns
 - **Example**:
+
 ```csharp
 // ServiceBusService.cs
 using Azure.Messaging.ServiceBus;
@@ -888,7 +916,7 @@ public class ServiceBusService
         try
         {
             ServiceBusSender sender = _client.CreateSender(_queueName);
-            
+
             var messageBody = JsonSerializer.Serialize(message);
             var serviceBusMessage = new ServiceBusMessage(messageBody)
             {
@@ -921,7 +949,7 @@ public class ServiceBusService
             {
                 string body = args.Message.Body.ToString();
                 _logger.LogInformation($"Processing message: {args.Message.MessageId}");
-                
+
                 await messageHandler(body);
                 await args.CompleteMessageAsync(args.Message);
             }
@@ -1005,6 +1033,7 @@ az monitor diagnostic-settings create --resource myResourceId --name myDiagnosti
 ## Workflow Integration
 
 ### Development Workflow
+
 1. **Local Development**: Use Azure CLI and local emulators for development
 2. **Source Control**: Integrate with Azure DevOps or GitHub
 3. **CI/CD Pipeline**: Use Azure DevOps Pipelines for automated deployment
@@ -1013,6 +1042,7 @@ az monitor diagnostic-settings create --resource myResourceId --name myDiagnosti
 6. **Security**: Implement Azure Active Directory and Key Vault
 
 ### Complete DevOps Pipeline
+
 ```yaml
 # azure-devops-complete.yml
 name: $(Date:yyyyMMdd)$(Rev:.r)
@@ -1020,9 +1050,9 @@ name: $(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   branches:
     include:
-    - main
-    - develop
-    - feature/*
+      - main
+      - develop
+      - feature/*
 
 variables:
   - group: 'production-variables'
@@ -1032,168 +1062,169 @@ variables:
     value: 'my-service-connection'
 
 stages:
-- stage: 'Build'
-  displayName: 'Build Application'
-  jobs:
-  - job: 'BuildJob'
-    displayName: 'Build and Test'
-    pool:
-      vmImage: 'ubuntu-latest'
-    
-    steps:
-    # Setup
-    - task: UseDotNet@2
-      displayName: 'Use .NET 6 SDK'
-      inputs:
-        packageType: 'sdk'
-        version: '6.x'
-    
-    # Restore and build
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore NuGet packages'
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'Build solution'
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-restore'
-    
-    # Security scanning
-    - task: CredScan@3
-      displayName: 'Run Credential Scanner'
-    
-    - task: SonarCloudPrepare@1
-      displayName: 'Prepare SonarCloud'
-      inputs:
-        SonarCloud: 'SonarCloud'
-        organization: 'my-org'
-        scannerMode: 'MSBuild'
-        projectKey: 'my-project'
-    
-    # Tests
-    - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests'
-      inputs:
-        command: 'test'
-        projects: '**/*Tests.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage" --logger trx'
-        publishTestResults: true
-    
-    - task: PublishCodeCoverageResults@1
-      displayName: 'Publish code coverage'
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
-    
-    # SonarCloud analysis
-    - task: SonarCloudAnalyze@1
-      displayName: 'Run SonarCloud analysis'
-    
-    - task: SonarCloudPublish@1
-      displayName: 'Publish SonarCloud results'
-    
-    # Publish artifacts
-    - task: DotNetCoreCLI@2
-      displayName: 'Publish application'
-      inputs:
-        command: 'publish'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-build'
-        zipAfterPublish: true
-    
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish build artifacts'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+  - stage: 'Build'
+    displayName: 'Build Application'
+    jobs:
+      - job: 'BuildJob'
+        displayName: 'Build and Test'
+        pool:
+          vmImage: 'ubuntu-latest'
 
-- stage: 'Deploy_Development'
-  displayName: 'Deploy to Development'
-  dependsOn: 'Build'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
-  jobs:
-  - deployment: 'DeployDev'
-    displayName: 'Deploy to Development Environment'
-    pool:
-      vmImage: 'ubuntu-latest'
-    environment: 'development'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureResourceManagerTemplateDeployment@3
-            displayName: 'Deploy infrastructure'
+        steps:
+          # Setup
+          - task: UseDotNet@2
+            displayName: 'Use .NET 6 SDK'
             inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: '$(azureSubscription)'
-              subscriptionId: '$(subscriptionId)'
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: '$(resourceGroupName)-dev'
-              location: '$(location)'
-              templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/infrastructure/main.bicep'
-              overrideParameters: '-environment dev -appName $(appName)'
-              deploymentMode: 'Incremental'
-          
-          - task: AzureWebApp@1
-            displayName: 'Deploy web application'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webApp'
-              appName: '$(appName)-dev'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
+              packageType: 'sdk'
+              version: '6.x'
 
-- stage: 'Deploy_Production'
-  displayName: 'Deploy to Production'
-  dependsOn: 'Build'
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-  jobs:
-  - deployment: 'DeployProd'
-    displayName: 'Deploy to Production Environment'
-    pool:
-      vmImage: 'ubuntu-latest'
-    environment: 'production'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: AzureResourceManagerTemplateDeployment@3
-            displayName: 'Deploy infrastructure'
+          # Restore and build
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore NuGet packages'
             inputs:
-              deploymentScope: 'Resource Group'
-              azureResourceManagerConnection: '$(azureSubscription)'
-              subscriptionId: '$(subscriptionId)'
-              action: 'Create Or Update Resource Group'
-              resourceGroupName: '$(resourceGroupName)'
-              location: '$(location)'
-              templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/infrastructure/main.bicep'
-              overrideParameters: '-environment prod -appName $(appName)'
-              deploymentMode: 'Incremental'
-          
-          - task: AzureWebApp@1
-            displayName: 'Deploy web application'
+              command: 'restore'
+              projects: '**/*.csproj'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Build solution'
             inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: 'webApp'
-              appName: '$(appName)'
-              package: '$(Pipeline.Workspace)/drop/*.zip'
-          
-          - task: AzureAppServiceManage@0
-            displayName: 'Restart App Service'
+              command: 'build'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-restore'
+
+          # Security scanning
+          - task: CredScan@3
+            displayName: 'Run Credential Scanner'
+
+          - task: SonarCloudPrepare@1
+            displayName: 'Prepare SonarCloud'
             inputs:
-              azureSubscription: '$(azureSubscription)'
-              Action: 'Restart Azure App Service'
-              WebAppName: '$(appName)'
+              SonarCloud: 'SonarCloud'
+              organization: 'my-org'
+              scannerMode: 'MSBuild'
+              projectKey: 'my-project'
+
+          # Tests
+          - task: DotNetCoreCLI@2
+            displayName: 'Run unit tests'
+            inputs:
+              command: 'test'
+              projects: '**/*Tests.csproj'
+              arguments: '--configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage" --logger trx'
+              publishTestResults: true
+
+          - task: PublishCodeCoverageResults@1
+            displayName: 'Publish code coverage'
+            inputs:
+              codeCoverageTool: 'Cobertura'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
+          # SonarCloud analysis
+          - task: SonarCloudAnalyze@1
+            displayName: 'Run SonarCloud analysis'
+
+          - task: SonarCloudPublish@1
+            displayName: 'Publish SonarCloud results'
+
+          # Publish artifacts
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish application'
+            inputs:
+              command: 'publish'
+              projects: '**/*.csproj'
+              arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-build'
+              zipAfterPublish: true
+
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish build artifacts'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+
+  - stage: 'Deploy_Development'
+    displayName: 'Deploy to Development'
+    dependsOn: 'Build'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+    jobs:
+      - deployment: 'DeployDev'
+        displayName: 'Deploy to Development Environment'
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: 'development'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureResourceManagerTemplateDeployment@3
+                  displayName: 'Deploy infrastructure'
+                  inputs:
+                    deploymentScope: 'Resource Group'
+                    azureResourceManagerConnection: '$(azureSubscription)'
+                    subscriptionId: '$(subscriptionId)'
+                    action: 'Create Or Update Resource Group'
+                    resourceGroupName: '$(resourceGroupName)-dev'
+                    location: '$(location)'
+                    templateLocation: 'Linked artifact'
+                    csmFile: '$(Pipeline.Workspace)/drop/infrastructure/main.bicep'
+                    overrideParameters: '-environment dev -appName $(appName)'
+                    deploymentMode: 'Incremental'
+
+                - task: AzureWebApp@1
+                  displayName: 'Deploy web application'
+                  inputs:
+                    azureSubscription: '$(azureSubscription)'
+                    appType: 'webApp'
+                    appName: '$(appName)-dev'
+                    package: '$(Pipeline.Workspace)/drop/*.zip'
+
+  - stage: 'Deploy_Production'
+    displayName: 'Deploy to Production'
+    dependsOn: 'Build'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: 'DeployProd'
+        displayName: 'Deploy to Production Environment'
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureResourceManagerTemplateDeployment@3
+                  displayName: 'Deploy infrastructure'
+                  inputs:
+                    deploymentScope: 'Resource Group'
+                    azureResourceManagerConnection: '$(azureSubscription)'
+                    subscriptionId: '$(subscriptionId)'
+                    action: 'Create Or Update Resource Group'
+                    resourceGroupName: '$(resourceGroupName)'
+                    location: '$(location)'
+                    templateLocation: 'Linked artifact'
+                    csmFile: '$(Pipeline.Workspace)/drop/infrastructure/main.bicep'
+                    overrideParameters: '-environment prod -appName $(appName)'
+                    deploymentMode: 'Incremental'
+
+                - task: AzureWebApp@1
+                  displayName: 'Deploy web application'
+                  inputs:
+                    azureSubscription: '$(azureSubscription)'
+                    appType: 'webApp'
+                    appName: '$(appName)'
+                    package: '$(Pipeline.Workspace)/drop/*.zip'
+
+                - task: AzureAppServiceManage@0
+                  displayName: 'Restart App Service'
+                  inputs:
+                    azureSubscription: '$(azureSubscription)'
+                    Action: 'Restart Azure App Service'
+                    WebAppName: '$(appName)'
 ```
 
 ## Best Practices
 
 ### ✅ **Infrastructure Best Practices**
+
 - **Use Infrastructure as Code** - Manage resources with ARM templates or Bicep
 - **Implement resource tagging** - Tag all resources for cost management and organization
 - **Use managed identities** - Authenticate services without storing credentials
@@ -1202,6 +1233,7 @@ stages:
 - **Monitor costs** - Set up cost alerts and budgets
 
 ### ✅ **Security Best Practices**
+
 - **Enable Azure Security Center** - Monitor security posture and recommendations
 - **Use Azure Key Vault** - Store secrets, keys, and certificates securely
 - **Implement network security** - Use NSGs, firewalls, and private endpoints
@@ -1210,6 +1242,7 @@ stages:
 - **Regular security assessments** - Perform vulnerability scans and penetration testing
 
 ### ✅ **Performance Optimization**
+
 - **Use Azure CDN** - Improve global performance with content delivery network
 - **Implement caching** - Use Azure Cache for Redis for better performance
 - **Optimize database performance** - Use SQL Database performance recommendations
@@ -1218,6 +1251,7 @@ stages:
 - **Optimize storage** - Choose appropriate storage tiers and access patterns
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't hardcode secrets** - Use Key Vault and managed identities
 - **Avoid single region deployment** - Plan for disaster recovery across regions
 - **Don't ignore cost optimization** - Regularly review and optimize resource usage
@@ -1228,6 +1262,7 @@ stages:
 ## Advanced Azure Usage
 
 ### Azure Arc for Hybrid Cloud
+
 ```yaml
 # arc-configuration.yaml
 apiVersion: v1
@@ -1236,10 +1271,10 @@ metadata:
   name: azure-arc-config
   namespace: azure-arc
 data:
-  AZURE_TENANT_ID: "your-tenant-id"
-  AZURE_SUBSCRIPTION_ID: "your-subscription-id"
-  AZURE_RESOURCE_GROUP: "arc-enabled-servers"
-  AZURE_LOCATION: "eastus"
+  AZURE_TENANT_ID: 'your-tenant-id'
+  AZURE_SUBSCRIPTION_ID: 'your-subscription-id'
+  AZURE_RESOURCE_GROUP: 'arc-enabled-servers'
+  AZURE_LOCATION: 'eastus'
 
 ---
 apiVersion: apps/v1
@@ -1258,22 +1293,23 @@ spec:
         app: arc-app
     spec:
       containers:
-      - name: app
-        image: myapp:latest
-        env:
-        - name: AZURE_CLIENT_ID
-          valueFrom:
-            secretKeyRef:
-              name: azure-credentials
-              key: client-id
-        - name: AZURE_CLIENT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: azure-credentials
-              key: client-secret
+        - name: app
+          image: myapp:latest
+          env:
+            - name: AZURE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: azure-credentials
+                  key: client-id
+            - name: AZURE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: azure-credentials
+                  key: client-secret
 ```
 
 ### Azure Logic Apps for Integration
+
 ```json
 {
   "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
@@ -1346,60 +1382,62 @@ spec:
 ## Integration with Other Tools
 
 ### GitHub Actions Integration
+
 ```yaml
 # .github/workflows/azure-deploy.yml
 name: Deploy to Azure
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    
-    - name: Restore dependencies
-      run: dotnet restore
-    
-    - name: Build
-      run: dotnet build --no-restore
-    
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    
-    - name: Publish
-      run: dotnet publish -c Release -o ./publish
-    
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'my-web-app'
-        package: './publish'
-    
-    - name: Azure CLI script
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.30.0
-        inlineScript: |
-          az webapp restart --name my-web-app --resource-group my-resource-group
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'my-web-app'
+          package: './publish'
+
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 2.30.0
+          inlineScript: |
+            az webapp restart --name my-web-app --resource-group my-resource-group
 ```
 
 ### Terraform Integration
+
 ```hcl
 # main.tf - Azure infrastructure with Terraform
 terraform {
@@ -1425,7 +1463,7 @@ provider "azurerm" {
 resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
   location = var.location
-  
+
   tags = {
     Environment = var.environment
     Project     = var.project_name
@@ -1447,25 +1485,25 @@ resource "azurerm_linux_web_app" "main" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_service_plan.main.location
   service_plan_id     = azurerm_service_plan.main.id
-  
+
   site_config {
     application_stack {
       dotnet_version = "6.0"
     }
     always_on = true
   }
-  
+
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "APPLICATIONINSIGHTS_CONNECTION_STRING" = azurerm_application_insights.main.connection_string
   }
-  
+
   connection_string {
     name  = "DefaultConnection"
     type  = "SQLAzure"
     value = "Server=tcp:${azurerm_mssql_server.main.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.main.name};Persist Security Info=False;User ID=${var.sql_admin_username};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
-  
+
   identity {
     type = "SystemAssigned"
   }
@@ -1477,7 +1515,7 @@ resource "azurerm_application_insights" "main" {
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
   application_type    = "web"
-  
+
   tags = {
     Environment = var.environment
   }
@@ -1526,9 +1564,11 @@ output "application_insights_key" {
 ### Common Issues
 
 #### Authentication and Access Issues
+
 **Problem**: Access denied or authentication failures
 **Symptoms**: 401 Unauthorized, access denied errors
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check current login status
 az account show
@@ -1544,9 +1584,11 @@ az ad user show --id your-user-id
 ```
 
 #### Deployment Failures
+
 **Problem**: Application deployment fails
 **Symptoms**: Deployment errors, service unavailable
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check deployment logs
 az webapp log tail --name myapp --resource-group myrg
@@ -1562,9 +1604,11 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 #### Resource Quota Issues
+
 **Problem**: Resource creation fails due to quota limits
 **Symptoms**: Quota exceeded errors
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check current usage
 az vm list-usage --location eastus
@@ -1576,6 +1620,7 @@ az monitor activity-log list --resource-group myrg
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable debug mode
 az config set core.output=yaml
@@ -1592,6 +1637,7 @@ az monitor app-insights component show --app myapp --resource-group myrg
 ## Security Considerations
 
 ### Security Best Practices
+
 - **Implement Azure Active Directory** - Use AAD for centralized identity management
 - **Use managed identities** - Authenticate without storing credentials in code
 - **Enable Microsoft Defender for Cloud** - Monitor security posture and threats
@@ -1600,6 +1646,7 @@ az monitor app-insights component show --app myapp --resource-group myrg
 - **Enable audit logging** - Track all operations and access patterns
 
 ### Secure Configuration Examples
+
 ```json
 {
   "security": {
@@ -1643,6 +1690,7 @@ When helping with Azure:
 8. **Suggest hybrid cloud strategies** when on-premises integration is required
 
 ### Code Generation Rules
+
 - Generate complete Bicep or ARM templates for infrastructure as code
 - Include proper Azure AD integration and managed identities
 - Provide comprehensive Azure DevOps pipelines with testing and security scanning
@@ -1653,6 +1701,7 @@ When helping with Azure:
 - Include backup and disaster recovery strategies in infrastructure designs
 
 ### CLI Configuration
+
 ```bash
 # Global configuration
 [tool] config set [option] [value]
@@ -1662,31 +1711,39 @@ When helping with Azure:
 ```
 
 ## Core Features
+
 ### [Feature 1]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
-- **Example**: 
+- **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 2]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ### [Feature 3]
+
 - **Purpose**: [What this feature does]
 - **Usage**: [How to use it]
 - **Example**:
+
 ```bash
 [tool] [command] [options]
 ```
 
 ## Common Commands
+
 ```bash
 # Essential daily commands
 [tool] [basic-command]              # Description
@@ -1701,7 +1758,9 @@ When helping with Azure:
 ```
 
 ## Workflow Integration
+
 ### Development Workflow
+
 1. **Setup**: [Initial setup steps]
 2. **Development**: [How to use during development]
 3. **Testing**: [Integration with testing process]
@@ -1709,6 +1768,7 @@ When helping with Azure:
 5. **CI/CD**: [Continuous integration usage]
 
 ### Automation Scripts
+
 ```bash
 # Package.json scripts (if applicable)
 {
@@ -1720,6 +1780,7 @@ When helping with Azure:
 ```
 
 ### Git Hooks Integration
+
 ```bash
 # Pre-commit hook example
 #!/bin/sh
@@ -1727,75 +1788,98 @@ When helping with Azure:
 ```
 
 ## Best Practices
+
 ### Configuration Best Practices
+
 - [Best practice 1 with explanation]
 - [Best practice 2 with explanation]
 - [Best practice 3 with explanation]
 
 ### Usage Patterns
+
 - [Pattern 1: When and how to use]
 - [Pattern 2: When and how to use]
 - [Pattern 3: When and how to use]
 
 ### Performance Optimization
+
 - [Optimization tip 1]
 - [Optimization tip 2]
 - [Optimization tip 3]
 
 ## Common Use Cases
+
 ### [Use Case 1]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 2]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ### [Use Case 3]
+
 **Scenario**: [Description of the scenario]
 **Implementation**:
+
 ```bash
 [tool] [specific-commands]
 ```
+
 **Expected Result**: [What should happen]
 
 ## Integration with Other Tools
+
 ### [Related Tool 1]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ### [Related Tool 2]
+
 - **Integration Purpose**: [Why integrate]
 - **Setup**: [How to configure integration]
 - **Usage**: [How they work together]
 
 ## Troubleshooting
+
 ### Common Issues
+
 #### [Issue 1]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 2]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 #### [Issue 3]
+
 **Problem**: [Description of the problem]
 **Symptoms**: [How to identify this issue]
 **Solution**: [Step-by-step fix]
 
 ### Debug Mode
+
 ```bash
 # Enable verbose/debug output
 [tool] --verbose [command]
@@ -1807,58 +1891,71 @@ When helping with Azure:
 ```
 
 ### Performance Issues
+
 - [Performance issue 1 and solution]
 - [Performance issue 2 and solution]
 - [Performance issue 3 and solution]
 
 ## Security Considerations
+
 ### Security Best Practices
+
 - [Security practice 1]
 - [Security practice 2]
 - [Security practice 3]
 
 ### Sensitive Data Handling
+
 - [How the tool handles secrets]
 - [Configuration for secure usage]
 - [Best practices for credentials]
 
 ### Network Security
+
 - [Network-related security considerations]
 - [Proxy and firewall configurations]
 - [Certificate and SSL handling]
 
 ## Advanced Configuration
+
 ### Custom Plugins/Extensions
+
 ```[config-format]
 # Plugin configuration
 [plugin-config-example]
 ```
 
 ### Scripting and Automation
+
 ```bash
 # Advanced scripting examples
 [automation-script-example]
 ```
 
 ### Performance Tuning
+
 ```[config-format]
 # Performance optimization settings
 [performance-config-example]
 ```
 
 ## Version Management
+
 ### Version Compatibility
+
 - **Tool Version**: [Version requirements]
 - **Node.js**: [If applicable]
 - **Python**: [If applicable]
 - **OS Support**: [Supported operating systems]
 
 ### Migration Guides
+
 - **From [Old Version]**: [Migration steps]
 - **Breaking Changes**: [Important changes to note]
 - **Deprecation Notices**: [Features being deprecated]
 
 ## Useful Resources
+
 - **Official Documentation**: [URL]
 - **GitHub Repository**: [URL]
 - **Community Resources**: [URLs]
@@ -1867,36 +1964,44 @@ When helping with Azure:
 - **Stack Overflow Tag**: [Tag name]
 
 ## Tool-Specific Guidelines
+
 ### Code Organization
+
 - [How the tool affects code structure]
 - [File organization recommendations]
 - [Naming conventions]
 
 ### Maintenance
+
 - [Regular maintenance tasks]
 - [Update procedures]
 - [Cleanup and optimization]
 
 ## Examples and Templates
+
 ### Basic Example
+
 ```[language]
 // Example usage in context
 [practical-example]
 ```
 
 ### Advanced Example
+
 ```[language]
 // Advanced usage pattern
 [advanced-example]
 ```
 
 ### Template Files
+
 ```[format]
 # Template configuration
 [template-example]
 ```
 
 ## AI Assistant Guidelines
+
 When helping with [Tool Name]:
 
 1. **Always suggest the most current stable version**
@@ -1909,6 +2014,7 @@ When helping with [Tool Name]:
 8. **Reference official documentation**
 
 ### Code Generation Rules
+
 - Generate configurations that follow tool best practices
 - Include comments explaining important settings
 - Provide multiple options when appropriate

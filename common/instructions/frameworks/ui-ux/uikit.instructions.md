@@ -1,25 +1,36 @@
 ---
-title: "UIKit CSS Framework Instructions"
-description: "Comprehensive guide for using UIKit CSS framework for modern, lightweight responsive web development with modular components and customizable design"
-category: "UI/UX Frameworks"
-author: "AI Assistant"
-tags: ["uikit", "css-framework", "responsive-design", "modular-components", "lightweight", "customizable", "less", "sass"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'UIKit CSS Framework Instructions'
+description: 'Comprehensive guide for using UIKit CSS framework for modern, lightweight responsive web development with modular components and customizable design'
+category: 'UI/UX Frameworks'
+
+tags:
+  [
+    'uikit',
+    'css-framework',
+    'responsive-design',
+    'modular-components',
+    'lightweight',
+    'customizable',
+    'less',
+    'sass',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/*.html"
-  - "**/*.css"
-  - "**/*.scss"
-  - "**/*.less"
-  - "**/*.js"
-  - "**/uikit.config.js"
-  - "**/webpack.config.js"
-  - "**/package.json"
+  - '**/*.html'
+  - '**/*.css'
+  - '**/*.scss'
+  - '**/*.less'
+  - '**/*.js'
+  - '**/uikit.config.js'
+  - '**/webpack.config.js'
+  - '**/package.json'
 ---
 
 # UIKit CSS Framework Instructions
 
 ## Framework Overview
+
 - **Framework Name**: UIKit
 - **Version**: 3.21+ (Latest stable with modern features)
 - **Type**: CSS Framework for lightweight responsive web development
@@ -29,6 +40,7 @@ applyTo:
 ## When to Use UIKit
 
 ### ✅ **Use UIKit When**
+
 - Building modern, clean websites with minimal design philosophy
 - Need lightweight framework with excellent performance characteristics
 - Working on projects requiring extensive customization and theme flexibility
@@ -41,6 +53,7 @@ applyTo:
 - Working on projects where bundle size optimization is important
 
 ### ❌ **Avoid UIKit When**
+
 - Need rapid prototyping with extensive pre-built themes (Bootstrap ecosystem)
 - Working with teams unfamiliar with component-based CSS architectures
 - Project requires utility-first CSS approach (Tailwind CSS would be better)
@@ -52,70 +65,80 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | UIKit Recommendation | Alternative |
-|--------------|---------------------|-------------|
-| Admin Dashboard | ✅ **Strongly Recommended** - Clean UI components and data visualization | Ant Design |
-| Corporate Website | ✅ **Recommended** - Professional, customizable design | Foundation or Bootstrap |
-| E-commerce Platform | ✅ **Recommended** - Comprehensive form and layout components | Tailwind CSS |
-| Content Management | ✅ **Strongly Recommended** - Rich content components | Semantic UI |
-| Landing Page | 🔄 **Consider** - May be over-engineered for simple sites | Tailwind or custom CSS |
-| Web Application | ✅ **Recommended** - Modular components and customization | React/Vue component libraries |
+
+| Project Type        | UIKit Recommendation                                                     | Alternative                   |
+| ------------------- | ------------------------------------------------------------------------ | ----------------------------- |
+| Admin Dashboard     | ✅ **Strongly Recommended** - Clean UI components and data visualization | Ant Design                    |
+| Corporate Website   | ✅ **Recommended** - Professional, customizable design                   | Foundation or Bootstrap       |
+| E-commerce Platform | ✅ **Recommended** - Comprehensive form and layout components            | Tailwind CSS                  |
+| Content Management  | ✅ **Strongly Recommended** - Rich content components                    | Semantic UI                   |
+| Landing Page        | 🔄 **Consider** - May be over-engineered for simple sites                | Tailwind or custom CSS        |
+| Web Application     | ✅ **Recommended** - Modular components and customization                | React/Vue component libraries |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 15 minutes (CDN) | 1-2 hours (custom build) | 4+ hours (complete customization) |
-| **Learning Curve** | HTML/CSS knowledge | Less/Sass familiarity | Advanced customization skills |
-| **Customization** | Theme variables | Custom components | Complete design system |
-| **Build Process** | None (CDN) | Basic Less/Sass compilation | Webpack with optimization |
+
+| Factor             | Low Complexity     | Medium Complexity           | High Complexity                   |
+| ------------------ | ------------------ | --------------------------- | --------------------------------- |
+| **Setup Time**     | 15 minutes (CDN)   | 1-2 hours (custom build)    | 4+ hours (complete customization) |
+| **Learning Curve** | HTML/CSS knowledge | Less/Sass familiarity       | Advanced customization skills     |
+| **Customization**  | Theme variables    | Custom components           | Complete design system            |
+| **Build Process**  | None (CDN)         | Basic Less/Sass compilation | Webpack with optimization         |
 
 ## Installation & Setup
 
 ### Quick Start (CDN)
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UIKit Site</title>
-  <!-- UIKit CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/css/uikit.min.css" />
-  <!-- UIKit Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/css/uikit-icons.min.css" />
-</head>
-<body>
-  <div class="uk-container">
-    <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
-      <div>
-        <div class="uk-card uk-card-default uk-card-body">
-          <h3 class="uk-card-title">Default</h3>
-          <p>Lorem ipsum dolor sit amet.</p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UIKit Site</title>
+    <!-- UIKit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/css/uikit.min.css"
+    />
+    <!-- UIKit Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/css/uikit-icons.min.css"
+    />
+  </head>
+  <body>
+    <div class="uk-container">
+      <div class="uk-grid-match uk-child-width-1-3@m" uk-grid>
+        <div>
+          <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title">Default</h3>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="uk-card uk-card-primary uk-card-body">
-          <h3 class="uk-card-title">Primary</h3>
-          <p>Lorem ipsum dolor sit amet.</p>
+        <div>
+          <div class="uk-card uk-card-primary uk-card-body">
+            <h3 class="uk-card-title">Primary</h3>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="uk-card uk-card-secondary uk-card-body">
-          <h3 class="uk-card-title">Secondary</h3>
-          <p>Lorem ipsum dolor sit amet.</p>
+        <div>
+          <div class="uk-card uk-card-secondary uk-card-body">
+            <h3 class="uk-card-title">Secondary</h3>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- UIKit JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/js/uikit.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/js/uikit-icons.min.js"></script>
-</body>
+
+    <!-- UIKit JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.9/dist/js/uikit-icons.min.js"></script>
+  </body>
 </html>
 ```
 
 ### Package Manager Installation
+
 ```bash
 # npm installation (recommended for projects)
 npm install uikit --save
@@ -131,6 +154,7 @@ npm install @types/uikit --save-dev
 ```
 
 ### Project Setup with Build Tools
+
 ```bash
 # Initialize project with custom build setup
 npm init -y
@@ -142,6 +166,7 @@ touch src/index.html src/styles.less src/scripts.js
 ```
 
 ### Custom Build Integration
+
 ```javascript
 // webpack.config.js
 const path = require('path');
@@ -153,7 +178,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true
+    clean: true,
   },
   module: {
     rules: [
@@ -166,37 +191,38 @@ module.exports = {
             loader: 'less-loader',
             options: {
               lessOptions: {
-                math: 'always'
-              }
-            }
-          }
-        ]
+                math: 'always',
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles.css'
-    })
+      filename: 'styles.css',
+    }),
   ],
   devServer: {
     static: './dist',
     port: 3000,
-    open: true
-  }
+    open: true,
+  },
 };
 ```
 
 ## Project Structure
 
 ### Standard UIKit Project
+
 ```
 uikit-project/
 ├── src/
@@ -222,6 +248,7 @@ uikit-project/
 ```
 
 ### Custom Theme Structure
+
 ```
 custom-uikit/
 ├── less/
@@ -248,9 +275,11 @@ custom-uikit/
 ## Core Concepts
 
 ### Grid System and Layout
+
 - **Purpose**: Flexible grid system using CSS Grid and Flexbox for responsive layouts
 - **Usage**: Create responsive designs with automatic spacing and alignment
 - **Example**:
+
 ```html
 <!-- Container with responsive grid -->
 <div class="uk-container">
@@ -260,7 +289,7 @@ custom-uikit/
     <div>Auto</div>
     <div>Auto</div>
   </div>
-  
+
   <!-- Responsive fractional widths -->
   <div class="uk-grid-match uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l" uk-grid>
     <div>
@@ -274,13 +303,13 @@ custom-uikit/
       </div>
     </div>
   </div>
-  
+
   <!-- Column widths and offsets -->
   <div class="uk-grid" uk-grid>
     <div class="uk-width-1-3@m">1/3</div>
     <div class="uk-width-2-3@m">2/3</div>
   </div>
-  
+
   <!-- Nested grids -->
   <div class="uk-grid" uk-grid>
     <div class="uk-width-2-3@m">
@@ -295,9 +324,11 @@ custom-uikit/
 ```
 
 ### Component Architecture
+
 - **Purpose**: Modular, reusable UI components with consistent design patterns
 - **Usage**: Build complex interfaces using pre-built, customizable components
 - **Example**:
+
 ```html
 <!-- Advanced Navigation -->
 <nav class="uk-navbar-container" uk-navbar>
@@ -319,7 +350,12 @@ custom-uikit/
   </div>
   <div class="uk-navbar-right">
     <div>
-      <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
+      <a
+        class="uk-navbar-toggle"
+        uk-search-icon
+        uk-toggle="target: .nav-overlay; animation: uk-animation-fade"
+        href="#"
+      ></a>
     </div>
   </div>
 </nav>
@@ -341,7 +377,7 @@ custom-uikit/
   <div class="uk-card-header">
     <div class="uk-grid-small uk-flex-middle" uk-grid>
       <div class="uk-width-auto">
-        <img class="uk-border-circle" width="40" height="40" src="avatar.jpg" alt="Avatar">
+        <img class="uk-border-circle" width="40" height="40" src="avatar.jpg" alt="Avatar" />
       </div>
       <div class="uk-width-expand">
         <h3 class="uk-card-title uk-margin-remove-bottom">Title</h3>
@@ -359,24 +395,36 @@ custom-uikit/
 ```
 
 ### JavaScript Components and Interactions
+
 - **Purpose**: Rich interactive components with smooth animations and user feedback
 - **Usage**: Add behavior to UI components with data attributes or JavaScript API
 - **Example**:
+
 ```html
 <!-- Slider/Carousel -->
 <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
   <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
     <li>
-      <img src="image1.jpg" alt="">
+      <img src="image1.jpg" alt="" />
       <div class="uk-position-center uk-panel"><h1>1</h1></div>
     </li>
     <li>
-      <img src="image2.jpg" alt="">
+      <img src="image2.jpg" alt="" />
       <div class="uk-position-center uk-panel"><h1>2</h1></div>
     </li>
   </ul>
-  <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-  <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+  <a
+    class="uk-position-center-left uk-position-small uk-hidden-hover"
+    href="#"
+    uk-slidenav-previous
+    uk-slider-item="previous"
+  ></a>
+  <a
+    class="uk-position-center-right uk-position-small uk-hidden-hover"
+    href="#"
+    uk-slidenav-next
+    uk-slider-item="next"
+  ></a>
 </div>
 
 <!-- Accordion -->
@@ -412,9 +460,11 @@ custom-uikit/
 ```
 
 ### Customization with Less/Sass
+
 - **Purpose**: Deep customization through variables, mixins, and theme development
 - **Usage**: Override default styles and create custom design systems
 - **Example**:
+
 ```less
 // variables.less - Custom theme variables
 @global-primary-background: #1e87f0;
@@ -427,7 +477,7 @@ custom-uikit/
 @global-emphasis-color: #333;
 @global-muted-color: #999;
 
-@global-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+@global-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 @global-font-size: 14px;
 @global-line-height: 1.5;
 
@@ -459,22 +509,30 @@ custom-uikit/
 @card-header-padding-vertical: round(@global-gutter * 0.5);
 
 // Import UIKit after variables
-@import "uikit/src/less/uikit.less";
+@import 'uikit/src/less/uikit.less';
 
 // Custom component styles
 .uk-button-gradient {
-  background: linear-gradient(135deg, @global-primary-background 0%, darken(@global-primary-background, 10%) 100%);
+  background: linear-gradient(
+    135deg,
+    @global-primary-background 0%,
+    darken(@global-primary-background, 10%) 100%
+  );
   border: none;
-  
+
   &:hover {
-    background: linear-gradient(135deg, lighten(@global-primary-background, 5%) 0%, @global-primary-background 100%);
+    background: linear-gradient(
+      135deg,
+      lighten(@global-primary-background, 5%) 0%,
+      @global-primary-background 100%
+    );
   }
 }
 
 .uk-card-premium {
   border: 2px solid @global-primary-background;
-  box-shadow: 0 14px 25px rgba(0,0,0,.16);
-  
+  box-shadow: 0 14px 25px rgba(0, 0, 0, 0.16);
+
   &:hover {
     transform: translateY(-2px);
     transition: all 0.3s ease;
@@ -485,6 +543,7 @@ custom-uikit/
 ## Development Workflow
 
 ### 1. Setup and Installation
+
 ```bash
 # Create new project
 mkdir my-uikit-project
@@ -503,6 +562,7 @@ touch src/index.html src/styles.less src/scripts.js
 ```
 
 ### 2. Development Process
+
 ```bash
 # Development server
 npm run dev
@@ -518,10 +578,11 @@ npm run lint:css
 ```
 
 ### 3. Custom Theme Development
+
 ```less
 // main.less
 // Import UIKit source for customization
-@import "~uikit/src/less/uikit.less";
+@import '~uikit/src/less/uikit.less';
 
 // Custom theme variables
 @global-primary-background: #e74c3c;
@@ -530,19 +591,24 @@ npm run lint:css
 
 // Custom components
 .uk-button-custom {
-  background: linear-gradient(135deg, @global-primary-background 0%, darken(@global-primary-background, 15%) 100%);
+  background: linear-gradient(
+    135deg,
+    @global-primary-background 0%,
+    darken(@global-primary-background, 15%) 100%
+  );
   border: none;
   border-radius: 25px;
   padding: 0 30px;
-  
+
   &:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }
 ```
 
 ### 4. Building for Production
+
 ```bash
 # Production build
 npm run build
@@ -558,6 +624,7 @@ npm run deploy
 ```
 
 ### 5. Testing and Quality Assurance
+
 ```bash
 # Visual regression testing
 npm run test:visual
@@ -575,6 +642,7 @@ npm run test:performance
 ## Configuration
 
 ### Webpack Configuration for Custom Builds
+
 ```javascript
 // webpack.config.js - Complete UIKit build setup
 const path = require('path');
@@ -585,15 +653,15 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
-  
+
   return {
     entry: {
-      main: './src/index.js'
+      main: './src/index.js',
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: isProduction ? '[name].[contenthash].js' : '[name].js',
-      publicPath: '/'
+      publicPath: '/',
     },
     module: {
       rules: [
@@ -604,40 +672,42 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                sourceMap: !isProduction
-              }
+                sourceMap: !isProduction,
+              },
             },
             {
               loader: 'less-loader',
               options: {
                 lessOptions: {
                   math: 'always',
-                  sourceMap: !isProduction
-                }
-              }
-            }
-          ]
+                  sourceMap: !isProduction,
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.(png|jpe?g|gif|svg|woff|woff2|eot|ttf|otf)$/,
           type: 'asset/resource',
           generator: {
-            filename: 'assets/[hash][ext][query]'
-          }
-        }
-      ]
+            filename: 'assets/[hash][ext][query]',
+          },
+        },
+      ],
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        minify: isProduction
+        minify: isProduction,
       }),
-      ...(isProduction ? [
-        new MiniCssExtractPlugin({
-          filename: '[name].[contenthash].css'
-        })
-      ] : [])
+      ...(isProduction
+        ? [
+            new MiniCssExtractPlugin({
+              filename: '[name].[contenthash].css',
+            }),
+          ]
+        : []),
     ],
     optimization: {
       splitChunks: {
@@ -646,28 +716,29 @@ module.exports = (env, argv) => {
           vendor: {
             test: /[\/]node_modules[\/]/,
             name: 'vendors',
-            chunks: 'all'
-          }
-        }
+            chunks: 'all',
+          },
+        },
       },
-      ...(isProduction ? {
-        minimizer: [
-          new OptimizeCSSAssetsPlugin()
-        ]
-      } : {})
+      ...(isProduction
+        ? {
+            minimizer: [new OptimizeCSSAssetsPlugin()],
+          }
+        : {}),
     },
     devServer: {
       static: './dist',
       port: 3000,
       open: true,
-      hot: true
+      hot: true,
     },
-    devtool: isProduction ? 'source-map' : 'eval-source-map'
+    devtool: isProduction ? 'source-map' : 'eval-source-map',
   };
 };
 ```
 
 ### Package.json Scripts
+
 ```json
 {
   "scripts": {
@@ -687,6 +758,7 @@ module.exports = (env, argv) => {
 ```
 
 ### Less Configuration
+
 ```less
 // uikit-config.less
 // Global settings
@@ -697,7 +769,7 @@ module.exports = (env, argv) => {
 @global-link-hover-color: #0f6ecd;
 
 // Typography
-@global-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+@global-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 @global-font-size: 14px;
 @global-line-height: 1.5;
 
@@ -718,12 +790,13 @@ module.exports = (env, argv) => {
 @navbar-nav-item-active-color: @global-emphasis-color;
 
 // Import UIKit
-@import "uikit/src/less/uikit.less";
+@import 'uikit/src/less/uikit.less';
 ```
 
 ## Essential Commands
 
 ### Development Commands
+
 ```bash
 # Project creation and setup
 mkdir uikit-project && cd uikit-project
@@ -744,6 +817,7 @@ npm run watch
 ```
 
 ### Asset Compilation
+
 ```bash
 # Compile Less to CSS
 lessc src/styles.less dist/styles.css
@@ -759,6 +833,7 @@ lessc src/styles.less dist/styles.css --watch
 ```
 
 ### Testing and Quality
+
 ```bash
 # Lint Less/CSS
 stylelint "src/**/*.less"
@@ -776,6 +851,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 ## Best Practices
 
 ### ✅ **Architecture Best Practices**
+
 - **Use modular component approach** - Import only needed UIKit components to reduce bundle size
 - **Implement consistent spacing** using UIKit's margin and padding utility classes
 - **Follow semantic HTML structure** with proper heading hierarchy and ARIA attributes
@@ -784,6 +860,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 - **Organize styles logically** with separate files for variables, components, and utilities
 
 ### ✅ **Performance Optimization**
+
 - **Import specific components** rather than the entire UIKit library
 - **Use UIKit's lazy loading** for images and content that's below the fold
 - **Optimize custom Less compilation** by minimizing nested selectors and mixins
@@ -792,6 +869,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 - **Minimize DOM manipulation** by leveraging UIKit's data attribute API
 
 ### ✅ **Responsive Design Patterns**
+
 - **Mobile-first approach** using UIKit's breakpoint system (@s, @m, @l, @xl)
 - **Use flexible grid widths** with fractional and auto-sizing options
 - **Implement responsive typography** using UIKit's responsive text utility classes
@@ -800,6 +878,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 - **Use UIKit's responsive utilities** for showing/hiding content across breakpoints
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't override UIKit core files** - use custom Less files and variable overrides
 - **Avoid excessive customization** that defeats UIKit's design consistency
 - **Don't mix multiple CSS frameworks** - commit to UIKit's methodology
@@ -810,6 +889,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 ## Advanced Component Patterns
 
 ### Complex Dashboard Layout
+
 ```html
 <!-- Admin Dashboard with Sidebar -->
 <div class="uk-offcanvas-content">
@@ -846,9 +926,15 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
   <div id="offcanvas-nav" uk-offcanvas="overlay: true">
     <div class="uk-offcanvas-bar uk-flex uk-flex-column">
       <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
-        <li class="uk-active"><a href="#"><span uk-icon="home"></span> Dashboard</a></li>
-        <li><a href="#"><span uk-icon="users"></span> Users</a></li>
-        <li><a href="#"><span uk-icon="cog"></span> Settings</a></li>
+        <li class="uk-active">
+          <a href="#"><span uk-icon="home"></span> Dashboard</a>
+        </li>
+        <li>
+          <a href="#"><span uk-icon="users"></span> Users</a>
+        </li>
+        <li>
+          <a href="#"><span uk-icon="cog"></span> Settings</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -865,7 +951,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
       </div>
       <!-- More stats cards... -->
     </div>
-    
+
     <!-- Data Table -->
     <div class="uk-card uk-card-default uk-margin-top">
       <div class="uk-card-header">
@@ -897,13 +983,20 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 ```
 
 ### Advanced Form Components
+
 ```html
 <!-- Multi-step Form with Validation -->
 <form class="uk-form-stacked" uk-form>
   <div class="uk-margin">
     <label class="uk-form-label" for="form-stacked-text">Name</label>
     <div class="uk-form-controls">
-      <input class="uk-input" id="form-stacked-text" type="text" placeholder="Enter your name" required>
+      <input
+        class="uk-input"
+        id="form-stacked-text"
+        type="text"
+        placeholder="Enter your name"
+        required
+      />
     </div>
   </div>
 
@@ -921,7 +1014,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
   <div class="uk-margin">
     <div class="uk-form-label">Newsletter</div>
     <div class="uk-form-controls uk-form-controls-text">
-      <label><input class="uk-checkbox" type="checkbox" checked> Send weekly newsletter</label>
+      <label><input class="uk-checkbox" type="checkbox" checked /> Send weekly newsletter</label>
     </div>
   </div>
 
@@ -935,7 +1028,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
   <span uk-icon="icon: cloud-upload; ratio: 3"></span>
   <span class="uk-text-middle">Attach files by dropping them here or</span>
   <div uk-form-custom>
-    <input type="file" multiple>
+    <input type="file" multiple />
     <span class="uk-link">selecting one</span>
   </div>
 </div>
@@ -946,6 +1039,7 @@ lighthouse http://localhost:3000 --output html --output-path ./report.html
 ## JavaScript Integration and Custom Components
 
 ### Advanced JavaScript Integration
+
 ```javascript
 // Custom UIKit component initialization
 import UIkit from 'uikit';
@@ -957,21 +1051,21 @@ UIkit.use(Icons);
 // Custom component creation
 UIkit.component('custom-slider', {
   mixins: [UIkit.mixin.class],
-  
+
   props: {
     autoplay: Boolean,
-    interval: Number
+    interval: Number,
   },
-  
+
   defaults: {
     autoplay: true,
-    interval: 5000
+    interval: 5000,
   },
-  
+
   init() {
     this.startAutoplay();
   },
-  
+
   methods: {
     startAutoplay() {
       if (this.autoplay) {
@@ -980,23 +1074,23 @@ UIkit.component('custom-slider', {
         }, this.interval);
       }
     },
-    
+
     next() {
       // Custom next logic
     },
-    
+
     prev() {
       // Custom previous logic
-    }
-  }
+    },
+  },
 });
 
 // Event handling for dynamic content
-UIkit.util.on(document, 'click', '.js-dynamic-modal', function(e) {
+UIkit.util.on(document, 'click', '.js-dynamic-modal', function (e) {
   e.preventDefault();
-  
+
   const content = this.getAttribute('data-content');
-  
+
   UIkit.modal.dialog(`
     <div class="uk-modal-header">
       <h2 class="uk-modal-title">Dynamic Content</h2>
@@ -1016,7 +1110,7 @@ function showNotification(message, type = 'primary') {
     message: message,
     status: type,
     pos: 'top-right',
-    timeout: 5000
+    timeout: 5000,
   });
 }
 
@@ -1025,18 +1119,22 @@ async function loadData() {
   try {
     const response = await fetch('/api/data');
     const data = await response.json();
-    
+
     // Update UIKit components with new data
     const container = document.querySelector('#data-container');
-    container.innerHTML = data.map(item => `
+    container.innerHTML = data
+      .map(
+        (item) => `
       <div class="uk-card uk-card-default uk-margin-bottom">
         <div class="uk-card-body">
           <h3 class="uk-card-title">${item.title}</h3>
           <p>${item.description}</p>
         </div>
       </div>
-    `).join('');
-    
+    `,
+      )
+      .join('');
+
     showNotification('Data loaded successfully', 'success');
   } catch (error) {
     showNotification('Failed to load data', 'danger');
@@ -1045,6 +1143,7 @@ async function loadData() {
 ```
 
 ### TypeScript Integration
+
 ```typescript
 // types/uikit.d.ts
 import UIkit from 'uikit';
@@ -1073,9 +1172,9 @@ class CustomSlider {
       autoplay: true,
       interval: 5000,
       animation: 'slide',
-      ...options
+      ...options,
     };
-    
+
     this.init();
   }
 
@@ -1083,7 +1182,7 @@ class CustomSlider {
     if (this.options.autoplay) {
       this.startAutoplay();
     }
-    
+
     this.bindEvents();
   }
 
@@ -1122,10 +1221,10 @@ class CustomSlider {
 // Usage
 document.addEventListener('DOMContentLoaded', () => {
   const sliders = document.querySelectorAll<HTMLElement>('.custom-slider');
-  sliders.forEach(slider => {
+  sliders.forEach((slider) => {
     new CustomSlider(slider, {
       autoplay: true,
-      interval: 3000
+      interval: 3000,
     });
   });
 });
@@ -1136,9 +1235,11 @@ document.addEventListener('DOMContentLoaded', () => {
 ### Common Issues
 
 #### Less Compilation Errors
+
 **Problem**: Less compilation fails with import or variable errors
 **Symptoms**: Build process fails with UIKit-related import errors
-**Solution**: 
+**Solution**:
+
 ```bash
 # Ensure correct UIKit path in Less imports
 # Check node_modules path
@@ -1168,9 +1269,11 @@ ls node_modules/uikit/src/less/
 ```
 
 #### JavaScript Components Not Working
+
 **Problem**: UIKit JavaScript components don't initialize or function properly
 **Symptoms**: Dropdowns, modals, and other interactive elements are non-functional
-**Solution**: 
+**Solution**:
+
 ```javascript
 // Ensure UIKit is properly loaded
 import UIkit from 'uikit';
@@ -1178,7 +1281,7 @@ import Icons from 'uikit/dist/js/uikit-icons';
 UIkit.use(Icons);
 
 // Check for proper DOM ready initialization
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // UIKit components should initialize automatically
   // For manual initialization:
   UIkit.modal('#my-modal');
@@ -1194,9 +1297,11 @@ console.log(UIkit.components); // List available components
 ```
 
 #### Grid Layout Issues
+
 **Problem**: Grid columns don't align or behave responsively
 **Symptoms**: Columns stack incorrectly or don't maintain proper spacing
-**Solution**: 
+**Solution**:
+
 ```html
 <!-- Ensure proper grid structure -->
 <div class="uk-container">
@@ -1208,21 +1313,26 @@ console.log(UIkit.components); // List available components
 </div>
 
 <!-- Check for missing uk-grid attribute -->
-<div class="uk-grid" uk-grid> <!-- uk-grid attribute required -->
+<div class="uk-grid" uk-grid>
+  <!-- uk-grid attribute required -->
   <div class="uk-width-1-2">Half</div>
   <div class="uk-width-1-2">Half</div>
 </div>
 
 <!-- Debug grid with visible borders -->
 <style>
-.uk-grid > * { border: 1px solid red; }
+  .uk-grid > * {
+    border: 1px solid red;
+  }
 </style>
 ```
 
 #### Performance Issues
+
 **Problem**: Large bundle size or slow loading times
 **Symptoms**: Slow page loads, large CSS/JS bundles
-**Solution**: 
+**Solution**:
+
 ```javascript
 // Import only needed components
 import { modal, dropdown, navbar } from 'uikit/dist/js/uikit.min.js';
@@ -1236,12 +1346,13 @@ import Dropdown from 'uikit/src/js/components/dropdown';
 module.exports = {
   optimization: {
     usedExports: true,
-    sideEffects: false
-  }
+    sideEffects: false,
+  },
 };
 ```
 
 ### Debug Mode
+
 ```javascript
 // Enable UIKit debugging
 UIkit.debug = true;
@@ -1250,18 +1361,19 @@ UIkit.debug = true;
 console.log(UIkit.components);
 
 // Monitor events
-UIkit.util.on(document, 'show.uk.modal', function(e) {
+UIkit.util.on(document, 'show.uk.modal', function (e) {
   console.log('Modal showing:', e.target);
 });
 
 // Check for initialization issues
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   console.log('UIKit loaded:', typeof UIkit !== 'undefined');
   console.log('Available components:', Object.keys(UIkit.components));
 });
 ```
 
 ### Performance Optimization
+
 ```bash
 # Analyze bundle size
 webpack-bundle-analyzer dist/main.*.js
@@ -1288,6 +1400,7 @@ When helping with UIKit:
 8. **Provide troubleshooting guidance** for common Less compilation and component initialization issues
 
 ### Code Generation Rules
+
 - Generate semantic HTML with proper UIKit classes and data attributes for component functionality
 - Include responsive design considerations using UIKit's breakpoint classes (@s, @m, @l, @xl)
 - Provide Less/Sass examples for customization when deep styling is needed
@@ -1298,6 +1411,7 @@ When helping with UIKit:
 - Provide both basic and advanced examples based on project complexity requirements
 
 ## Installation & Setup
+
 ```bash
 # Installation commands
 [package manager install command]
@@ -1307,6 +1421,7 @@ When helping with UIKit:
 ```
 
 ## Project Structure
+
 ```
 project-root/
 ├── [typical folder structure]
@@ -1316,17 +1431,21 @@ project-root/
 ```
 
 ## Core Concepts
+
 ### [Concept 1]
+
 - **Purpose**: [What this concept does]
 - **Usage**: [How to implement/use it]
 - **Example**: [Code example]
 
 ### [Concept 2]
+
 - **Purpose**: [What this concept does]
 - **Usage**: [How to implement/use it]
 - **Example**: [Code example]
 
 ## Development Workflow
+
 1. **Setup**: [Initial project setup steps]
 2. **Development**: [Development server, hot reload, etc.]
 3. **Testing**: [Testing framework and commands]
@@ -1334,37 +1453,45 @@ project-root/
 5. **Deployment**: [Deployment strategies]
 
 ## Best Practices
+
 - [Best practice 1 with explanation]
 - [Best practice 2 with explanation]
 - [Best practice 3 with explanation]
 
 ## Common Patterns
+
 ### [Pattern Name]
+
 ```[language]
 // Example implementation
 [code example]
 ```
 
 ### [Pattern Name]
+
 ```[language]
 // Example implementation
 [code example]
 ```
 
 ## Configuration
+
 ### [Config File 1]
+
 ```[format]
 # Configuration options
 [example configuration]
 ```
 
 ### [Config File 2]
+
 ```[format]
 # Configuration options
 [example configuration]
 ```
 
 ## Essential Commands
+
 ```bash
 # Development
 [dev server command]
@@ -1385,69 +1512,86 @@ project-root/
 ```
 
 ## Common Issues & Solutions
+
 ### [Issue 1]
+
 **Problem**: [Description of the problem]
 **Solution**: [How to solve it]
 
 ### [Issue 2]
+
 **Problem**: [Description of the problem]
 **Solution**: [How to solve it]
 
 ## Performance Optimization
+
 - [Optimization technique 1]
 - [Optimization technique 2]
 - [Optimization technique 3]
 
 ## Security Considerations
+
 - [Security best practice 1]
 - [Security best practice 2]
 - [Security best practice 3]
 
 ## Useful Resources
+
 - **Official Documentation**: [URL]
 - **Community Resources**: [URLs]
 - **Learning Materials**: [URLs]
 - **Tools & Extensions**: [List of helpful tools]
 
 ## Framework-Specific Guidelines
+
 ### Code Style
+
 - [Coding conventions specific to this framework]
 - [Naming conventions]
 - [File organization patterns]
 
 ### Architecture Patterns
+
 - [Recommended architectural patterns]
 - [State management approaches]
 - [Component/module organization]
 
 ## Integration Points
+
 ### [External Service/Tool 1]
+
 - **Purpose**: [What it integrates with]
 - **Setup**: [How to configure]
 - **Usage**: [Implementation examples]
 
 ### [External Service/Tool 2]
+
 - **Purpose**: [What it integrates with]
 - **Setup**: [How to configure]
 - **Usage**: [Implementation examples]
 
 ## Version Compatibility
+
 - **Node.js**: [Supported versions]
 - **Dependencies**: [Key dependency versions]
 - **Browser Support**: [If applicable]
 - **OS Support**: [If applicable]
 
 ## Troubleshooting
+
 ### Debug Mode
+
 ```bash
 [debug commands]
 ```
 
 ### Log Analysis
+
 - [Where to find logs]
 - [How to interpret common error messages]
 
 ### Common Error Messages
+
 - **Error**: `[error message]`
   **Cause**: [Why this happens]
   **Solution**: [How to fix]

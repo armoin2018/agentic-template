@@ -1,22 +1,32 @@
 ---
-title: "Docker Containerization Platform Instructions"
-description: "Comprehensive guide for Docker containerization, orchestration, and deployment including multi-stage builds, security, and production workflows"
-category: "Containerization"
-author: "AI Assistant"
-tags: ["docker", "containers", "containerization", "devops", "deployment", "microservices", "orchestration"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Docker Containerization Platform Instructions'
+description: 'Comprehensive guide for Docker containerization, orchestration, and deployment including multi-stage builds, security, and production workflows'
+category: 'Containerization'
+
+tags:
+  [
+    'docker',
+    'containers',
+    'containerization',
+    'devops',
+    'deployment',
+    'microservices',
+    'orchestration',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/Dockerfile"
-  - "**/docker-compose.yml"
-  - "**/docker-compose.*.yml"
-  - "**/.dockerignore"
-  - "**/Dockerfile.*"
+  - '**/Dockerfile'
+  - '**/docker-compose.yml'
+  - '**/docker-compose.*.yml'
+  - '**/.dockerignore'
+  - '**/Dockerfile.*'
 ---
 
 # Docker Containerization Platform Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Docker
 - **Version**: 24.0+ (Latest stable with BuildKit and multi-platform support)
 - **Category**: Containerization - Application Packaging and Deployment
@@ -26,6 +36,7 @@ applyTo:
 ## When to Use Docker
 
 ### ✅ **Use Docker When**
+
 - Building microservices architectures requiring isolation and scalability
 - Need consistent development, testing, and production environments
 - Deploying applications across different cloud platforms and environments
@@ -36,6 +47,7 @@ applyTo:
 - Building applications requiring horizontal scaling and load balancing
 
 ### ❌ **Avoid Docker When**
+
 - Building simple static websites without complex dependencies
 - Working with applications requiring specialized hardware or GPU access
 - Team lacks containerization knowledge and DevOps expertise
@@ -47,26 +59,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Docker Recommendation | Configuration Priority |
-|--------------|----------------------|----------------------|
-| Microservices Architecture | ✅ **Essential** - Perfect fit | High - Multi-service setup |
-| Web Application | ✅ **Essential** - Environment consistency | High - Production optimization |
-| API Service | ✅ **Essential** - Scalable deployment | High - Load balancing |
-| Database Application | ✅ **Recommended** - Data persistence | Medium - Volume management |
-| Desktop Application | 🔄 **Consider** - Limited benefits | Low - Native alternatives |
-| IoT/Edge Application | ✅ **Recommended** - Edge deployment | Medium - Resource constraints |
+
+| Project Type               | Docker Recommendation                      | Configuration Priority         |
+| -------------------------- | ------------------------------------------ | ------------------------------ |
+| Microservices Architecture | ✅ **Essential** - Perfect fit             | High - Multi-service setup     |
+| Web Application            | ✅ **Essential** - Environment consistency | High - Production optimization |
+| API Service                | ✅ **Essential** - Scalable deployment     | High - Load balancing          |
+| Database Application       | ✅ **Recommended** - Data persistence      | Medium - Volume management     |
+| Desktop Application        | 🔄 **Consider** - Limited benefits         | Low - Native alternatives      |
+| IoT/Edge Application       | ✅ **Recommended** - Edge deployment       | Medium - Resource constraints  |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 1 hour (single service) | 4 hours (multi-service) | 2 days (orchestration) |
-| **Services** | Single container | Multiple containers | Full orchestration |
-| **Architecture** | Monolithic application | Multi-tier application | Distributed microservices |
-| **Data Management** | Stateless application | Database integration | Complex data workflows |
+
+| Factor              | Low Complexity          | Medium Complexity       | High Complexity           |
+| ------------------- | ----------------------- | ----------------------- | ------------------------- |
+| **Setup Time**      | 1 hour (single service) | 4 hours (multi-service) | 2 days (orchestration)    |
+| **Services**        | Single container        | Multiple containers     | Full orchestration        |
+| **Architecture**    | Monolithic application  | Multi-tier application  | Distributed microservices |
+| **Data Management** | Stateless application   | Database integration    | Complex data workflows    |
 
 ## Installation & Setup
 
 ### Docker Engine Installation
+
 ```bash
 # Ubuntu/Debian installation
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -92,6 +107,7 @@ docker run hello-world
 ```
 
 ### Docker Desktop Setup (Development)
+
 ```bash
 # macOS/Windows Docker Desktop
 # Download from https://www.docker.com/products/docker-desktop
@@ -109,6 +125,7 @@ docker system prune --help
 ```
 
 ### Development Environment Setup
+
 ```bash
 # Create project Docker configuration
 mkdir -p myproject/{docker,scripts}
@@ -138,13 +155,14 @@ chmod +x scripts/dev-setup.sh
 ## Configuration
 
 ### Production-Ready Dockerfile
+
 ```dockerfile
 # Multi-stage Dockerfile for Node.js application
 # Stage 1: Build environment
 FROM node:18-alpine AS builder
 
 # Security: Create non-root user
-RUN addgroup -g 1001 -S nodejs && 
+RUN addgroup -g 1001 -S nodejs &&
     adduser -S nextjs -u 1001
 
 WORKDIR /app
@@ -160,19 +178,19 @@ RUN npm ci --include=dev
 COPY . .
 
 # Build application
-RUN npm run build && 
+RUN npm run build &&
     npm prune --omit=dev
 
 # Stage 2: Production environment
 FROM node:18-alpine AS runner
 
 # Security: Install security updates
-RUN apk update && apk upgrade && 
-    apk add --no-cache dumb-init && 
+RUN apk update && apk upgrade &&
+    apk add --no-cache dumb-init &&
     rm -rf /var/cache/apk/*
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs && 
+RUN addgroup -g 1001 -S nodejs &&
     adduser -S nextjs -u 1001
 
 WORKDIR /app
@@ -193,7 +211,7 @@ USER nextjs
 EXPOSE 3000
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3
   CMD curl -f http://localhost:3000/api/health || exit 1
 
 # Use dumb-init for proper signal handling
@@ -204,6 +222,7 @@ CMD ["node", "server.js"]
 ```
 
 ### Advanced Multi-Service Docker Compose
+
 ```yaml
 # docker-compose.yml - Production-ready multi-service setup
 version: '3.8'
@@ -221,7 +240,7 @@ services:
     container_name: myapp-web
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
@@ -239,16 +258,16 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/api/health']
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
     logging:
-      driver: "json-file"
+      driver: 'json-file'
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: '10m'
+        max-file: '3'
     security_opt:
       - no-new-privileges:true
     cap_drop:
@@ -274,7 +293,7 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-myapp}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-myapp}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -293,7 +312,7 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
       interval: 10s
       timeout: 3s
       retries: 5
@@ -307,8 +326,8 @@ services:
     container_name: myapp-nginx
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
@@ -319,7 +338,7 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost/health']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -351,7 +370,7 @@ services:
     networks:
       - app_network
     healthcheck:
-      test: ["CMD", "node", "health-check.js"]
+      test: ['CMD', 'node', 'health-check.js']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -398,6 +417,7 @@ volumes:
 ```
 
 ### Development Override Configuration
+
 ```yaml
 # docker-compose.override.yml - Development environment
 version: '3.8'
@@ -414,19 +434,19 @@ services:
       - /app/node_modules
       - /app/.next
     ports:
-      - "3000:3000"
-      - "9229:9229"  # Node.js debugger
+      - '3000:3000'
+      - '9229:9229' # Node.js debugger
     command: npm run dev
 
   db:
     ports:
-      - "5432:5432"  # Expose for local access
+      - '5432:5432' # Expose for local access
     environment:
       - POSTGRES_DB=myapp_dev
 
   redis:
     ports:
-      - "6379:6379"  # Expose for local access
+      - '6379:6379' # Expose for local access
 
   # Development tools
   adminer:
@@ -434,7 +454,7 @@ services:
     container_name: myapp-adminer
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - db
     networks:
@@ -446,7 +466,7 @@ services:
     container_name: myapp-redis-commander
     restart: unless-stopped
     ports:
-      - "8081:8081"
+      - '8081:8081'
     environment:
       - REDIS_HOSTS=local:redis:6379
     depends_on:
@@ -456,6 +476,7 @@ services:
 ```
 
 ### Advanced .dockerignore Configuration
+
 ```bash
 # .dockerignore - Optimize build context
 # Version control
@@ -532,9 +553,11 @@ temp/
 ## Core Features
 
 ### Multi-Stage Builds
+
 - **Purpose**: Optimize image size and separate build/runtime environments
 - **Usage**: Reduce production image size and improve security
 - **Example**:
+
 ```dockerfile
 # Advanced multi-stage build for Go application
 # Stage 1: Build environment with all tools
@@ -559,8 +582,8 @@ RUN go mod verify
 COPY . .
 
 # Build statically linked binary
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 
-    go build -ldflags='-w -s -extldflags "-static"' 
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+    go build -ldflags='-w -s -extldflags "-static"'
     -a -installsuffix cgo -o app ./cmd/server
 
 # Stage 2: Minimal runtime environment
@@ -585,7 +608,7 @@ USER appuser
 EXPOSE 8080
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3
   CMD ["/app", "-health-check"]
 
 # Run application
@@ -593,9 +616,11 @@ ENTRYPOINT ["/app"]
 ```
 
 ### Docker Compose Orchestration
+
 - **Purpose**: Define and manage multi-container applications
 - **Usage**: Coordinate services, networks, and volumes
 - **Example**:
+
 ```yaml
 # Production orchestration with monitoring
 version: '3.8'
@@ -613,7 +638,7 @@ services:
       - REDIS_URL=${REDIS_URL}
       - JWT_SECRET=${JWT_SECRET}
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -646,7 +671,7 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     ports:
-      - "9090:9090"
+      - '9090:9090'
     networks:
       - monitoring
 
@@ -661,7 +686,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
     ports:
-      - "3001:3000"
+      - '3001:3000'
     networks:
       - monitoring
     depends_on:
@@ -681,20 +706,22 @@ volumes:
 ```
 
 ### Container Security
+
 - **Purpose**: Implement security best practices for containers
 - **Usage**: Protect against vulnerabilities and runtime attacks
 - **Example**:
+
 ```dockerfile
 # Security-hardened Dockerfile
 FROM node:18-alpine AS base
 
 # Security: Update packages and remove package manager cache
-RUN apk update && apk upgrade && 
-    apk add --no-cache dumb-init && 
+RUN apk update && apk upgrade &&
+    apk add --no-cache dumb-init &&
     rm -rf /var/cache/apk/*
 
 # Security: Create non-root user with specific UID/GID
-RUN addgroup -g 1001 -S nodejs && 
+RUN addgroup -g 1001 -S nodejs &&
     adduser -S nextjs -u 1001 -G nodejs
 
 # Security: Set secure file permissions
@@ -709,7 +736,7 @@ COPY --chown=nextjs:nodejs package*.json ./
 COPY --chown=nextjs:nodejs . .
 
 # Security: Install dependencies and remove dev tools
-RUN npm ci --only=production && 
+RUN npm ci --only=production &&
     npm cache clean --force
 
 # Security: Remove unnecessary packages
@@ -767,9 +794,11 @@ networks:
 ```
 
 ### Volume Management and Data Persistence
+
 - **Purpose**: Manage data persistence and sharing between containers
 - **Usage**: Store databases, uploads, and persistent application data
 - **Example**:
+
 ```yaml
 # Advanced volume management
 version: '3.8'
@@ -806,7 +835,7 @@ services:
       - ./config/app.yml:/app/config/production.yml:ro
       # Development: source code mounting
       - .:/app:cached
-      - /app/node_modules  # Anonymous volume to prevent overwriting
+      - /app/node_modules # Anonymous volume to prevent overwriting
     depends_on:
       - database
 
@@ -916,6 +945,7 @@ docker load < myapp.tar              # Load image from tar archive
 ## Workflow Integration
 
 ### Development Workflow
+
 1. **Local Development**: Use Docker Compose for local environment setup
 2. **Code Changes**: Live reload with volume mounting for development
 3. **Testing**: Run tests in isolated containers
@@ -924,15 +954,16 @@ docker load < myapp.tar              # Load image from tar archive
 6. **Monitoring**: Container health checks and resource monitoring
 
 ### CI/CD Pipeline Integration
+
 ```yaml
 # .github/workflows/docker-ci.yml
 name: Docker CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   REGISTRY: ghcr.io
@@ -1032,6 +1063,7 @@ jobs:
 ```
 
 ### Package.json Scripts Integration
+
 ```json
 {
   "scripts": {
@@ -1055,6 +1087,7 @@ jobs:
 ## Best Practices
 
 ### ✅ **Image Optimization Best Practices**
+
 - **Use multi-stage builds** - Separate build and runtime environments
 - **Choose minimal base images** - Use Alpine or distroless images when possible
 - **Layer caching optimization** - Order Dockerfile commands for maximum cache efficiency
@@ -1063,6 +1096,7 @@ jobs:
 - **Combine RUN commands** - Reduce image layers and size
 
 ### ✅ **Security Best Practices**
+
 - **Run as non-root user** - Create and use dedicated application users
 - **Use official images** - Trust verified base images from official repositories
 - **Scan images for vulnerabilities** - Regular security scanning with tools like Trivy
@@ -1071,6 +1105,7 @@ jobs:
 - **Apply security policies** - Use security contexts and capabilities
 
 ### ✅ **Production Deployment Best Practices**
+
 - **Implement health checks** - Monitor container health and restart when needed
 - **Set resource limits** - Prevent containers from consuming excessive resources
 - **Use orchestration** - Deploy with Kubernetes or Docker Swarm for scaling
@@ -1079,6 +1114,7 @@ jobs:
 - **Monitor performance** - Track resource usage and application metrics
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't run as root** - Security risk and bad practice
 - **Avoid large images** - Impacts deployment speed and storage costs
 - **Don't embed secrets** - Use environment variables or secret management
@@ -1089,6 +1125,7 @@ jobs:
 ## Advanced Docker Usage
 
 ### Docker Swarm Orchestration
+
 ```yaml
 # docker-stack.yml - Docker Swarm deployment
 version: '3.8'
@@ -1122,7 +1159,7 @@ services:
           - node.role == worker
           - node.labels.zone == frontend
     ports:
-      - "80:3000"
+      - '80:3000'
     networks:
       - frontend
       - backend
@@ -1175,6 +1212,7 @@ configs:
 ```
 
 ### Container Monitoring and Observability
+
 ```yaml
 # monitoring-stack.yml
 version: '3.8'
@@ -1204,7 +1242,7 @@ services:
       - '--web.enable-lifecycle'
       - '--web.enable-admin-api'
     ports:
-      - "9090:9090"
+      - '9090:9090'
     networks:
       - monitoring
 
@@ -1219,7 +1257,7 @@ services:
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
       - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
     ports:
-      - "3001:3000"
+      - '3001:3000'
     networks:
       - monitoring
 
@@ -1229,8 +1267,8 @@ services:
     environment:
       - COLLECTOR_OTLP_ENABLED=true
     ports:
-      - "16686:16686"
-      - "14268:14268"
+      - '16686:16686'
+      - '14268:14268'
     networks:
       - monitoring
 
@@ -1239,7 +1277,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
     environment:
       - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
       - xpack.security.enabled=false
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
@@ -1261,7 +1299,7 @@ services:
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     ports:
-      - "5601:5601"
+      - '5601:5601'
     depends_on:
       - elasticsearch
     networks:
@@ -1282,6 +1320,7 @@ volumes:
 ## Integration with Other Tools
 
 ### Kubernetes Integration
+
 ```yaml
 # k8s/deployment.yaml - Kubernetes deployment for Docker containers
 apiVersion: apps/v1
@@ -1301,62 +1340,63 @@ spec:
         app: myapp
     spec:
       containers:
-      - name: myapp
-        image: myregistry/myapp:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: database-url
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 1001
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-            - ALL
-        volumeMounts:
-        - name: tmp-volume
-          mountPath: /tmp
-        - name: app-config
-          mountPath: /app/config
-          readOnly: true
+        - name: myapp
+          image: myregistry/myapp:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: 'production'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: database-url
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '250m'
+            limits:
+              memory: '512Mi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+            - name: app-config
+              mountPath: /app/config
+              readOnly: true
       volumes:
-      - name: tmp-volume
-        emptyDir: {}
-      - name: app-config
-        configMap:
-          name: app-config
+        - name: tmp-volume
+          emptyDir: {}
+        - name: app-config
+          configMap:
+            name: app-config
       imagePullSecrets:
-      - name: registry-credentials
+        - name: registry-credentials
 ```
 
 ### Terraform Integration
+
 ```hcl
 # terraform/docker.tf - Terraform configuration for Docker
 terraform {
@@ -1390,7 +1430,7 @@ resource "docker_image" "app" {
 resource "docker_network" "app_network" {
   name = "myapp-network"
   driver = "bridge"
-  
+
   ipam_config {
     subnet  = "172.20.0.0/16"
     gateway = "172.20.0.1"
@@ -1401,22 +1441,22 @@ resource "docker_network" "app_network" {
 resource "docker_container" "database" {
   name  = "myapp-db"
   image = "postgres:15"
-  
+
   env = [
     "POSTGRES_DB=${var.db_name}",
     "POSTGRES_USER=${var.db_user}",
     "POSTGRES_PASSWORD=${var.db_password}"
   ]
-  
+
   volumes {
     host_path      = "${path.cwd}/data/postgres"
     container_path = "/var/lib/postgresql/data"
   }
-  
+
   networks_advanced {
     name = docker_network.app_network.name
   }
-  
+
   restart = "unless-stopped"
 }
 
@@ -1424,24 +1464,24 @@ resource "docker_container" "database" {
 resource "docker_container" "app" {
   name  = "myapp"
   image = docker_image.app.image_id
-  
+
   ports {
     internal = 3000
     external = 3000
   }
-  
+
   env = [
     "NODE_ENV=${var.environment}",
     "DATABASE_URL=postgresql://${var.db_user}:${var.db_password}@${docker_container.database.name}:5432/${var.db_name}"
   ]
-  
+
   networks_advanced {
     name = docker_network.app_network.name
   }
-  
+
   depends_on = [docker_container.database]
   restart    = "unless-stopped"
-  
+
   healthcheck {
     test         = ["CMD", "curl", "-f", "http://localhost:3000/health"]
     interval     = "30s"
@@ -1497,9 +1537,11 @@ output "container_id" {
 ### Common Issues
 
 #### Container Won't Start
+
 **Problem**: Container exits immediately or fails to start
 **Symptoms**: Container status shows "Exited (1)" or similar error codes
-**Solution**: 
+**Solution**:
+
 ```bash
 # Check container logs
 docker logs container_name
@@ -1517,9 +1559,11 @@ docker system df
 ```
 
 #### Build Failures
+
 **Problem**: Docker build fails with errors
 **Symptoms**: Build context errors, dependency installation failures
-**Solution**: 
+**Solution**:
+
 ```bash
 # Clean build without cache
 docker build --no-cache -t myapp .
@@ -1538,9 +1582,11 @@ docker run -it node:18-alpine /bin/sh
 ```
 
 #### Performance Issues
+
 **Problem**: Slow container performance or high resource usage
 **Symptoms**: High CPU/memory usage, slow response times
-**Solution**: 
+**Solution**:
+
 ```bash
 # Monitor resource usage
 docker stats
@@ -1560,6 +1606,7 @@ docker exec container_name top
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable Docker debug mode
 export DOCKER_DEBUG=1
@@ -1584,6 +1631,7 @@ docker exec container_name df -h
 ```
 
 ### Performance Optimization
+
 ```dockerfile
 # Optimized Dockerfile template
 FROM node:18-alpine AS dependencies
@@ -1613,7 +1661,7 @@ COPY --from=builder /app/dist ./dist
 COPY package*.json ./
 
 # Create non-root user
-RUN addgroup -g 1001 -S nodejs && 
+RUN addgroup -g 1001 -S nodejs &&
     adduser -S nextjs -u 1001
 
 USER nextjs
@@ -1625,6 +1673,7 @@ CMD ["npm", "start"]
 ## Security Considerations
 
 ### Security Best Practices
+
 - **Use official base images** - Trust verified images from official repositories
 - **Scan images regularly** - Use tools like Trivy, Clair, or Snyk for vulnerability scanning
 - **Run as non-root** - Create dedicated users with minimal privileges
@@ -1633,17 +1682,18 @@ CMD ["npm", "start"]
 - **Apply security policies** - Use Docker Bench for Security and CIS benchmarks
 
 ### Secure Configuration Examples
+
 ```dockerfile
 # Security-hardened production Dockerfile
 FROM node:18-alpine AS base
 
 # Security: Install security updates
-RUN apk update && apk upgrade && 
-    apk add --no-cache dumb-init && 
+RUN apk update && apk upgrade &&
+    apk add --no-cache dumb-init &&
     rm -rf /var/cache/apk/*
 
 # Security: Create non-root user
-RUN addgroup -g 1001 -S appgroup && 
+RUN addgroup -g 1001 -S appgroup &&
     adduser -S appuser -u 1001 -G appgroup
 
 FROM base AS production
@@ -1652,17 +1702,17 @@ WORKDIR /app
 
 # Security: Copy with proper ownership
 COPY --chown=appuser:appgroup package*.json ./
-RUN npm ci --only=production && 
+RUN npm ci --only=production &&
     npm cache clean --force
 
 COPY --chown=appuser:appgroup . .
 
 # Security: Remove unnecessary packages
-RUN apk del wget curl && 
+RUN apk del wget curl &&
     rm -rf /var/cache/apk/*
 
 # Security: Set file permissions
-RUN chmod -R 755 /app && 
+RUN chmod -R 755 /app &&
     chmod -R 644 /app/package*.json
 
 # Security: Switch to non-root user
@@ -1701,7 +1751,7 @@ services:
           memory: 512M
           pids: 100
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:3000/health']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -1727,6 +1777,7 @@ When helping with Docker:
 8. **Suggest orchestration solutions** like Kubernetes or Docker Swarm for scalable deployments
 
 ### Code Generation Rules
+
 - Generate multi-stage Dockerfiles with optimization and security best practices
 - Include proper health checks and resource limits in container configurations
 - Provide comprehensive Docker Compose files with networks, volumes, and dependencies
@@ -1737,6 +1788,7 @@ When helping with Docker:
 - Include backup and disaster recovery strategies for containerized applications
 
 ### .dockerignore
+
 ```
 node_modules
 npm-debug.log
@@ -1751,6 +1803,7 @@ coverage
 ```
 
 ### docker-compose.yml
+
 ```yaml
 version: '3.8'
 
@@ -1758,7 +1811,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
     volumes:
@@ -1775,34 +1828,41 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
 
 volumes:
   postgres_data:
 ```
 
 ## Core Features
+
 ### Container Management
+
 - **Purpose**: Create, run, and manage application containers
 - **Usage**: Isolate applications with their dependencies
 - **Example**:
+
 ```bash
 docker run -d -p 3000:3000 --name myapp myapp:latest
 ```
 
 ### Image Building
+
 - **Purpose**: Create reusable container images
 - **Usage**: Package applications for deployment
 - **Example**:
+
 ```bash
 docker build -t myapp:latest .
 docker build -t myapp:v1.2.3 --build-arg NODE_ENV=production .
 ```
 
 ### Multi-stage Builds
+
 - **Purpose**: Optimize image size and security
 - **Usage**: Separate build and runtime environments
 - **Example**:
+
 ```dockerfile
 # Build stage
 FROM node:18-alpine AS builder
@@ -1822,6 +1882,7 @@ CMD ["node", "dist/index.js"]
 ```
 
 ## Common Commands
+
 ```bash
 # Essential daily commands
 docker ps                              # List running containers
@@ -1836,7 +1897,9 @@ docker run --rm -it app:latest /bin/sh  # Run temporary interactive container
 ```
 
 ## Workflow Integration
+
 ### Development Workflow
+
 1. **Setup**: Create Dockerfile and docker-compose.yml
 2. **Development**: Use docker-compose for local development
 3. **Testing**: Run tests in containers for consistency
@@ -1844,6 +1907,7 @@ docker run --rm -it app:latest /bin/sh  # Run temporary interactive container
 5. **CI/CD**: Build and push images in CI pipeline
 
 ### Automation Scripts
+
 ```json
 {
   "scripts": {
@@ -1856,6 +1920,7 @@ docker run --rm -it app:latest /bin/sh  # Run temporary interactive container
 ```
 
 ### Git Hooks Integration
+
 ```bash
 # Pre-commit hook example
 #!/bin/sh
@@ -1863,79 +1928,102 @@ docker build -t myapp:test . && docker run --rm myapp:test npm test
 ```
 
 ## Best Practices
+
 ### Configuration Best Practices
+
 - Use multi-stage builds to reduce image size
 - Run containers as non-root users for security
 - Use specific image tags instead of 'latest' in production
 - Keep images small by minimizing layers and removing unnecessary files
 
 ### Usage Patterns
+
 - Use .dockerignore to exclude unnecessary files from build context
 - Leverage Docker layer caching for faster builds
 - Use environment variables for configuration instead of hardcoding values
 
 ### Performance Optimization
+
 - Use Alpine Linux base images for smaller size
 - Combine RUN commands to reduce layers
 - Use BuildKit for improved build performance
 
 ## Common Use Cases
+
 ### Web Application Deployment
+
 **Scenario**: Deploy a Node.js web application with database
 **Implementation**:
+
 ```bash
 docker-compose up -d
 docker-compose logs -f app
 ```
+
 **Expected Result**: Application running on specified port with database connection
 
 ### Development Environment
+
 **Scenario**: Consistent development environment across team
 **Implementation**:
+
 ```bash
 docker-compose -f docker-compose.dev.yml up
 docker-compose exec app npm run dev
 ```
+
 **Expected Result**: Hot-reloaded development server with all dependencies
 
 ### Testing Pipeline
+
 **Scenario**: Run tests in isolated environment
 **Implementation**:
+
 ```bash
 docker build -t myapp:test --target test .
 docker run --rm myapp:test
 ```
+
 **Expected Result**: All tests pass in clean environment
 
 ## Integration with Other Tools
+
 ### Kubernetes
+
 - **Integration Purpose**: Deploy Docker images to Kubernetes clusters
 - **Setup**: Create Kubernetes manifests referencing Docker images
 - **Usage**: Use kubectl to deploy containerized applications
 
 ### CI/CD Pipelines
+
 - **Integration Purpose**: Automate building and deployment of images
 - **Setup**: Configure pipeline to build, test, and push images
 - **Usage**: Trigger builds on code changes
 
 ## Troubleshooting
+
 ### Common Issues
+
 #### Container Won't Start
+
 **Problem**: Container exits immediately after starting
 **Symptoms**: Container shows "Exited (1)" status
 **Solution**: Check logs with `docker logs <container>` and fix application errors
 
 #### Port Already in Use
+
 **Problem**: Cannot bind to port (port already allocated)
 **Symptoms**: Error message about port binding
 **Solution**: Stop conflicting services or use different port mapping
 
 #### Out of Disk Space
+
 **Problem**: No space left on device
 **Symptoms**: Build failures or container start failures
 **Solution**: Run `docker system prune -a` to clean up unused resources
 
 ### Debug Mode
+
 ```bash
 # Enable verbose/debug output
 docker build --progress=plain --no-cache .
@@ -1947,28 +2035,35 @@ docker inspect <container>
 ```
 
 ### Performance Issues
+
 - Monitor resource usage with `docker stats`
 - Limit container resources with `--memory` and `--cpus` flags
 - Use health checks to monitor container health
 
 ## Security Considerations
+
 ### Security Best Practices
+
 - Never store secrets in images or environment variables
 - Use official base images from trusted sources
 - Regularly update base images for security patches
 
 ### Sensitive Data Handling
+
 - Use Docker secrets or external secret management
 - Mount sensitive files as volumes instead of copying into images
 - Use multi-stage builds to avoid including build-time secrets
 
 ### Network Security
+
 - Use custom networks instead of default bridge
 - Limit exposed ports to only what's necessary
 - Use reverse proxies for external access
 
 ## Advanced Configuration
+
 ### Docker Buildx
+
 ```bash
 # Multi-platform builds
 docker buildx create --name multiarch
@@ -1977,12 +2072,14 @@ docker buildx build --platform linux/amd64,linux/arm64 -t myapp:latest .
 ```
 
 ### Health Checks
+
 ```dockerfile
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3000/health || exit 1
 ```
 
 ### Resource Limits
+
 ```yaml
 services:
   app:
@@ -1998,17 +2095,21 @@ services:
 ```
 
 ## Version Management
+
 ### Version Compatibility
+
 - **Docker Engine**: 20.10+
 - **Docker Compose**: 2.0+
 - **OS Support**: Linux, macOS, Windows 10/11
 
 ### Migration Guides
+
 - **From Docker Compose v1**: Update to v2 syntax and commands
 - **Breaking Changes**: Review changelog for version-specific changes
 - **Deprecation Notices**: Monitor for deprecated features
 
 ## Useful Resources
+
 - **Official Documentation**: https://docs.docker.com/
 - **Docker Hub**: https://hub.docker.com/
 - **Best Practices Guide**: https://docs.docker.com/develop/dev-best-practices/
@@ -2016,6 +2117,7 @@ services:
 - **Community Forum**: https://forums.docker.com/
 
 ## AI Assistant Guidelines
+
 When helping with Docker:
 
 1. **Always suggest the most current stable version**
@@ -2028,6 +2130,7 @@ When helping with Docker:
 8. **Reference official documentation and best practices**
 
 ### Code Generation Rules
+
 - Generate Dockerfiles that follow best practices
 - Include comments explaining important steps
 - Use specific image tags instead of 'latest'

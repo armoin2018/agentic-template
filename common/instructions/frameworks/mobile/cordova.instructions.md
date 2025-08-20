@@ -1,23 +1,34 @@
 ---
-title: "Apache Cordova Mobile Development Framework Instructions"
-description: "Comprehensive guide for Apache Cordova hybrid mobile app development using web technologies for iOS, Android, and other platforms"
-category: "Mobile Frameworks"
-author: "AI Assistant"
-tags: ["cordova", "phonegap", "hybrid", "mobile", "cross-platform", "web-to-mobile", "ionic", "javascript"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Apache Cordova Mobile Development Framework Instructions'
+description: 'Comprehensive guide for Apache Cordova hybrid mobile app development using web technologies for iOS, Android, and other platforms'
+category: 'Mobile Frameworks'
+
+tags:
+  [
+    'cordova',
+    'phonegap',
+    'hybrid',
+    'mobile',
+    'cross-platform',
+    'web-to-mobile',
+    'ionic',
+    'javascript',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/config.xml"
-  - "**/cordova/**"
-  - "**/platforms/**"
-  - "**/plugins/**"
-  - "**/www/**"
-  - "**/hooks/**"
+  - '**/config.xml'
+  - '**/cordova/**'
+  - '**/platforms/**'
+  - '**/plugins/**'
+  - '**/www/**'
+  - '**/hooks/**'
 ---
 
 # Apache Cordova Mobile Development Framework Instructions
 
 ## Framework Overview
+
 - **Framework Name**: Apache Cordova
 - **Version**: 12.0+ (Latest stable with platform improvements and security updates)
 - **Type**: Hybrid Mobile Framework
@@ -27,6 +38,7 @@ applyTo:
 ## When to Use Cordova
 
 ### ✅ **Use Cordova When**
+
 - Converting existing web applications to mobile apps quickly
 - Team has strong web development skills but limited native mobile experience
 - Need to support multiple platforms with single codebase
@@ -37,6 +49,7 @@ applyTo:
 - Prototyping mobile concepts before committing to native development
 
 ### ❌ **Avoid Cordova When**
+
 - Building performance-critical applications (games, AR/VR, heavy animations)
 - Need advanced native UI components and platform-specific design patterns
 - Requiring complex device integrations beyond basic plugin capabilities
@@ -48,26 +61,29 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Type Assessment
-| Project Type | Cordova Recommendation | Alternative Consideration |
-|--------------|----------------------|--------------------------|
-| Content/News App | ✅ **Recommended** - Web content works well | Consider PWA first |
-| Business/Enterprise | ✅ **Good Choice** - Forms and data entry | React Native for better UX |
-| E-commerce | 🔄 **Consider** - Performance important | Native for complex checkout |
-| Gaming | ❌ **Avoid** - Performance critical | Unity, native frameworks |
-| Social Media | 🔄 **Consider** - UX expectations high | React Native, Flutter |
-| Utility/Tools | ✅ **Good Choice** - Simple functionality | PWA might be sufficient |
+
+| Project Type        | Cordova Recommendation                      | Alternative Consideration   |
+| ------------------- | ------------------------------------------- | --------------------------- |
+| Content/News App    | ✅ **Recommended** - Web content works well | Consider PWA first          |
+| Business/Enterprise | ✅ **Good Choice** - Forms and data entry   | React Native for better UX  |
+| E-commerce          | 🔄 **Consider** - Performance important     | Native for complex checkout |
+| Gaming              | ❌ **Avoid** - Performance critical         | Unity, native frameworks    |
+| Social Media        | 🔄 **Consider** - UX expectations high      | React Native, Flutter       |
+| Utility/Tools       | ✅ **Good Choice** - Simple functionality   | PWA might be sufficient     |
 
 ### Complexity Assessment
-| Factor | Low Complexity | Medium Complexity | High Complexity |
-|--------|----------------|-------------------|-----------------|
-| **Setup Time** | 4 hours (basic app) | 2 days (plugins + customization) | 1 week (complex integrations) |
-| **Platform Support** | Android + iOS | + Windows, Browser | + Custom platforms |
-| **Plugin Dependencies** | 0-3 basic plugins | 4-8 plugins with customization | 9+ plugins or custom development |
-| **Performance Requirements** | Basic content display | Moderate interactivity | High performance needs |
+
+| Factor                       | Low Complexity        | Medium Complexity                | High Complexity                  |
+| ---------------------------- | --------------------- | -------------------------------- | -------------------------------- |
+| **Setup Time**               | 4 hours (basic app)   | 2 days (plugins + customization) | 1 week (complex integrations)    |
+| **Platform Support**         | Android + iOS         | + Windows, Browser               | + Custom platforms               |
+| **Plugin Dependencies**      | 0-3 basic plugins     | 4-8 plugins with customization   | 9+ plugins or custom development |
+| **Performance Requirements** | Basic content display | Moderate interactivity           | High performance needs           |
 
 ## Installation & Setup
 
 ### Prerequisites
+
 ```bash
 # Install Node.js (version 16+ recommended)
 node --version  # Should be 16.0.0 or higher
@@ -87,6 +103,7 @@ xcode-select --install
 ```
 
 ### Global Cordova Installation
+
 ```bash
 # Install Cordova CLI globally
 npm install -g cordova
@@ -102,6 +119,7 @@ npm update -g cordova
 ```
 
 ### Project Initialization
+
 ```bash
 # Create new Cordova project
 cordova create myApp com.example.myapp "My App"
@@ -121,6 +139,7 @@ cordova requirements ios
 ```
 
 ## Project Structure
+
 ```
 myApp/
 ├── config.xml              # Main configuration file
@@ -148,35 +167,39 @@ myApp/
 ## Core Concepts
 
 ### Device Ready Event
+
 - **Purpose**: Ensures Cordova APIs are loaded before use
 - **Usage**: Critical initialization point for all Cordova applications
-- **Example**: 
+- **Example**:
+
 ```javascript
 // Wait for device ready before using Cordova APIs
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-    console.log('Cordova is ready!');
-    
-    // Safe to use Cordova APIs now
-    console.log('Device: ' + device.platform);
-    console.log('Version: ' + device.version);
-    
-    // Initialize your app here
-    initializeApp();
+  console.log('Cordova is ready!');
+
+  // Safe to use Cordova APIs now
+  console.log('Device: ' + device.platform);
+  console.log('Version: ' + device.version);
+
+  // Initialize your app here
+  initializeApp();
 }
 
 function initializeApp() {
-    // App initialization code
-    setupEventHandlers();
-    loadInitialData();
+  // App initialization code
+  setupEventHandlers();
+  loadInitialData();
 }
 ```
 
 ### Plugin System
+
 - **Purpose**: Extends web apps with native device functionality
 - **Usage**: Bridge between JavaScript and native mobile platform APIs
 - **Example**:
+
 ```bash
 # Install essential plugins
 cordova plugin add cordova-plugin-device
@@ -194,34 +217,34 @@ cordova plugin remove cordova-plugin-camera
 
 ```javascript
 // Using device plugin
-document.addEventListener('deviceready', function() {
-    console.log('Device Platform: ' + device.platform);
-    console.log('Device Version: ' + device.version);
-    console.log('Device Model: ' + device.model);
-    console.log('Device UUID: ' + device.uuid);
+document.addEventListener('deviceready', function () {
+  console.log('Device Platform: ' + device.platform);
+  console.log('Device Version: ' + device.version);
+  console.log('Device Model: ' + device.model);
+  console.log('Device UUID: ' + device.uuid);
 });
 
 // Using camera plugin
 function takePicture() {
-    const options = {
-        quality: 75,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 300,
-        targetHeight: 300
-    };
-    
-    navigator.camera.getPicture(onSuccess, onFail, options);
+  const options = {
+    quality: 75,
+    destinationType: Camera.DestinationType.FILE_URI,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    encodingType: Camera.EncodingType.JPEG,
+    targetWidth: 300,
+    targetHeight: 300,
+  };
+
+  navigator.camera.getPicture(onSuccess, onFail, options);
 }
 
 function onSuccess(imageURI) {
-    const image = document.getElementById('myImage');
-    image.src = imageURI;
+  const image = document.getElementById('myImage');
+  image.src = imageURI;
 }
 
 function onFail(message) {
-    alert('Failed to capture image: ' + message);
+  alert('Failed to capture image: ' + message);
 }
 ```
 
@@ -234,6 +257,7 @@ function onFail(message) {
 5. **Deployment**: Distribute through app stores or enterprise channels
 
 ## Essential Commands
+
 ```bash
 # Project management
 cordova create <path> <id> <name>     # Create new project
@@ -264,6 +288,7 @@ cordova run --list             # List available devices/emulators
 ## Best Practices
 
 ### ✅ **Performance Optimization**
+
 - **Minimize DOM manipulation** - Cache DOM references and batch updates
 - **Use CSS transforms** instead of changing layout properties for animations
 - **Implement lazy loading** for images and content to improve initial load time
@@ -272,6 +297,7 @@ cordova run --list             # List available devices/emulators
 - **Minimize plugin usage** - Only include plugins you actually need
 
 ### ✅ **Security Best Practices**
+
 - **Content Security Policy** - Implement strict CSP headers
 - **Validate all inputs** - Never trust data from device APIs or user input
 - **Secure storage** - Use plugins for sensitive data storage
@@ -280,6 +306,7 @@ cordova run --list             # List available devices/emulators
 - **Whitelist domains** - Restrict network access to known domains
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't access device APIs before deviceready** - Always wait for the event
 - **Don't use synchronous operations** - Use callbacks and promises for async operations
 - **Don't ignore platform differences** - Test thoroughly on each target platform
@@ -301,6 +328,7 @@ When helping with Apache Cordova development:
 8. **Testing strategies** - Emphasize testing on real devices, not just emulators
 
 ### Code Generation Rules
+
 - Generate code that waits for deviceready event before using Cordova APIs
 - Include proper error handling for all plugin operations
 - Provide cross-platform compatible solutions

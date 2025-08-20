@@ -1,26 +1,36 @@
 ---
-title: "Kubernetes Container Orchestration Instructions"
-description: "Comprehensive guide for Kubernetes container orchestration, scaling, service management, and enterprise deployment with monitoring and security"
-category: "Containerization"
-author: "AI Assistant"
-tags: ["kubernetes", "k8s", "container-orchestration", "microservices", "scaling", "devops", "cloud-native"]
-version: "1.0"
-last_updated: "2025-08-14"
+title: 'Kubernetes Container Orchestration Instructions'
+description: 'Comprehensive guide for Kubernetes container orchestration, scaling, service management, and enterprise deployment with monitoring and security'
+category: 'Containerization'
+
+tags:
+  [
+    'kubernetes',
+    'k8s',
+    'container-orchestration',
+    'microservices',
+    'scaling',
+    'devops',
+    'cloud-native',
+  ]
+version: '1.0'
+last_updated: '2025-08-14'
 applyTo:
-  - "**/k8s/**"
-  - "**/kubernetes/**"
-  - "**/*.yaml"
-  - "**/*.yml"
-  - "**/deployment.yaml"
-  - "**/service.yaml"
-  - "**/ingress.yaml"
-  - "**/configmap.yaml"
-  - "**/secret.yaml"
+  - '**/k8s/**'
+  - '**/kubernetes/**'
+  - '**/*.yaml'
+  - '**/*.yml'
+  - '**/deployment.yaml'
+  - '**/service.yaml'
+  - '**/ingress.yaml'
+  - '**/configmap.yaml'
+  - '**/secret.yaml'
 ---
 
 # Kubernetes Container Orchestration Instructions
 
 ## Tool Overview
+
 - **Tool Name**: Kubernetes (K8s)
 - **Version**: 1.28+ (Latest stable with enhanced security and performance features)
 - **Category**: Container Orchestration - Application Deployment and Management
@@ -30,6 +40,7 @@ applyTo:
 ## When to Use Kubernetes
 
 ### ✅ **Use Kubernetes When**
+
 - Building microservices architectures requiring orchestration and service discovery
 - Need automated scaling based on demand and resource utilization
 - Deploying applications across multiple environments (dev, staging, production)
@@ -40,6 +51,7 @@ applyTo:
 - Building applications requiring service mesh and advanced networking
 
 ### ❌ **Avoid Kubernetes When**
+
 - Building simple single-container applications
 - Team lacks containerization and orchestration expertise
 - Working with small-scale applications without scaling requirements
@@ -51,27 +63,30 @@ applyTo:
 ## AI Agent Decision Matrix
 
 ### Project Complexity Assessment
-| Project Type | Kubernetes Recommendation | Setup Complexity |
-|--------------|---------------------------|------------------|
-| Microservices Architecture | ✅ **Essential** - Perfect orchestration | High - Multi-service coordination |
-| Distributed Systems | ✅ **Essential** - Service mesh integration | High - Advanced networking |
-| Cloud-Native Applications | ✅ **Essential** - Auto-scaling and resilience | High - Production deployment |
-| Web Applications (Multi-tier) | ✅ **Recommended** - Load balancing | Medium - Service management |
-| API Gateway Applications | ✅ **Recommended** - Traffic management | Medium - Ingress configuration |
-| Batch Processing | 🔄 **Consider** - Job orchestration | Medium - CronJob setup |
-| Single Container Apps | ❌ **Avoid** - Unnecessary complexity | Low - Use Docker Compose |
+
+| Project Type                  | Kubernetes Recommendation                      | Setup Complexity                  |
+| ----------------------------- | ---------------------------------------------- | --------------------------------- |
+| Microservices Architecture    | ✅ **Essential** - Perfect orchestration       | High - Multi-service coordination |
+| Distributed Systems           | ✅ **Essential** - Service mesh integration    | High - Advanced networking        |
+| Cloud-Native Applications     | ✅ **Essential** - Auto-scaling and resilience | High - Production deployment      |
+| Web Applications (Multi-tier) | ✅ **Recommended** - Load balancing            | Medium - Service management       |
+| API Gateway Applications      | ✅ **Recommended** - Traffic management        | Medium - Ingress configuration    |
+| Batch Processing              | 🔄 **Consider** - Job orchestration            | Medium - CronJob setup            |
+| Single Container Apps         | ❌ **Avoid** - Unnecessary complexity          | Low - Use Docker Compose          |
 
 ### Infrastructure Assessment
-| Factor | Small Scale | Medium Scale | Enterprise Scale |
-|--------|-------------|--------------|------------------|
-| **Setup Time** | 2 days (managed cluster) | 1 week (self-managed) | 2-4 weeks (enterprise) |
-| **Node Count** | 3-5 nodes | 10-50 nodes | 50+ nodes |
-| **Services** | 5-10 services | 20-100 services | 100+ services |
-| **Complexity** | Basic deployments | Multi-environment | Multi-cluster federation |
+
+| Factor         | Small Scale              | Medium Scale          | Enterprise Scale         |
+| -------------- | ------------------------ | --------------------- | ------------------------ |
+| **Setup Time** | 2 days (managed cluster) | 1 week (self-managed) | 2-4 weeks (enterprise)   |
+| **Node Count** | 3-5 nodes                | 10-50 nodes           | 50+ nodes                |
+| **Services**   | 5-10 services            | 20-100 services       | 100+ services            |
+| **Complexity** | Basic deployments        | Multi-environment     | Multi-cluster federation |
 
 ## Installation & Setup
 
 ### kubectl Installation
+
 ```bash
 # macOS installation
 brew install kubectl
@@ -89,6 +104,7 @@ kubectl version --short
 ```
 
 ### Local Development Cluster
+
 ```bash
 # Minikube installation and setup
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -114,6 +130,7 @@ kubectl get pods --all-namespaces
 ```
 
 ### Production Cluster Setup
+
 ```bash
 # Managed Kubernetes services
 # AWS EKS
@@ -134,6 +151,7 @@ az aks get-credentials --resource-group myResourceGroup --name production-cluste
 ## Configuration
 
 ### Production-Ready Application Deployment
+
 ```yaml
 # deployment.yaml - Comprehensive application deployment
 apiVersion: apps/v1
@@ -162,108 +180,108 @@ spec:
         runAsUser: 1001
         fsGroup: 1001
       containers:
-      - name: web-app
-        image: myregistry/web-app:v1.0.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
-          name: http
-          protocol: TCP
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: connection-string
-        - name: REDIS_URL
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: redis-url
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: jwt-secret
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 3
-          failureThreshold: 3
-        startupProbe:
-          httpGet:
-            path: /startup
-            port: 3000
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 30
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsNonRoot: true
-          runAsUser: 1001
-          capabilities:
-            drop:
-            - ALL
-          readOnlyRootFilesystem: true
-        volumeMounts:
-        - name: tmp-volume
-          mountPath: /tmp
-        - name: app-config
-          mountPath: /app/config
-          readOnly: true
-        - name: app-storage
-          mountPath: /app/storage
+        - name: web-app
+          image: myregistry/web-app:v1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: 'production'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: connection-string
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: redis-url
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: jwt-secret
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '250m'
+            limits:
+              memory: '512Mi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /startup
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1001
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+            - name: app-config
+              mountPath: /app/config
+              readOnly: true
+            - name: app-storage
+              mountPath: /app/storage
       volumes:
-      - name: tmp-volume
-        emptyDir: {}
-      - name: app-config
-        configMap:
-          name: app-config
-      - name: app-storage
-        persistentVolumeClaim:
-          claimName: app-storage-pvc
+        - name: tmp-volume
+          emptyDir: {}
+        - name: app-config
+          configMap:
+            name: app-config
+        - name: app-storage
+          persistentVolumeClaim:
+            claimName: app-storage-pvc
       imagePullSecrets:
-      - name: registry-credentials
+        - name: registry-credentials
       nodeSelector:
         kubernetes.io/arch: amd64
       tolerations:
-      - key: "app"
-        operator: "Equal"
-        value: "web-app"
-        effect: "NoSchedule"
+        - key: 'app'
+          operator: 'Equal'
+          value: 'web-app'
+          effect: 'NoSchedule'
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - web-app
-              topologyKey: kubernetes.io/hostname
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - web-app
+                topologyKey: kubernetes.io/hostname
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -272,6 +290,7 @@ spec:
 ```
 
 ### Service Configuration
+
 ```yaml
 # service.yaml - Load balancer service configuration
 apiVersion: v1
@@ -282,21 +301,21 @@ metadata:
   labels:
     app: web-app
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+    service.beta.kubernetes.io/aws-load-balancer-type: 'nlb'
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: 'http'
 spec:
   type: LoadBalancer
   selector:
     app: web-app
   ports:
-  - name: http
-    port: 80
-    targetPort: 3000
-    protocol: TCP
-  - name: https
-    port: 443
-    targetPort: 3000
-    protocol: TCP
+    - name: http
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 3000
+      protocol: TCP
   sessionAffinity: ClientIP
   sessionAffinityConfig:
     clientIP:
@@ -314,12 +333,13 @@ spec:
   selector:
     app: web-app
   ports:
-  - name: http
-    port: 3000
-    targetPort: 3000
+    - name: http
+      port: 3000
+      targetPort: 3000
 ```
 
 ### Ingress Configuration
+
 ```yaml
 # ingress.yaml - Advanced ingress with SSL and routing
 apiVersion: networking.k8s.io/v1
@@ -328,15 +348,15 @@ metadata:
   name: web-app-ingress
   namespace: production
   annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/rate-limit: "100"
-    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://mydomain.com"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-body-size: '50m'
+    nginx.ingress.kubernetes.io/rate-limit: '100'
+    nginx.ingress.kubernetes.io/rate-limit-window: '1m'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/cors-allow-origin: 'https://mydomain.com'
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
     nginx.ingress.kubernetes.io/configuration-snippet: |
       add_header X-Frame-Options SAMEORIGIN always;
       add_header X-Content-Type-Options nosniff always;
@@ -344,41 +364,42 @@ metadata:
       add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 spec:
   tls:
-  - hosts:
-    - api.mydomain.com
-    - app.mydomain.com
-    secretName: web-app-tls
+    - hosts:
+        - api.mydomain.com
+        - app.mydomain.com
+      secretName: web-app-tls
   rules:
-  - host: api.mydomain.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-app-service
-            port:
-              number: 80
-  - host: app.mydomain.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend-service
-            port:
-              number: 80
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: web-app-service
-            port:
-              number: 80
+    - host: api.mydomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-app-service
+                port:
+                  number: 80
+    - host: app.mydomain.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: web-app-service
+                port:
+                  number: 80
 ```
 
 ### ConfigMap and Secrets
+
 ```yaml
 # configmap.yaml - Application configuration
 apiVersion: v1
@@ -429,12 +450,13 @@ metadata:
   namespace: production
 type: Opaque
 stringData:
-  connection-string: "postgresql://user:password@postgres-service:5432/myapp"
-  username: "myapp_user"
-  password: "secure_password_123"
+  connection-string: 'postgresql://user:password@postgres-service:5432/myapp'
+  username: 'myapp_user'
+  password: 'secure_password_123'
 ```
 
 ### Persistent Storage
+
 ```yaml
 # storage.yaml - Persistent volume configuration
 apiVersion: v1
@@ -451,7 +473,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/mnt/data/app-storage"
+    path: '/mnt/data/app-storage'
 
 ---
 apiVersion: v1
@@ -476,9 +498,9 @@ metadata:
 provisioner: kubernetes.io/aws-ebs
 parameters:
   type: gp3
-  iops: "3000"
-  throughput: "125"
-  encrypted: "true"
+  iops: '3000'
+  throughput: '125'
+  encrypted: 'true'
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
@@ -487,9 +509,11 @@ volumeBindingMode: WaitForFirstConsumer
 ## Core Features
 
 ### Horizontal Pod Autoscaler (HPA)
+
 - **Purpose**: Automatically scale pods based on CPU, memory, or custom metrics
 - **Usage**: Maintain optimal resource utilization and handle traffic spikes
 - **Example**:
+
 ```yaml
 # hpa.yaml - Horizontal Pod Autoscaler
 apiVersion: autoscaling/v2
@@ -505,48 +529,50 @@ spec:
   minReplicas: 3
   maxReplicas: 20
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
-  - type: Pods
-    pods:
-      metric:
-        name: requests_per_second
-      target:
-        type: AverageValue
-        averageValue: "30"
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+    - type: Pods
+      pods:
+        metric:
+          name: requests_per_second
+        target:
+          type: AverageValue
+          averageValue: '30'
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
       policies:
-      - type: Percent
-        value: 10
-        periodSeconds: 60
+        - type: Percent
+          value: 10
+          periodSeconds: 60
     scaleUp:
       stabilizationWindowSeconds: 0
       policies:
-      - type: Percent
-        value: 100
-        periodSeconds: 15
-      - type: Pods
-        value: 4
-        periodSeconds: 15
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+        - type: Pods
+          value: 4
+          periodSeconds: 15
       selectPolicy: Max
 ```
 
 ### StatefulSet for Stateful Applications
+
 - **Purpose**: Manage stateful applications with persistent identity and storage
 - **Usage**: Databases, message queues, and applications requiring stable network identities
 - **Example**:
+
 ```yaml
 # statefulset.yaml - Database StatefulSet
 apiVersion: apps/v1
@@ -566,71 +592,73 @@ spec:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: postgres:15-alpine
-        env:
-        - name: POSTGRES_DB
-          value: myapp
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: username
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: password
-        - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
-        ports:
-        - containerPort: 5432
-          name: postgres
+        - name: postgres
+          image: postgres:15-alpine
+          env:
+            - name: POSTGRES_DB
+              value: myapp
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          ports:
+            - containerPort: 5432
+              name: postgres
+          resources:
+            requests:
+              memory: '1Gi'
+              cpu: '500m'
+            limits:
+              memory: '2Gi'
+              cpu: '1000m'
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - $(POSTGRES_USER)
+                - -d
+                - $(POSTGRES_DB)
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - $(POSTGRES_USER)
+                - -d
+                - $(POSTGRES_DB)
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-storage
+      spec:
+        accessModes: ['ReadWriteOnce']
+        storageClassName: 'fast-ssd'
         resources:
           requests:
-            memory: "1Gi"
-            cpu: "500m"
-          limits:
-            memory: "2Gi"
-            cpu: "1000m"
-        livenessProbe:
-          exec:
-            command:
-            - pg_isready
-            - -U
-            - $(POSTGRES_USER)
-            - -d
-            - $(POSTGRES_DB)
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          exec:
-            command:
-            - pg_isready
-            - -U
-            - $(POSTGRES_USER)
-            - -d
-            - $(POSTGRES_DB)
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        volumeMounts:
-        - name: postgres-storage
-          mountPath: /var/lib/postgresql/data
-  volumeClaimTemplates:
-  - metadata:
-      name: postgres-storage
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      storageClassName: "fast-ssd"
-      resources:
-        requests:
-          storage: 100Gi
+            storage: 100Gi
 ```
 
 ### Jobs and CronJobs
+
 - **Purpose**: Run batch processing and scheduled tasks
 - **Usage**: Data processing, backups, and periodic maintenance tasks
 - **Example**:
+
 ```yaml
 # cronjob.yaml - Scheduled backup job
 apiVersion: batch/v1
@@ -639,33 +667,33 @@ metadata:
   name: database-backup
   namespace: production
 spec:
-  schedule: "0 2 * * *"  # Daily at 2 AM
+  schedule: '0 2 * * *' # Daily at 2 AM
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: backup
-            image: postgres:15-alpine
-            env:
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: password
-            command:
-            - /bin/bash
-            - -c
-            - |
-              pg_dump -h postgres-service -U myapp_user myapp > /backup/backup-$(date +%Y%m%d-%H%M%S).sql
-              find /backup -name "*.sql" -mtime +7 -delete
-            volumeMounts:
-            - name: backup-storage
-              mountPath: /backup
+            - name: backup
+              image: postgres:15-alpine
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: postgres-secret
+                      key: password
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  pg_dump -h postgres-service -U myapp_user myapp > /backup/backup-$(date +%Y%m%d-%H%M%S).sql
+                  find /backup -name "*.sql" -mtime +7 -delete
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backup
           volumes:
-          - name: backup-storage
-            persistentVolumeClaim:
-              claimName: backup-pvc
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: backup-pvc
           restartPolicy: OnFailure
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
@@ -682,24 +710,26 @@ spec:
   template:
     spec:
       containers:
-      - name: migration
-        image: myregistry/migration-tool:latest
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: database-secrets
-              key: connection-string
-        command: ["npm", "run", "migrate"]
+        - name: migration
+          image: myregistry/migration-tool:latest
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-secrets
+                  key: connection-string
+          command: ['npm', 'run', 'migrate']
       restartPolicy: Never
   backoffLimit: 3
   activeDeadlineSeconds: 1800
 ```
 
 ### NetworkPolicy for Security
+
 - **Purpose**: Control network traffic between pods and services
 - **Usage**: Implement micro-segmentation and security policies
 - **Example**:
+
 ```yaml
 # networkpolicy.yaml - Traffic control policies
 apiVersion: networking.k8s.io/v1
@@ -712,42 +742,42 @@ spec:
     matchLabels:
       app: web-app
   policyTypes:
-  - Ingress
-  - Egress
+    - Ingress
+    - Egress
   ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: ingress-nginx
-    ports:
-    - protocol: TCP
-      port: 3000
-  - from:
-    - podSelector:
-        matchLabels:
-          app: frontend
-    ports:
-    - protocol: TCP
-      port: 3000
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 3000
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+      ports:
+        - protocol: TCP
+          port: 3000
   egress:
-  - to:
-    - podSelector:
-        matchLabels:
-          app: postgres
-    ports:
-    - protocol: TCP
-      port: 5432
-  - to:
-    - podSelector:
-        matchLabels:
-          app: redis
-    ports:
-    - protocol: TCP
-      port: 6379
-  - to: []  # Allow DNS
-    ports:
-    - protocol: UDP
-      port: 53
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+    - to:
+        - podSelector:
+            matchLabels:
+              app: redis
+      ports:
+        - protocol: TCP
+          port: 6379
+    - to: [] # Allow DNS
+      ports:
+        - protocol: UDP
+          port: 53
 ```
 
 ## Common Commands
@@ -814,6 +844,7 @@ kubectl create -f deployment.yaml --dry-run=client -o yaml # Dry run
 ## Workflow Integration
 
 ### Development Workflow
+
 1. **Local Development**: Use Minikube or Kind for local Kubernetes testing
 2. **Image Building**: Build and tag container images for deployment
 3. **Configuration**: Create Kubernetes manifests for application components
@@ -822,6 +853,7 @@ kubectl create -f deployment.yaml --dry-run=client -o yaml # Dry run
 6. **Monitoring**: Implement observability with metrics, logs, and tracing
 
 ### GitOps with ArgoCD
+
 ```yaml
 # argocd-application.yaml - GitOps application definition
 apiVersion: argoproj.io/v1alpha1
@@ -843,7 +875,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
     retry:
       limit: 5
       backoff:
@@ -853,6 +885,7 @@ spec:
 ```
 
 ### CI/CD Pipeline Integration
+
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy to Kubernetes
@@ -910,7 +943,7 @@ jobs:
       - name: Update Kubernetes manifests
         run: |
           sed -i 's|IMAGE_TAG|${{ github.sha }}|g' k8s/deployment.yaml
-          
+
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f k8s/namespace.yaml
@@ -919,11 +952,11 @@ jobs:
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
           kubectl apply -f k8s/ingress.yaml
-          
+
       - name: Wait for deployment
         run: |
           kubectl rollout status deployment/web-app -n production --timeout=300s
-          
+
       - name: Run smoke tests
         run: |
           kubectl wait --for=condition=ready pod -l app=web-app -n production --timeout=300s
@@ -935,6 +968,7 @@ jobs:
 ## Best Practices
 
 ### ✅ **Container and Pod Best Practices**
+
 - **Use resource limits and requests** - Prevent resource starvation and enable proper scheduling
 - **Implement health checks** - Ensure application availability with liveness, readiness, and startup probes
 - **Run as non-root user** - Enhance security by avoiding root privileges
@@ -943,6 +977,7 @@ jobs:
 - **Use init containers** - Handle initialization tasks separately from main application
 
 ### ✅ **Security Best Practices**
+
 - **Use RBAC** - Implement Role-Based Access Control for fine-grained permissions
 - **Network policies** - Control traffic flow between pods and services
 - **Pod Security Standards** - Enforce security policies for pod specifications
@@ -951,6 +986,7 @@ jobs:
 - **Service mesh** - Implement mTLS and advanced security policies with Istio or Linkerd
 
 ### ✅ **Deployment and Scaling Best Practices**
+
 - **Rolling updates** - Use rolling deployment strategies for zero-downtime updates
 - **Horizontal Pod Autoscaling** - Implement HPA for automatic scaling based on metrics
 - **Pod Disruption Budgets** - Ensure availability during voluntary disruptions
@@ -959,6 +995,7 @@ jobs:
 - **Canary deployments** - Gradually roll out changes with traffic splitting
 
 ### ❌ **Common Pitfalls to Avoid**
+
 - **Don't ignore resource limits** - Can cause cluster instability and resource contention
 - **Avoid privileged containers** - Security risk and bad practice
 - **Don't store secrets in manifests** - Use proper secret management
@@ -969,6 +1006,7 @@ jobs:
 ## Advanced Kubernetes Usage
 
 ### Custom Resource Definitions (CRDs)
+
 ```yaml
 # custom-resource.yaml - Custom application resource
 apiVersion: apiextensions.k8s.io/v1
@@ -978,47 +1016,48 @@ metadata:
 spec:
   group: example.com
   versions:
-  - name: v1
-    served: true
-    storage: true
-    schema:
-      openAPIV3Schema:
-        type: object
-        properties:
-          spec:
-            type: object
-            properties:
-              replicas:
-                type: integer
-                minimum: 1
-                maximum: 100
-              image:
-                type: string
-              resources:
-                type: object
-                properties:
-                  cpu:
-                    type: string
-                  memory:
-                    type: string
-          status:
-            type: object
-            properties:
-              phase:
-                type: string
-                enum: ["Pending", "Running", "Failed"]
-              replicas:
-                type: integer
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                replicas:
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                image:
+                  type: string
+                resources:
+                  type: object
+                  properties:
+                    cpu:
+                      type: string
+                    memory:
+                      type: string
+            status:
+              type: object
+              properties:
+                phase:
+                  type: string
+                  enum: ['Pending', 'Running', 'Failed']
+                replicas:
+                  type: integer
   scope: Namespaced
   names:
     plural: webapps
     singular: webapp
     kind: WebApp
     shortNames:
-    - wa
+      - wa
 ```
 
 ### Operator Pattern
+
 ```yaml
 # operator-deployment.yaml - Custom operator
 apiVersion: apps/v1
@@ -1038,29 +1077,30 @@ spec:
     spec:
       serviceAccountName: webapp-operator
       containers:
-      - name: operator
-        image: myregistry/webapp-operator:v1.0.0
-        env:
-        - name: WATCH_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: OPERATOR_NAME
-          value: "webapp-operator"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
+        - name: operator
+          image: myregistry/webapp-operator:v1.0.0
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: 'webapp-operator'
+          resources:
+            requests:
+              memory: '128Mi'
+              cpu: '100m'
+            limits:
+              memory: '256Mi'
+              cpu: '200m'
 ```
 
 ### Service Mesh with Istio
+
 ```yaml
 # istio-gateway.yaml - Istio gateway configuration
 apiVersion: networking.istio.io/v1alpha3
@@ -1072,23 +1112,23 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-  - port:
-      number: 80
-      name: http
-      protocol: HTTP
-    hosts:
-    - "app.mydomain.com"
-    tls:
-      httpsRedirect: true
-  - port:
-      number: 443
-      name: https
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      credentialName: web-app-tls
-    hosts:
-    - "app.mydomain.com"
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - 'app.mydomain.com'
+      tls:
+        httpsRedirect: true
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: web-app-tls
+      hosts:
+        - 'app.mydomain.com'
 
 ---
 # virtualservice.yaml - Traffic routing
@@ -1099,36 +1139,36 @@ metadata:
   namespace: production
 spec:
   hosts:
-  - "app.mydomain.com"
+    - 'app.mydomain.com'
   gateways:
-  - web-app-gateway
+    - web-app-gateway
   http:
-  - match:
-    - uri:
-        prefix: "/api/v2"
-    route:
-    - destination:
-        host: web-app-v2-service
-        port:
-          number: 80
-      weight: 10
-    - destination:
-        host: web-app-service
-        port:
-          number: 80
-      weight: 90
-  - match:
-    - uri:
-        prefix: "/"
-    route:
-    - destination:
-        host: web-app-service
-        port:
-          number: 80
-    timeout: 30s
-    retries:
-      attempts: 3
-      perTryTimeout: 10s
+    - match:
+        - uri:
+            prefix: '/api/v2'
+      route:
+        - destination:
+            host: web-app-v2-service
+            port:
+              number: 80
+          weight: 10
+        - destination:
+            host: web-app-service
+            port:
+              number: 80
+          weight: 90
+    - match:
+        - uri:
+            prefix: '/'
+      route:
+        - destination:
+            host: web-app-service
+            port:
+              number: 80
+      timeout: 30s
+      retries:
+        attempts: 3
+        perTryTimeout: 10s
 
 ---
 # destinationrule.yaml - Traffic policies
@@ -1158,6 +1198,7 @@ spec:
 ## Integration with Other Tools
 
 ### Helm Chart Management
+
 ```yaml
 # Chart.yaml - Helm chart metadata
 apiVersion: v2
@@ -1165,17 +1206,17 @@ name: web-app
 description: A production-ready web application
 type: application
 version: 1.0.0
-appVersion: "1.0.0"
+appVersion: '1.0.0'
 
 dependencies:
-- name: postgresql
-  version: 12.1.0
-  repository: https://charts.bitnami.com/bitnami
-  condition: postgresql.enabled
-- name: redis
-  version: 17.4.0
-  repository: https://charts.bitnami.com/bitnami
-  condition: redis.enabled
+  - name: postgresql
+    version: 12.1.0
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  - name: redis
+    version: 17.4.0
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
 ```
 
 ```yaml
@@ -1185,7 +1226,7 @@ replicaCount: 3
 image:
   repository: myregistry/web-app
   pullPolicy: IfNotPresent
-  tag: "v1.0.0"
+  tag: 'v1.0.0'
 
 service:
   type: ClusterIP
@@ -1193,9 +1234,9 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"
+  className: 'nginx'
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
   hosts:
     - host: app.mydomain.com
       paths:
@@ -1226,6 +1267,7 @@ redis:
 ```
 
 ### Prometheus Monitoring
+
 ```yaml
 # servicemonitor.yaml - Prometheus monitoring
 apiVersion: monitoring.coreos.com/v1
@@ -1240,12 +1282,13 @@ spec:
     matchLabels:
       app: web-app
   endpoints:
-  - port: metrics
-    interval: 30s
-    path: /metrics
+    - port: metrics
+      interval: 30s
+      path: /metrics
 ```
 
 ### Terraform Integration
+
 ```hcl
 # kubernetes.tf - Terraform Kubernetes provider
 terraform {
@@ -1307,9 +1350,11 @@ resource "helm_release" "web_app" {
 ### Common Issues
 
 #### Pod Startup Problems
+
 **Problem**: Pod fails to start or crashes repeatedly
 **Symptoms**: Pod status shows CrashLoopBackOff, ImagePullBackOff, or Pending
 **Solution**:
+
 ```bash
 # Check pod status and events
 kubectl describe pod pod-name
@@ -1328,9 +1373,11 @@ kubectl describe node node-name
 ```
 
 #### Service Discovery Issues
+
 **Problem**: Services cannot communicate with each other
 **Symptoms**: Connection timeouts, DNS resolution failures
 **Solution**:
+
 ```bash
 # Test DNS resolution
 kubectl run dns-debug --image=busybox -it --rm -- nslookup service-name
@@ -1348,9 +1395,11 @@ kubectl describe networkpolicy policy-name
 ```
 
 #### Storage Issues
+
 **Problem**: Persistent volumes not mounting or data loss
 **Symptoms**: Volume mount failures, permission errors
 **Solution**:
+
 ```bash
 # Check PV and PVC status
 kubectl get pv,pvc
@@ -1366,6 +1415,7 @@ kubectl exec -it pod-name -- id
 ```
 
 ### Debug Mode
+
 ```bash
 # Enable verbose kubectl output
 kubectl --v=8 get pods
@@ -1387,15 +1437,16 @@ kubectl proxy --port=8080
 ```
 
 ### Performance Optimization
+
 ```yaml
 # Resource optimization
 resources:
   requests:
-    memory: "256Mi"  # Guaranteed allocation
-    cpu: "250m"      # Guaranteed CPU
+    memory: '256Mi' # Guaranteed allocation
+    cpu: '250m' # Guaranteed CPU
   limits:
-    memory: "512Mi"  # Maximum allocation
-    cpu: "500m"      # Maximum CPU
+    memory: '512Mi' # Maximum allocation
+    cpu: '500m' # Maximum CPU
 
 # Quality of Service classes
 # Guaranteed: requests = limits
@@ -1406,6 +1457,7 @@ resources:
 ## Security Considerations
 
 ### RBAC Configuration
+
 ```yaml
 # rbac.yaml - Role-based access control
 apiVersion: v1
@@ -1421,12 +1473,12 @@ metadata:
   namespace: production
   name: web-app-role
 rules:
-- apiGroups: [""]
-  resources: ["configmaps", "secrets"]
-  verbs: ["get", "list"]
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "list", "create"]
+  - apiGroups: ['']
+    resources: ['configmaps', 'secrets']
+    verbs: ['get', 'list']
+  - apiGroups: ['']
+    resources: ['pods']
+    verbs: ['get', 'list', 'create']
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -1435,9 +1487,9 @@ metadata:
   name: web-app-binding
   namespace: production
 subjects:
-- kind: ServiceAccount
-  name: web-app-sa
-  namespace: production
+  - kind: ServiceAccount
+    name: web-app-sa
+    namespace: production
 roleRef:
   kind: Role
   name: web-app-role
@@ -1445,6 +1497,7 @@ roleRef:
 ```
 
 ### Pod Security Standards
+
 ```yaml
 # pod-security-policy.yaml - Pod security enforcement
 apiVersion: v1
@@ -1458,6 +1511,7 @@ metadata:
 ```
 
 ### Security Context Best Practices
+
 ```yaml
 securityContext:
   runAsNonRoot: true
@@ -1468,9 +1522,9 @@ securityContext:
     type: RuntimeDefault
   capabilities:
     drop:
-    - ALL
+      - ALL
     add:
-    - NET_BIND_SERVICE
+      - NET_BIND_SERVICE
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
 ```
@@ -1489,6 +1543,7 @@ When helping with Kubernetes:
 8. **Suggest appropriate storage solutions** based on application requirements and performance needs
 
 ### Code Generation Rules
+
 - Generate production-ready Kubernetes manifests with comprehensive configurations
 - Include proper resource requests and limits for optimal cluster utilization
 - Provide security-hardened configurations with non-root users and security contexts
