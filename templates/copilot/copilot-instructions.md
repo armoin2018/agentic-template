@@ -106,6 +106,28 @@ This guide defines universal coding standards and project management workflows t
 - Use consistent patterns across the codebase
 - Enrich documentation of complex business logic to improve understanding and maintainability.
 - Encourage collaboration and sharing among personas.
+- Clear memory between logical working units to prevent context pollution and ensure fresh perspective on new tasks:
+  - Clear context when switching between different projects or repositories
+  - Reset memory when moving from one major feature to another unrelated feature
+  - Clean slate approach when transitioning between different programming languages or frameworks
+  - Purge temporary variables and intermediate results after completing a discrete unit of work
+  - Maintain only essential project-level context (requirements, standards, personas) across unit boundaries
+
+### Task Chunking & Size Limit Handling
+
+- If a request fails due to size limits (token limits, context window overflow, or processing constraints), automatically break down the task into smaller, manageable chunks
+- Identify logical breakpoints for chunking based on:
+  - File boundaries (process one file at a time)
+  - Function/class boundaries (process individual components)
+  - Feature boundaries (implement one feature per chunk)
+  - Test boundaries (write tests for one module at a time)
+- Maintain consistency across chunks by:
+  - Preserving naming conventions and coding standards
+  - Ensuring proper imports and dependencies between chunks
+  - Maintaining architectural patterns across all pieces
+- After completing each chunk, verify integration and compatibility with previously completed chunks
+- Provide clear progress updates showing which chunks have been completed and what remains
+- Resume from the last successful chunk if the process is interrupted
 
 ---
 
