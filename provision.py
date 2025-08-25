@@ -7,6 +7,8 @@ Provisions AI-specific configurations and project types based on user selection.
 import argparse
 import os
 import shutil
+import subprocess
+from datetime import datetime
 from pathlib import Path
 
 try:
@@ -640,6 +642,162 @@ class TemplateProvisioner:
         except (UnicodeDecodeError, PermissionError):
             return False
 
+    def update_from_template_repo(self, template_repo_url=None, branch='main', force=False, backup=True):
+        """Update local files from the agentic-template repository if repo files are newer"""
+        if template_repo_url is None:
+            template_repo_url = "https://github.com/armoin2018/agentic-template.git"
+        
+        print(f"Updating from agentic-template repository: {template_repo_url}")
+        
+        # Create cache directory for the template repo
+        cache_dir = self.base_dir / '.template_repo_cache'
+        cache_dir.mkdir(exist_ok=True)
+        template_repo_path = cache_dir / 'agentic-template'
+        
+        # Clone or update the template repository
+        try:
+            if template_repo_path.exists():
+                print("  Updating existing template repository...")
+                result = subprocess.run(
+                    ['git', 'pull', 'origin', branch],
+                    cwd=template_repo_path,
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                print(f"  Git pull result: {result.stdout.strip()}")
+            else:
+                print("  Cloning template repository...")
+                result = subprocess.run(
+                    ['git', 'clone', '-b', branch, template_repo_url, str(template_repo_path)],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+                print("  Repository cloned successfully")
+        except subprocess.CalledProcessError as e:
+            print(f"  Error with git operation: {e}")
+            print(f"  Git stderr: {e.stderr}")
+            return False
+        
+        # Define files/directories to update from template
+        update_paths = [
+            'common/',
+            'templates/',
+            'provision.py',
+            'provision.map.yaml',
+            'external-resources.map.yaml',
+            'map.yaml',
+            '.github/copilot-instructions.md'
+        ]
+        
+        updated_files = []
+        skipped_files = []
+        backed_up_files = []
+        
+        for update_path in update_paths:
+            source_path = template_repo_path / update_path
+            target_path = self.base_dir / update_path
+            
+            if not source_path.exists():
+                print(f"  Warning: Source path not found in template: {update_path}")
+                continue
+            
+            if source_path.is_file():
+                result = self._update_file(source_path, target_path, force, backup)
+                if result['action'] == 'updated':
+                    updated_files.append(update_path)
+                elif result['action'] == 'backed_up':
+                    backed_up_files.append(update_path)
+                elif result['action'] == 'skipped':
+                    skipped_files.append(update_path)
+            elif source_path.is_dir():
+                results = self._update_directory(source_path, target_path, force, backup)
+                updated_files.extend(results['updated'])
+                backed_up_files.extend(results['backed_up'])
+                skipped_files.extend(results['skipped'])
+        
+        # Print summary
+        print("\nUpdate Summary:")
+        if updated_files:
+            print(f"  Updated files ({len(updated_files)}):")
+            for file_path in updated_files:
+                print(f"    ✓ {file_path}")
+        
+        if backed_up_files:
+            print(f"  Backed up files ({len(backed_up_files)}):")
+            for file_path in backed_up_files:
+                print(f"    📦 {file_path}")
+        
+        if skipped_files:
+            print(f"  Skipped files (local newer or same) ({len(skipped_files)}):")
+            for file_path in skipped_files:
+                print(f"    ⏭ {file_path}")
+        
+        if not updated_files and not backed_up_files:
+            print("  No files needed updating - local files are up to date!")
+        
+        return True
+    
+    def _update_file(self, source_path, target_path, force=False, backup=True):
+        """Update a single file if source is newer"""
+        if not target_path.exists():
+            # File doesn't exist locally, copy it
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, target_path)
+            print(f"  Added new file: {target_path}")
+            return {'action': 'updated', 'path': str(target_path)}
+        
+        # Get modification times
+        source_mtime = source_path.stat().st_mtime
+        target_mtime = target_path.stat().st_mtime
+        
+        if force or source_mtime > target_mtime:
+            # Source is newer (or force is enabled), update the file
+            if backup and target_path.exists():
+                backup_path = target_path.with_suffix(f"{target_path.suffix}.backup.{int(datetime.now().timestamp())}")
+                shutil.copy2(target_path, backup_path)
+                print(f"  Backed up {target_path} to {backup_path}")
+                
+            shutil.copy2(source_path, target_path)
+            print(f"  Updated: {target_path}")
+            
+            if backup:
+                return {'action': 'backed_up', 'path': str(target_path)}
+            else:
+                return {'action': 'updated', 'path': str(target_path)}
+        else:
+            # Local file is newer or same, skip
+            return {'action': 'skipped', 'path': str(target_path)}
+    
+    def _update_directory(self, source_dir, target_dir, force=False, backup=True):
+        """Update all files in a directory recursively"""
+        results = {'updated': [], 'backed_up': [], 'skipped': []}
+        
+        # Create target directory if it doesn't exist
+        target_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Process each file in the source directory
+        for source_file in source_dir.rglob('*'):
+            if source_file.is_file():
+                # Calculate relative path and corresponding target file
+                relative_path = source_file.relative_to(source_dir)
+                target_file = target_dir / relative_path
+                
+                result = self._update_file(source_file, target_file, force, backup)
+                
+                # Store relative path for reporting
+                relative_str = str(target_dir.name / relative_path)
+                if result['action'] == 'updated':
+                    results['updated'].append(relative_str)
+                elif result['action'] == 'backed_up':
+                    results['backed_up'].append(relative_str)
+                elif result['action'] == 'skipped':
+                    results['skipped'].append(relative_str)
+        
+        return results
+
+
 def main():
     parser = argparse.ArgumentParser(description='Provision AI tool templates and project types')
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
@@ -681,6 +839,17 @@ def main():
     pull_repo_parser = subparsers.add_parser('pull-repo', help='Pull resources from external repo')
     pull_repo_parser.add_argument('--repo', required=True, help='Repo key from external-resources.map.yaml')
     pull_repo_parser.add_argument('--target-dir', required=True, help='Target directory in client project')
+
+    # Update command
+    update_parser = subparsers.add_parser('update', help='Update local files from agentic-template repository')
+    update_parser.add_argument('--repo-url', 
+                              help='Template repository URL (default: https://github.com/armoin2018/agentic-template.git)')
+    update_parser.add_argument('--branch', default='main',
+                              help='Branch to pull from (default: main)')
+    update_parser.add_argument('--force', action='store_true',
+                              help='Force update all files regardless of modification time')
+    update_parser.add_argument('--no-backup', action='store_true',
+                              help='Do not create backup files (default: create backups)')
 
     args = parser.parse_args()
 
@@ -730,6 +899,17 @@ def main():
             provisioner.clean_provisioned_files(args.ai_tool)
         elif args.command == 'pull-repo':
             provisioner.pull_external_repo(args.repo, args.target_dir)
+        elif args.command == 'update':
+            backup = not args.no_backup
+            success = provisioner.update_from_template_repo(
+                template_repo_url=args.repo_url,
+                branch=args.branch,
+                force=args.force,
+                backup=backup
+            )
+            if not success:
+                print("Update failed!")
+                return 1
     except ValueError as e:
         print(f"Error: {e}")
         return 1
