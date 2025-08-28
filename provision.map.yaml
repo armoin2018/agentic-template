@@ -78,6 +78,14 @@ ai_tools:
 
 # Git repositories to clone and integrate
 git_repos:
+  architecture-center:
+    url: 'https://github.com/MicrosoftDocs/architecture-center.git'
+    subfolder: 'external/microsoft'
+    branch: 'main'
+    cache_dir: '.git_repo_cache'
+    folders:
+      - 'docs'
+
   agentic-chatmodes:
     url: 'https://github.com/armoin2018/agentic-chatmodes.git'
     subfolder: 'external/armoin'
